@@ -13,6 +13,7 @@ const app = express();
 //Middleware
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true })); 
 
 const routes = {
     //Fill with routes
@@ -20,7 +21,8 @@ const routes = {
 
 const startApp = async () => { 
     try  {
-        await sequelize.sync({ force: true });
+        //{force: true} if we want to change and delete all previous data
+        await sequelize.sync();
         console.log("Created Database and Tables")
         
         app.get('/', (req, res) => {

@@ -28,6 +28,15 @@ module.exports = (sequelize) => {
           type: DataTypes.STRING(250),
           allowNull: false
         },
+        isActive: {
+          type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
+        },
+        isRegistered: {
+          type: DataTypes.BOOLEAN,
+          default: false
+        },
       },
       {
         createdAt: false,
