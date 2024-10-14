@@ -36,7 +36,7 @@ const updateUserPassword = async (req, res) => {
         res.status(200).send(body)
 
     } catch (error) {
-        res.status(403).send(error)
+        res.status(400).send(error)
     }
 }
 
@@ -77,7 +77,7 @@ const getUsers = async (req, res) => {
         
         res.status(200).send(users)
     } catch (error) {
-        res.status(404).send(error)
+        res.status(400).send(error)
     }
 }
 
@@ -93,7 +93,7 @@ const getUser = async (req, res) => {
         res.status(200).send(user)
 
     } catch(error) {
-        res.status(404).send(error)
+        res.status(400).send(error)
     }
 }
 
@@ -116,7 +116,7 @@ const deleteUser = async (req, res) => {
         res.sendStatus(200);
 
     } catch(error) {
-        res.sendStatus(404);
+        res.sendStatus(400);
     }
 
 

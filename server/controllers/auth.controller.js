@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
         
     
 } catch (error) {
-        res.status(401).send(error);
+        res.status(400).send(error);
     }
 }
 
@@ -38,7 +38,31 @@ const registerUser = async (req, res) => {
     //Check email code
     //Update user isRegistered to true if valid
     //Use nodemailer and jwt with 1-day exp
+    try {
+        const {id, email} = req.body;
+        
+        const user = await User.findOne({where:
+            { 
+                id: id,
+                email: email
+            }
+        });
 
+        if (!user) {
+            throw "User not found"
+        }
+
+        await User.update({isRegistered: true}, {
+            where: {
+                id: id
+        }});
+
+        res.status(200).send("Successful Registration");
+
+
+    } catch(error) {
+        res.status(400).send(error)
+    }
 }
 
 const login = async (req, res) => {
@@ -65,7 +89,7 @@ const login = async (req, res) => {
         res.status(200).send("Successful Login")
 
     } catch (error) {
-        res.status(404).send(error)
+        res.status(400).send(error)
     }
 }
 
