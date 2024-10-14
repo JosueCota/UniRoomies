@@ -26,17 +26,7 @@ const createUser = async (req, res) => {
 
         //Generate regEmailCode
         //Send link to email, link should include regCode in param
-        //Store User
-        // User.sync({alter:true}).then(()=> {
-        //     User.build({
-        //         firstName: firstName, 
-        //         lastName: lastName,
-        //         password: hashedPassword,
-        //         email: email
-        //     }); 
-        // }).catch(error => {
-        //     console.log(error)
-        // })
+        
     
 } catch (error) {
         res.status(401).send(error);
@@ -44,36 +34,44 @@ const createUser = async (req, res) => {
 }
 
 
-    const login = async (req, res) => {
-        try {
-            const email = req.body.email
-            const user = await User.findOne({where: { email } });
+const registerUser = async (req, res) => {
+    //Check email code
+    //Update user isRegistered to true if valid
+    //Use nodemailer and jwt with 1-day exp
 
-            //User doesn't exist with email
-            if (!user) {
-                throw ("Invalid Login")
-            }
-            
-            //User hasn't been registered
-            if (!user.isRegistered) {
-                throw ("Please Confirm Your Email")
-            }
+}
 
-            //User input incorrect password
-            const valid = await bcrypt.compare(req.body.password, user.password);
-            if(!valid) {
-                throw ("Invalid Login Password")
-            }
+const login = async (req, res) => {
+    try {
+        const email = req.body.email
+        const user = await User.findOne({where: { email } });
 
-            res.status(200).send("Successful Login")
-
-        } catch (error) {
-            res.status(404).send(error)
+        //User doesn't exist with email
+        if (!user) {
+            throw ("Invalid Login")
         }
+        
+        //User hasn't been registered
+        if (!user.isRegistered) {
+            throw ("Please Confirm Your Email")
+        }
+
+        //User input incorrect password
+        const valid = await bcrypt.compare(req.body.password, user.password);
+        if(!valid) {
+            throw ("Invalid Login Password")
+        }
+
+        res.status(200).send("Successful Login")
+
+    } catch (error) {
+        res.status(404).send(error)
     }
+}
 
 
 module.exports = {
     createUser,
-    login
+    login,
+    registerUser
 }

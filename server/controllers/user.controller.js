@@ -2,7 +2,7 @@ const sequelize  = require("../database.js");
 const bcrypt = require("bcryptjs")
 const User = sequelize.models.User
 
-//Update User Password with the req.body.id sent and new password
+//Update User Password with the req.body.id sent and new password (could use email too instead of param)
 const updateUserPassword = async (req, res) => {
 
     try {
@@ -41,9 +41,7 @@ const updateUserPassword = async (req, res) => {
 }
 
 const updateUser = async(req, res) => {
-    
     try {
-
         //Expecting Cleaned/Valid Data
         const {firstName, lastName, email} = req.body;
         const id = req.params.id;
