@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 
-const { createUser, login, registerUser } = require("../controllers/auth.controller");
+const { createUser, login, registerUser, logout } = require("../controllers/auth.controller");
 
 //Creates User and Sends Email Conf: req has basic user info
 router.post("/createUser", createUser);
@@ -10,6 +10,7 @@ router.post("/createUser", createUser);
 router.post("/login", login);
 
 //Registers User (Email Confirmed): req checks jwt and id
-router.post("/registerUser", registerUser)
+router.post("/register", registerUser)
 
+router.post("/logout", logout)
 module.exports = router;
