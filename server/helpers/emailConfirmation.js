@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
-const db  = require("../database.js");
 
+//When frontend setup, change this
 const link = process.env.frontendURL || "http://localhost:8081/api/auth/register/";
 
 //Using brevo email host provider 
