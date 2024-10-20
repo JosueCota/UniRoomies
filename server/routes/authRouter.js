@@ -10,7 +10,7 @@ router.post("/createUser", createUser);
 router.post("/login", login);
 
 //Registers User (Email Confirmed): req checks jwt and id
-router.post("/register", registerUser)
+router.get("/register/:token", registerUser)
 
 router.post("/logout", logout)
 module.exports = router;

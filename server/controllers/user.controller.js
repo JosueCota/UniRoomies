@@ -59,20 +59,6 @@ const updateUser = asyncHandler(async(req, res) => {
         res.status(404);
         throw new Error("User not found")
     }
-    // //Update data
-    // const updatedUser = await User.update(
-    //     {
-    //         firstName: firstName || req.user.firstName, 
-    //         lastName: lastName,
-    //         email: email
-    //     },
-    //     {
-    //         where: {
-    //             id: id
-    //     }
-    // });
-    
-
 });
 
 const getUser = asyncHandler(async (req, res) => {
@@ -88,7 +74,7 @@ const getUser = asyncHandler(async (req, res) => {
 
 });
 
-//Delete user based on id sent
+//Delete user
 const deleteUser = asyncHandler(async (req, res) => {
 
     const delUser = await User.destroy({
@@ -102,7 +88,7 @@ const deleteUser = asyncHandler(async (req, res) => {
             httpOnly: true,
             expires: new Date(0)
         })
-        res.status(200).body("Successfully Deleted");
+        res.status(200).send("Successfully Deleted");
 
     } else {
         res.status(400);

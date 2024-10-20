@@ -1,7 +1,9 @@
 const db  = require("../database.js");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler")
-const generateToken = require("../helpers/generateToken.js")
+const generateToken = require("../helpers/generateToken.js");
+const sendConfirmationEmail = require("../helpers/emailConfirmation.js");
+const jwt = require("jsonwebtoken")
 
 const User = db.models.User;
 
@@ -24,49 +26,39 @@ const createUser = asyncHandler(async (req, res) => {
     const user = await User.create({firstName: firstName, lastName:lastName, email:email, password:hashedPassword}) 
     
     if (user) {
-        
-        //Here we will call a function to send email to user 
+        //Send confirmation email to user
+        await sendConfirmationEmail(user.email, user.id, res)
 
-        res.status(201).json({
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email
-    });
     } else {
         res.status(400);
         throw new Error("Invalid user data");
     }
 
-    //Generate regEmailCode
-    //Send link to email, link should include regCode in param
-        
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-    //Check email code
-    //Update user isRegistered to true if valid
-    //Use nodemailer and jwt with 1-day exp
-    const {email} = req.body;
-    
-    const user = await User.findOne({where:
-        { 
-            email: email
-        }
-    });
+   
+    //Update user isRegistered to true if valid jwt sent to link
+    const { id } = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
+
+    const user = await User.findByPk(id);
 
     if (!user) {
         res.status(404);
         throw new Error("User not found");
     }
 
+    if (user.isRegistered) {
+        res.status(404);
+        throw new Error("User already Confirmed")
+    }
+
     await User.update({isRegistered: true}, {
         where: {
-            email : email
+            id: id
     }});
 
     res.status(200).send("Successful Registration");
-   
 });
 
 // 

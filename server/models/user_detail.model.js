@@ -13,17 +13,20 @@ module.exports = (sequelize) => {
             roommate_desc: {
                 type: DataTypes.TEXT("medium"),
             },
-            study_time: {
-                type: DataTypes.STRING(25)
+            cities: {
+                //Interested in what cities, array, kept in space seperated string
+                type: DataTypes.TEXT("medium")
             },
             budget: {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
             sharing: {
+                // Whether they are open to sharing rooms
                 type: DataTypes.BOOLEAN()
             },
             move_in_date: {
+                //Ready date to move in
                 type: DataTypes.DATEONLY
             },
             age: {
@@ -33,9 +36,6 @@ module.exports = (sequelize) => {
             gender: {
                 type: DataTypes.STRING(10),
             },
-            location: {
-                type: DataTypes.STRING(50)
-            }
         },
         {
             createdAt: false,
