@@ -6,7 +6,7 @@ export default loginSlice = createSlice({
     reducers: {
         updateLogin: (state, action) => {
             //Expecting object with password and email, actual verification and logic is done on login page 
-            state = action.payload.user
+            return state = action.payload.user
         },
     }
 });
