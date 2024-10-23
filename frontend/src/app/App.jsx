@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom"
-import NavBar from "../components/NavBar"
+import Sidebar from "../components/SideBar"
 
 function App() {
 
   return (
-  <>
-    <NavBar/>
+  <div style={{display:"flex"}}>
+    {/* Sidebar won't show in login or register screen */}
+    <Sidebar/>
     <Outlet />  
-  </>
+  </div>
   
 )}
 

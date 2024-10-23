@@ -1,0 +1,13 @@
+.container {
+    margin: auto auto;
+    justify-items: center;
+    align-content: center;
+    border: 1px solid lightgrey;
+    padding: 3rem;
+    border-radius: 1rem;
+    width:40%;
+}
+
+.link{
+    display: block;
+}
