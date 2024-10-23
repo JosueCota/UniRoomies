@@ -8,9 +8,6 @@ import {
     CDBSidebarMenuItem, 
 } from "cdbreact"
 import { NavLink } from 'react-router-dom';
-import { Button } from 'bootstrap';
-// import Button from 'cdbreact/dist/components/Button';
-
 
 const Sidebar = () => {
 
