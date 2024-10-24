@@ -19,7 +19,7 @@ const Sidebar = () => {
             UniRoomies
           </NavLink>
         </CDBSidebarHeader>
-
+        
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink exact to="/roommates" className={({isActive}) => isActive? "activeClicked" : ""}>
@@ -29,9 +29,9 @@ const Sidebar = () => {
               <CDBSidebarMenuItem icon="house-user">Rooms</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/profile" className={({isActive}) => isActive? "activeClicked" : ""}>
-              <CDBSidebarMenuItem icon="user" iconType=''>Profile Page</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user" iconType=''>Profile</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/analytics" className={({isActive}) => isActive? "activeClicked" : ""}>
+            <NavLink exact to="/messages" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="comments">Messages</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
@@ -43,7 +43,7 @@ const Sidebar = () => {
               padding: '20px 5px',
             }}
           >
-            <button style={{width: "100%"}} type='button' className='btn btn-outline-light'>
+            <button style={{width: "90%", padding: "5px"}} type='button' className='btn btn-outline-light'>
                 <CDBSidebarMenuItem icon='arrow-right-from-bracket' >Log Out</CDBSidebarMenuItem>
             </button>
           </div>
