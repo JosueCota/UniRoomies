@@ -1,12 +1,13 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// // import loginSlice  from "../features/loginSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer  from "../features/authSlice";
+import { apiSlice } from "../features/apiSlice";
+const store = configureStore({
+    reducer: {
+        auth: authReducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+    devTools: true
+});
 
-// // export const store = configureStore({
-// //     reducer: {
-// //         // loginSlice
-// //     }
-    
-// // });
-
-// export const RootState = store.getState();
-// export const AppDispatch = store.dispatch();
+export default store

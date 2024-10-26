@@ -1,8 +1,12 @@
+import BrandHeader from "../components/BrandHeader";
 import LoginForm from "../components/Forms/LoginForm"
 
 const Login = () => {
     return (
-        <LoginForm/>
+        <div style={{width:"100%"}}>
+            <BrandHeader/>
+            <LoginForm/>
+        </div>
     );
 }
 

@@ -31,7 +31,7 @@ async function sendConfirmationEmail( email, id, res) {
           expiresIn: "1d"
         },
         (err, emailToken) => {
-          const url = link + emailToken;
+          const url = link + `${emailToken}`;
           
           transporter.sendMail({
             from: "'Josue Cota' <xjaramis@gmail.com>",

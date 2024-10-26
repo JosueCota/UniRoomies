@@ -15,7 +15,7 @@ const createUser = asyncHandler(async (req, res) => {
     //Check email is in correct format, will also be handled in frontend
     //Want to make sure people can't send requests to backend with fake or non school emails
     if (email) {
-
+ 
     }
 
     //Check if user with email already exists and is registered, if not registered, allow the user
@@ -49,9 +49,10 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-   
+    
+    const { token } = req.body
     //Update user isRegistered to true if valid jwt sent to link
-    const { id } = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
+    const { id } = jwt.verify(token, process.env.EMAIL_SECRET)
 
     const user = await User.findByPk(id);
 
@@ -116,9 +117,28 @@ const logout = asyncHandler(async (req, res) => {
     res.status(200).json({message: "User logged out"})
 });
 
+const resendLink = asyncHandler(async (req, res) => {
+    const {email} = req.body
+    const user = await User.findOne({where : {email: email}})
+
+    if (user.isRegistered) {
+        res.status(401)
+        throw new Error("User Already Registered")
+    }
+
+    if (user) {
+        await sendConfirmationEmail(email, user.id, res)
+        res.status(200).send("Successful Activation!")
+    } else {
+        res.status(404)
+        throw new Error("Invalid Email")
+    }
+})
+
 module.exports = {
     createUser,
     login,
     registerUser,
     logout,
+    resendLink
 }

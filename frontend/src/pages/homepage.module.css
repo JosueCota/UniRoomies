@@ -1,43 +1,41 @@
-.page {
-    background-color: #fef5eb;
-}
-
-.brandCont {
+.container {
     display: flex;
-    height: 75px;
-    border-bottom: 1px #4c4c4c solid;
-    background-color: #333333;
-    color: white;
+    flex-flow: row wrap;
     justify-content: center;
+
 }
 
-.brandIcon {
-    margin: auto 0px;    
-}
-
-.brandTitle{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 2rem;
-    margin: auto 15px;
-}
-.content {
+.box {
     display: flex;
-    flex-flow: column wrap;
-    padding: 4rem;
-    width: 70%;
+    flex-flow: row wrap;
     justify-content: center;
-    height: fit-content;
-    margin: 0px auto;
-    align-items: center;
-    align-self: center;
     border-radius: 1rem;
+    background-color: #fff;
+    width: 60%;
+    padding: 1.5rem;
 }
 
 .button {
-    margin: 5px 5px;
+    margin: 10px;
     border-radius: .5rem;
-    background-color: rgb(22, 45, 45);
-    padding: .5rem;
-    color: white;
     text-decoration: none;
+    padding: 1rem;
+    background-color: #4c4c4c;
+    color: white;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
+}
+
+.buttons {
+    background-color: #342f2f;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-flow: column;
 }

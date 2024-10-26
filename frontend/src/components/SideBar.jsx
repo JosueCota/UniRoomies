@@ -7,9 +7,26 @@ import {
     CDBSidebarMenu, 
     CDBSidebarMenuItem, 
 } from "cdbreact"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../features/usersApiSlice';
+import { clearCredentials } from "../features/authSlice"
+import { useDispatch } from 'react-redux';
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch();
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      await logout().unwrap();
+      dispatch(clearCredentials());
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
       <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial', position:"sticky", top:"0rem" }}>
@@ -43,7 +60,7 @@ const Sidebar = () => {
               padding: '20px 5px',
             }}
           >
-            <button style={{width: "90%", padding: "5px"}} type='button' className='btn btn-outline-light'>
+            <button style={{width: "90%", padding: "5px"}} type='button' className='btn btn-outline-light' onClick={logoutHandler}>
                 <CDBSidebarMenuItem icon='arrow-right-from-bracket' >Log Out</CDBSidebarMenuItem>
             </button>
           </div>
