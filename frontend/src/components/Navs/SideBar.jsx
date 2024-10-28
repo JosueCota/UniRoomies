@@ -11,6 +11,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../features/usersApiSlice';
 import { clearCredentials } from "../../features/authSlice"
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const Sidebar = () => {
 
@@ -23,8 +24,9 @@ const Sidebar = () => {
       await logout().unwrap();
       dispatch(clearCredentials());
       navigate('/')
+      toast.success("Logged Out!", {toastId: "logoutSuccess"});
     } catch (err) {
-      console.log(err)
+      toast.error(err?.data?.message || err.error, {toastId: "logoutServerErr"})
     }
   }
 

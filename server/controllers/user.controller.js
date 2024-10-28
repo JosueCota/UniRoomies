@@ -79,11 +79,21 @@ const getUsers = asyncHandler(async (req, res) => {
 //Delete user
 const deleteUser = asyncHandler(async (req, res) => {
 
-    const delUser = await User.destroy({
-        where: {
-            email: req.user.email
-        }
-    })
+    const user = await User.findByPk(req.user.id);
+
+    if (!user){
+        res.status(404);
+        throw new Error("User Does't Exist")
+    }
+
+    const verify = await bcrypt.compare(req.body.password, user.password)
+
+    if (!verify) {
+        res.status(401);
+        throw new Error("Password is Incorrect")
+    } 
+
+    const delUser = await user.destroy()
 
     if (delUser) {
         res.cookie("jwt", "", {
@@ -91,7 +101,6 @@ const deleteUser = asyncHandler(async (req, res) => {
             expires: new Date(0)
         })
         res.status(200).send("Successfully Deleted");
-
     } else {
         res.status(400);
         throw new Error("Error Deleting User")

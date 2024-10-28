@@ -4,7 +4,6 @@ const initialState = {
     user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")): null
 }
 
-//For Login Page
 const authSlice = createSlice({
     name: "auth",
     initialState: initialState,

@@ -71,7 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
             id: id
     }});
 
-    res.status(200).send("Successful Registration");
+    res.status(200).json({message:"Successful Registration"});
 });
 
 // 

@@ -47,7 +47,7 @@ async function sendConfirmationEmail( email, id, res) {
           }
         });
 
-        res.status(200).send("Email Sent, User Created");
+        res.status(200).json({message:"Email Sent, User Created"});
 
         } catch (error) {
           res.status(400);
