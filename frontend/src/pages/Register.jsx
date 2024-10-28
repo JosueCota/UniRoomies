@@ -1,5 +1,5 @@
 import RegisterForm from "../components/Forms/RegisterForm";
-import BrandHeader from "../components/BrandHeader";
+import BrandHeader from "../components/Navs/BrandHeader";
 
 export default function Register() {
     return (

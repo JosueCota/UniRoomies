@@ -17,10 +17,6 @@ app.use(cors());                                        //Authorization
 app.use(express.urlencoded({ extended: true }));        //Allows Form data recieving
 app.use(cookieParser());                                //Cookie parsing ease
 
-const routes = {
-    //Fill with routes
-}
-
 const startApp = async () => { 
     try  {
         //{force: true} if we want to change and delete all previous data

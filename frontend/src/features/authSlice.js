@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    userInfo: localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")): null
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")): null
 }
 
 //For Login Page
@@ -11,13 +11,13 @@ const authSlice = createSlice({
     reducers: {
         //When user logs in
         setCredentials: (state, action) => {
-            state.userInfo = action.payload;
-            localStorage.setItem("userInfo", JSON.stringify(action.payload));
+            state.user = action.payload;
+            localStorage.setItem("user", JSON.stringify(action.payload));
         },
         //When user logs out, reset state and local storage
         clearCredentials: (state, action) => {
-            state.userInfo = null;
-            localStorage.removeItem("userInfo");
+            state.user = null;
+            localStorage.removeItem("user");
         }
     }
 })

@@ -8,8 +8,8 @@ import {
     CDBSidebarMenuItem, 
 } from "cdbreact"
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useLogoutMutation } from '../features/usersApiSlice';
-import { clearCredentials } from "../features/authSlice"
+import { useLogoutMutation } from '../../features/usersApiSlice';
+import { clearCredentials } from "../../features/authSlice"
 import { useDispatch } from 'react-redux';
 
 const Sidebar = () => {
@@ -39,17 +39,14 @@ const Sidebar = () => {
         
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/roommates" className={({isActive}) => isActive? "activeClicked" : ""}>
+            <NavLink to="/roommates" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="people-group">Roommates</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/rooms" className={({isActive}) => isActive? "activeClicked" : ""}>
+            <NavLink to="/rooms" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="house-user">Rooms</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" className={({isActive}) => isActive? "activeClicked" : ""}>
+            <NavLink to="/profile" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="user" iconType=''>Profile</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/messages" className={({isActive}) => isActive? "activeClicked" : ""}>
-              <CDBSidebarMenuItem icon="comments">Messages</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
@@ -60,6 +57,9 @@ const Sidebar = () => {
               padding: '20px 5px',
             }}
           >
+            {/* <NavLink to="/messages" className={({isActive}) => isActive? "activeClicked" : ""}>
+              <CDBSidebarMenuItem icon="comments">Messages</CDBSidebarMenuItem>
+            </NavLink> */}
             <button style={{width: "90%", padding: "5px"}} type='button' className='btn btn-outline-light' onClick={logoutHandler}>
                 <CDBSidebarMenuItem icon='arrow-right-from-bracket' >Log Out</CDBSidebarMenuItem>
             </button>

@@ -5,7 +5,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import Tooltip from 'react-bootstrap/Tooltip';
 import styles from "./textinput.module.css"
 
-const TextInput = ({name, label, placeholder, state, onChange, required, type, maxChar, tip, minLength}) => {
+const TextInput = ({name, label, placeholder, state, onChange, required, type, maxChar, tip, minLength, disabled}) => {
   
   const renderTooltip = (props) => (
     <Tooltip id={name} className={styles.tooltip} {...props}>
@@ -23,11 +23,11 @@ const TextInput = ({name, label, placeholder, state, onChange, required, type, m
         delay={{show:100, hide:200}}
         overlay={renderTooltip}
         >
-          <i className="fa solid fa-circle-info"></i>
+          <i className="fa solid fa-circle-info" style={{opacity:.4}}></i>
         </OverlayTrigger>: null
         }
       </div>
-        <Form.Control required={required} type={type} placeholder={placeholder} value={state} onChange={(e) => onChange(e.target.value)} maxLength={maxChar} minLength={minLength}/>
+        <Form.Control required={required} type={type} placeholder={placeholder} value={state} onChange={(e) => onChange(e.target.value)} maxLength={maxChar} minLength={minLength} disabled={disabled}/>
         
       <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
       <Form.Control.Feedback type='invalid'>Cannot be Empty!</Form.Control.Feedback>

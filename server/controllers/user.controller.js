@@ -12,26 +12,33 @@ const updateUserPassword = asyncHandler(async (req, res) => {
     
     const user = await User.findByPk(id);
 
-    //Verify User Sent old Password
-    const verify = await bcrypt.compare(oldPassword, user.password )
-    if (!verify) {
+    if (!user) {
         res.status(404);
-        throw new Error("User provided incorrect password");
+        throw new Error("User doesn't exist")
     }
 
+    //Verify User Sent old Password
+    const verify = await bcrypt.compare(oldPassword, user.password)
+
+    if (verify=== false) {
+        res.status(404);
+        throw new Error("User provided incorrect password")
+    }
+
+    if (oldPassword === newPassword) {
+        res.status(401);
+        throw new Error("User Provided Same Password")
+    }
+    
+    
     //Salt and Hash New Password
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(newPassword, salt);
+    user.password = hashedPassword;
+    
+    await user.save()
 
-    const body = await User.update(
-        {password: hashedPassword },
-        {
-            where: {
-                id: id
-            }
-    });
-
-    res.status(200).send("Updated Password!")
+    res.status(200).json({message: "Updated Password!"})
 
 });
 
@@ -44,7 +51,6 @@ const updateUser = asyncHandler(async(req, res) => {
     if (user){
         user.firstName = req.body.firstName || user.firstName;
         user.lastName = req.body.lastName || user.lastName;
-        user.email = req.body.email || user.email;
 
         const updatedUser = await user.save()
         
@@ -52,7 +58,8 @@ const updateUser = asyncHandler(async(req, res) => {
             id: updatedUser.id,
             firstName: updatedUser.firstName,
             lastName: updatedUser.lastName,
-            email: updatedUser.email
+            email: updatedUser.email,
+            isActive: updatedUser.isActive
         })
 
     } else {
@@ -61,16 +68,11 @@ const updateUser = asyncHandler(async(req, res) => {
     }
 });
 
-const getUser = asyncHandler(async (req, res) => {
-  
-    const user = {
-        id: req.user.id,
-        firstName: req.user.firstName,
-        lastName: req.user.lastName,
-        email: req.user.email,
-    };
-
-    res.status(200).json(user)
+const getUsers = asyncHandler(async (req, res) => {
+    
+    //Returns array of users (will be users joined with user_details)
+    
+    // res.status(200).json(users)
 
 });
 
@@ -98,7 +100,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 module.exports = {
     deleteUser,
-    getUser,
+    getUsers,
     updateUser,
     updateUserPassword
 }

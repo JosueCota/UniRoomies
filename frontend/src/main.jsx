@@ -8,6 +8,7 @@ import store from "./app/store.js"
 
 import App from './app/App.jsx'
 import ErrorBound from "./components/ErrorBound.jsx";
+import PrivateRoute from './components/PrivateRoute.jsx';
 import Login from "./pages/Login.jsx"
 import Register from "./pages/Register.jsx"
 import Homepage from "./pages/Homepage.jsx";
@@ -23,9 +24,13 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
       <Route path="/activation/:token" element={<ActivationPage/>} />
-      <Route path="/profile" element={<Profile/>} />
-      <Route path="/roommates" element={<Roommates/>} />
-      <Route path="/rooms" element={<Rooms/>} />
+      
+      {/* Private Routes */}
+      <Route path="" element={<PrivateRoute/>}>
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/roommates" element={<Roommates/>} />
+        <Route path="/rooms" element={<Rooms/>} />
+      </Route>
     </Route>
   )
 )

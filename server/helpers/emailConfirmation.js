@@ -28,7 +28,7 @@ async function sendConfirmationEmail( email, id, res) {
         },
         process.env.EMAIL_SECRET,
         {
-          expiresIn: "1d"
+          expiresIn: "1h"
         },
         (err, emailToken) => {
           const url = link + `${emailToken}`;

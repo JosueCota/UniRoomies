@@ -1,0 +1,11 @@
+.formCont {
+    width: 70%;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    margin: 2rem auto;
+}
+
+.title {
+    align-self: center;
+}

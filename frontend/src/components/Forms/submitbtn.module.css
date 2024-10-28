@@ -1,5 +1,5 @@
 .button {
-    margin: 1rem 0rem;
+    margin: .3rem 0rem;
     padding: .5rem;
     border: 1px lightgrey solid;
     border-radius: .4rem;
@@ -7,10 +7,12 @@
 }
 
 .button:hover {
-    background-color: rgb(39, 11, 9);
+    background-color: rgba(51, 51, 51, .7);
     color: white;
 }
 
 .button:active{
+    color: black;
     background-color: white;
 }
+

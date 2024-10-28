@@ -20,11 +20,12 @@ const ActivationPage = () => {
             if (token) {          
                 await verifyEmail({token})
                 navigate("/login")
+                toast.success("Account Activated!")
             } else {
                 toast.error("No Token Provided")
             }
         } catch (err) {
-            toast.error(err);
+            toast.error(err?.data?.message || err.error);
         }
     }
   return (

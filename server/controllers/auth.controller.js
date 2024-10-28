@@ -104,7 +104,8 @@ const login = asyncHandler(async (req, res) => {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email
+        email: user.email,
+        isActive: user.isActive
     });
 });
 
@@ -121,6 +122,10 @@ const resendLink = asyncHandler(async (req, res) => {
     const {email} = req.body
     const user = await User.findOne({where : {email: email}})
 
+    if (!user) {
+        res.status(404)
+        throw new Error("User with Emai Doesn't Exist")
+    }
     if (user.isRegistered) {
         res.status(401)
         throw new Error("User Already Registered")
@@ -128,7 +133,6 @@ const resendLink = asyncHandler(async (req, res) => {
 
     if (user) {
         await sendConfirmationEmail(email, user.id, res)
-        res.status(200).send("Successful Activation!")
     } else {
         res.status(404)
         throw new Error("Invalid Email")

@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     'User',
       {
         id: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.INTEGER(),
           allowNull: false,
           autoIncrement: true,
           primaryKey: true
@@ -29,18 +29,13 @@ module.exports = (sequelize) => {
           allowNull: false
         },
         isActive: {
-          type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: true
-        },
-        isRegistered: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.BOOLEAN(),
           default: false
         },
+        isRegistered: {
+          type: DataTypes.BOOLEAN(),
+          default: false,
+        },
       },
-      {
-        createdAt: false,
-        updatedAt: false
-      }
   );
 };
