@@ -68,15 +68,36 @@ const updateUser = asyncHandler(async(req, res) => {
     }
 });
 
-const getUsers = asyncHandler(async (req, res) => {
-    
-    //Returns array of users (will be users joined with user_details)
-    
-    // res.status(200).json(users)
+//Updates user isActive Attribute
+const updateActiveUser = asyncHandler(async (req,res) => {
 
-});
+    const user = await User.findByPk(req.user.id);
 
-//Delete user
+    //Check user exists
+    if (!user) {
+        throw new Error("User Not Found");
+    }
+
+    //Check if they aren't registered
+    if (!user.isRegistered){
+        throw new Error("User Isn't Registered")
+    }
+
+    //Simply assign !current 
+    user.isActive = !user.isActive;
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+        id: updatedUser.id,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+        isActive: updatedUser.isActive
+    });
+})
+
+//Delete user with password confirmation
 const deleteUser = asyncHandler(async (req, res) => {
 
     const user = await User.findByPk(req.user.id);
@@ -100,7 +121,7 @@ const deleteUser = asyncHandler(async (req, res) => {
             httpOnly: true,
             expires: new Date(0)
         })
-        res.status(200).send("Successfully Deleted");
+        res.status(200).json({message:"Successfully Deleted"});
     } else {
         res.status(400);
         throw new Error("Error Deleting User")
@@ -109,7 +130,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 module.exports = {
     deleteUser,
-    getUsers,
     updateUser,
-    updateUserPassword
+    updateUserPassword,
+    updateActiveUser
 }

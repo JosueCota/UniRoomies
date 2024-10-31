@@ -9,6 +9,7 @@ import Loader from '../Loader'
 import { useUpdateUserNameMutation, useUpdateUserPasswordMutation } from '../../features/usersApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from "../../features/authSlice"
+import ProfileAccount from './ProfileAccount'
 
 const ProfileUserTab = () => {
 
@@ -31,18 +32,26 @@ const ProfileUserTab = () => {
     setEmail(user.email)
   }, [])
 
-  const validate = () => {
-    const namePattern = /^[a-zA-Z-]{2,}$/;
-    let err = false
-    if (!namePattern.test(firstName) || !namePattern.test(lastName)){
-      toast.error( "Make Sure Name Does Not Contain Numbers or Special Characters other than '-'", {toastId: "regNameErr"})
-      err = true;
-    }
+  const validatePassword = () => {
+    let valid = true;
     if (newPassword && newPassword === oldPassword ) {
-      toast.error("New Password Matches Old Password", {toastId: "regPassErr"});
-      err = true;
+      toast.error("New Password Matches Old Password", {toastId: "upPassErr"});
+      valid = false;
     }
-    return err
+    return valid
+  }
+
+  const validateName = () => {
+    const namePattern = /^[a-zA-Z-]{2,}$/;
+    let valid = true;
+    if (!namePattern.test(firstName) || !namePattern.test(lastName)){
+      toast.error( "Make Sure Name Does Not Contain Numbers or Special Characters other than '-'", {toastId: "upNameErr"})
+      valid = false;
+    } else if (firstName === user.firstName && lastName === user.lastName) {
+      toast.error("First Name or Last Name must be different than current value", {toastId: "upNameErr"})
+      valid = false;
+    }
+    return valid
   }
 
   const resetStates = () => {
@@ -50,42 +59,53 @@ const ProfileUserTab = () => {
     setOldPassword("");
   }
 
-  const handleSubmit = async (event) => {
+  const handleNameFormSubmit = async(event) => {
     event.preventDefault();
-    
-    if (validate()) {
-      console.log("Error with Submission")
-    } 
-    else {
+    if (validateName()) {
       try {
         if (firstName !== user.firstName || lastName!== user.lastName) {
           const res = await updateName({firstName, lastName}).unwrap();
           dispatch(setCredentials({...res}));
-          toast.success("Successfully Updated User!", {toastId: 'userUpdateSuccess'});
+          toast.success("Successfully Updated Name!");
+        } } catch (err) {
+          toast.error(err?.data?.message || err.error , {toastId: "updateUserServerErr"});
         }
+    }
+  }
+
+  const handlePasswordFormSubmit = async(event) => {
+    event.preventDefault();
+    if (validatePassword()) {
+      try {
         if (newPassword !== "") {
           await updatePassword({oldPassword, newPassword}).unwrap();
-          toast.success("Successfully Updated User", {toastId: 'userUpdateSuccess'});
+          toast.success("Successfully Updated Password!", {toastId: 'userUpdateSuccess'});
           resetStates();
         }
-      } catch(err) {
-
-        toast.error(err?.data?.message || err.error , {toastId: "updateUserServerErr"});
-      }
+        } catch (err) {
+          toast.error(err?.data?.message || err.error , {toastId: "updateUserServerErr"});
+        }
     }
-  };
+  }
 
   return (
-    <Form className={styles.formCont} onSubmit={handleSubmit}>   
-    <h2 className={styles.title}>Update Profile</h2>
-      <TextInput placeholder={firstName} label={"First Name"} state={firstName} onChange={setFirstName} name={"firstName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
-      <TextInput placeholder={lastName} label={"Last Name"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
-      <TextInput disabled placeholder={email} label={"Email"}/>
-      <TextInput placeholder={"New Password"} label={"New Password"} state={newPassword} onChange={setNewPassword} name={"password"} maxChar={50} tip={"Must be Different From Current Password"} minLength={8}/>
-      <TextInput placeholder={"Current Password"} label={"Current Password"} state={oldPassword} onChange={setOldPassword} name={"r-password"}  type={"password"} maxChar={50} tip={"Must Match Current Password"}/>
-      {(isLoading) && <Loader/>}
-      <SubmitBtn name={"Update"}/> 
-    </Form>    
+    <div>
+      <Form className={styles.formCont} onSubmit={handleNameFormSubmit} id='updateName'>
+        <h2 className={styles.title}>Update User</h2>
+        <TextInput placeholder={firstName} label={"First Name"} state={firstName} onChange={setFirstName} name={"firstName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
+        <TextInput placeholder={lastName} label={"Last Name"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
+        <TextInput disabled placeholder={email} label={"Email"}/>
+        <SubmitBtn name={"Update Name"} formId={"updateName"}/> 
+      </Form>
+      <Form className={styles.formCont} onSubmit={handlePasswordFormSubmit} id="updatePassword">
+        <h2 className={styles.title}>Update Password</h2>
+        <TextInput placeholder={"New Password"} label={"New Password"} state={newPassword} onChange={setNewPassword} name={"password"} maxChar={50} tip={"Must be Different From Current Password"} minLength={8}/>
+        <TextInput placeholder={"Current Password"} label={"Current Password"} state={oldPassword} onChange={setOldPassword} name={"r-password"}  type={"password"} maxChar={50} tip={"Must Match Current Password"} minLength={8}/>
+        {(isLoading) && <Loader/>}
+        <SubmitBtn name={"Update Password"} formId={"updatePassword"}/> 
+      </Form>
+      <ProfileAccount/>
+    </div>
   )
 }
 

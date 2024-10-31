@@ -10,7 +10,6 @@ const BrandHeader = () => {
           <BsFillHousesFill className={styles.brandIcon} size={36}/>
           <p className={styles.brandTitle}>UniRoomies</p>
         </Link>
-        
       </div>
   )
 }

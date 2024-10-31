@@ -19,6 +19,7 @@ const ResendEmailModal = () => {
                 await resendLink({email}).unwrap();
                 setShow(false);
                 setEmail("");
+                toast.success("Resent Email!", {toastId:"resendSucc"});
             } catch (err) {
                 toast.error(err?.data?.message || err.error);
             }

@@ -75,7 +75,7 @@ const RegisterForm = () => {
     <div className={styles.container}>
       <h2 style={{marginBottom: "2rem"}}>Register</h2>
       
-    <Form className={styles.formCont} onSubmit={handleSubmit}>
+    <Form className={styles.formCont} onSubmit={handleSubmit} id='registerForm'>
         <div className={styles.sameLine}>
             <TextInput placeholder={"Ex: John"} label={"First Name*"} state={firstName} onChange={setFirstName} name={"firstName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
             <TextInput placeholder={"Ex: Doe"} label={"Last Name*"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>

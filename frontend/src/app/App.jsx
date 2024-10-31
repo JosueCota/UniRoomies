@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Navs/SideBar";
+import Sidebar from "../components/NavsHeaders/SideBar";
 import { ToastContainer }  from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";

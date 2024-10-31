@@ -1,7 +1,11 @@
 import { apiSlice } from "./apiSlice";
 import { ROOMMATES_URL } from "../utils/constants";
 
-export const roommatesSlice = apiSlice.injectEndpoints({
+//Get all roommates 
+//Get all roommates based on location/price
+//Each of these searches will return 10 - (pagination will be used)
+
+export const roommatesApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getRoommates: builder.query({
             query: (data) => ({
@@ -13,4 +17,4 @@ export const roommatesSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetRoommatesQuery } = roommatesSlice
+export const { useGetRoommatesQuery } = roommatesApiSlice

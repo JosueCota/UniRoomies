@@ -5,6 +5,8 @@ const sequelize = require("./database")
 const cookieParser = require("cookie-parser")
 const userRouter = require("./routes/userRouter")
 const authRouter = require("./routes/authRouter");
+const roommateRouter = require("./routes/roommateRouter")
+
 const { errorHandler, notFound } = require("./middleware/error.middleware");
 
 const port = process.env.PORT || "8081"
@@ -25,7 +27,8 @@ const startApp = async () => {
         
         app.use('/api/users', userRouter);
         app.use('/api/auth', authRouter);
-
+        app.use('/api/roommates', roommateRouter);
+        
         app.use(errorHandler);                                  //Error handling for custom errors
         app.use(notFound);                                      //Error handling for incorrect api route
         

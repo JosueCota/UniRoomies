@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from "./homepage.module.css"
-import BrandHeader from '../components/Navs/BrandHeader';
+import BrandHeader from '../components/NavsHeaders/BrandHeader';
 import { useSelector } from 'react-redux';
 
 const Homepage = () => {

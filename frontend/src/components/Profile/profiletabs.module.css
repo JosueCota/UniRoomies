@@ -15,25 +15,23 @@
     
 }
 
-
 .tab {
     /* background-color: blue !important; */
     color: white !important;
     background-color: wheat;
 }
+.tab:hover {
+    opacity: .9;
+}
 
 .ltab {
-    border-bottom-left-radius: 50%;
+    border-bottom-left-radius: .375rem;
     border-top-right-radius: 0 !important;
     
 }
 
-.mtab {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-}
 .rtab { 
-    border-bottom-right-radius: 50% !important;
+    border-bottom-right-radius: .375rem !important;
     border-top-left-radius: 0 !important;
 
 }

@@ -3,3 +3,25 @@ html {
   margin: 0px;
   box-sizing: border-box;
 }
+
+.location-search-input {
+  width: 100%;
+  border-radius: 1rem 0rem 0rem 1rem;
+  margin: 0px;
+  padding: 5px 10px;
+  border: none;
+  text-align: center;
+}
+
+.location-search-input:focus {
+  outline-color: white;
+  border-radius: 0rem;
+}
+
+.inputSuggestion {
+  justify-self: center;
+  width: 100.5%;
+  color: black;
+  border: 1px lightgray solid;
+  padding: 5px;
+}
