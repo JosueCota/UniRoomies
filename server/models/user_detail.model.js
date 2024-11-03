@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
                 //How often they cook at home (1-2 a week) (3-5 a week) (every day)
                 type: DataTypes.STRING(50)
             },
-            stayLength: {
+            stay_length: {
                 //For how long are they looking for? (1 year, 6 months etc)
                 type: DataTypes.STRING(50)
             },
@@ -59,15 +59,14 @@ module.exports = (sequelize) => {
                 //Pets? Foods? Might be an array
                 type: DataTypes.TEXT()
             },
-            couplesOk: {
+            couples_ok: {
                 //Whether user is okay with couples
                 type: DataTypes.BOOLEAN()
             },
-            petOwner: {
+            pet_owner: {
                 //Whether they own a pet
                 type: DataTypes.BOOLEAN()
-            }
-
+            },
         },
         {
             createdAt: false,

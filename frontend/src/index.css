@@ -10,7 +10,7 @@ html {
   margin: 0px;
   padding: 5px 10px;
   border: none;
-  text-align: center;
+  text-align: start;
 }
 
 .location-search-input:focus {
@@ -19,9 +19,16 @@ html {
 }
 
 .inputSuggestion {
-  justify-self: center;
-  width: 100.5%;
   color: black;
   border: 1px lightgray solid;
   padding: 5px;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  justify-content: center;
 }

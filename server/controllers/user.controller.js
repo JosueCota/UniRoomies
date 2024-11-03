@@ -1,7 +1,10 @@
 const sequelize  = require("../database.js");
 const bcrypt = require("bcryptjs")
 const User = sequelize.models.User
+const UserDetails = sequelize.models.User_Detail
+
 const asyncHandler = require("express-async-handler");
+const { where } = require("sequelize");
 
 
 //Update User Password with the req.user sent and new password
@@ -95,7 +98,47 @@ const updateActiveUser = asyncHandler(async (req,res) => {
         email: updatedUser.email,
         isActive: updatedUser.isActive
     });
-})
+});
+
+//Updates user_details
+const updateUserDetails = asyncHandler(async (req,res) => {
+    
+    const newUserDetails = {
+        roommate_desc: req.body.roommate_desc || null,
+        budget: req.body.budget,
+        cities: req.body.cities,
+        room_sharing: req.body.room_sharing,
+        age: req.body.age,
+        gender: req.body.gender,
+        move_in_date: req.body.move_in_date || null,
+        pronouns: req.body.pronouns || null,
+        is_smoker: req.body.is_smoker || null,
+        cooking: req.body.cooking || null,
+        stay_length: req.body.stay_length || null,
+        allergies: req.body.allergies || null,
+        couples_ok: req.body.couples_ok || null,
+        pet_owner: req.body.pet_owner || null,
+        UserId: req.user.id
+    }
+
+    let userDetails = await UserDetails.findOne({where: {UserId: req.user.id}});
+
+    if (!userDetails) {
+        //Create a userDetails for user
+        const user = await User.findByPk(req.user.id);
+        const newUserDet = await UserDetails.create(newUserDetails);
+        user.setUser_Detail(newUserDet);
+
+        res.status(200).json({userDetails: newUserDet , message: "User Details Added"});
+    } else {
+        //Update users details
+        Object.assign(userDetails, newUserDetails);
+
+        await userDetails.save()
+        res.status(200).json({userDetails: userDetails, message: "User Details Updated"})   
+    }
+
+});
 
 //Delete user with password confirmation
 const deleteUser = asyncHandler(async (req, res) => {
@@ -132,5 +175,6 @@ module.exports = {
     deleteUser,
     updateUser,
     updateUserPassword,
-    updateActiveUser
+    updateActiveUser,
+    updateUserDetails
 }

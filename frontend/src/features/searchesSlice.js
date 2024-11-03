@@ -11,7 +11,6 @@ const searchSlice = createSlice({
     reducers: {
         setRoommateSearch: (state, action) => {
             state.roommateSearch = action.payload;
-            localStorage.setItem("roommateSearch", JSON.stringify(action.payload));
         },
         setRoomSearch: (state, action) => {
             state.roomSearch = action.payload;
@@ -20,6 +19,7 @@ const searchSlice = createSlice({
         deleteSearch: (state, action) => {
             state.roommateSearch = null;
             state.roomSearch = null;
+            
         },
     }
 })

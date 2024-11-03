@@ -42,7 +42,7 @@ const addAssociations = () => {
     User.hasOne(User_Detail, {onDelete: "CASCADE"});
     User.hasMany(Room, {onDelete: "CASCADE"});
    
-    Room.belongsTo(User,);
+    Room.belongsTo(User);
     User_Detail.belongsTo(User);
 }
 

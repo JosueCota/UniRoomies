@@ -7,11 +7,10 @@ export class AutoComplete extends Component {
         super(props);
         this.state = { address: this.props.address};
     }
-      
+
       handleChange = address => {
         this.setState({ address });
-        this.props.onAddressChange(address);
-        
+        this.props.onAddressChange(address);        
       };
       
   render() {

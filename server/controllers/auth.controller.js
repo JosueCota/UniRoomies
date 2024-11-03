@@ -1,7 +1,7 @@
 const db  = require("../database.js");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler")
-const generateToken = require("../helpers/generateToken.js");
+const {generateToken, generateRefreshToken} = require("../helpers/generateToken.js");
 const sendConfirmationEmail = require("../helpers/emailConfirmation.js");
 const jwt = require("jsonwebtoken");
 const { where } = require("sequelize");
@@ -100,6 +100,8 @@ const login = asyncHandler(async (req, res) => {
     }
 
     generateToken(res, user.id);
+    generateRefreshToken(res, user.id);
+
     res.status(201).json({
         id: user.id,
         firstName: user.firstName,
@@ -113,8 +115,11 @@ const logout = asyncHandler(async (req, res) => {
     res.cookie("jwt", "", {
         httpOnly: true,
         expires: new Date(0)
-    })
-
+    });
+    res.cookie("rfshToken", "", {
+        httpOnly: true,
+        expires: new Date(0)
+    });
     res.status(200).json({message: "User logged out"})
 });
 
