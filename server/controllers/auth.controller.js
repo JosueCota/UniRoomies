@@ -4,7 +4,6 @@ const asyncHandler = require("express-async-handler")
 const {generateToken, generateRefreshToken} = require("../helpers/generateToken.js");
 const sendConfirmationEmail = require("../helpers/emailConfirmation.js");
 const jwt = require("jsonwebtoken");
-const { where } = require("sequelize");
 
 const User = db.models.User;
 

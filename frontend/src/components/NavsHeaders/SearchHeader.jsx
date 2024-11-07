@@ -20,10 +20,10 @@ const SearchHeader = ({placeholder, type}) => {
 
   return (
     <div className={styles.headerContainer} >
-      <div className={styles.inputDiv} style={{width: "40%"}}>
+      <div className={styles.inputDiv} style={{width: "40%", minWidth:"100px"}}>
           <AutoComplete onAddressChange={handleAddressChange} address={type === "roommate"? roommateSearch || "": roomSearch || ""}/>
       </div>
-      <div className={styles.inputDiv} style={{width: "10%"}}>
+      <div className={styles.inputDiv} style={{width: "10%", minWidth:"100px"}}>
       <input id={placeholder} placeholder={placeholder} type='number' className={styles.numberInput} max={50000} step={100} min={100}/>
       </div>
     </div>

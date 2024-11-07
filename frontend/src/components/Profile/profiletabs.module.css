@@ -16,10 +16,9 @@
 }
 
 .tab {
-    /* background-color: blue !important; */
-    color: white !important;
-    background-color: wheat;
+    background-color: hsla(0, 0%, 100%, .8);
 }
+
 .tab:hover {
     opacity: .9;
 }

@@ -2,10 +2,7 @@ const sequelize  = require("../database.js");
 const bcrypt = require("bcryptjs")
 const User = sequelize.models.User
 const UserDetails = sequelize.models.User_Detail
-
 const asyncHandler = require("express-async-handler");
-const { where } = require("sequelize");
-
 
 //Update User Password with the req.user sent and new password
 const updateUserPassword = asyncHandler(async (req, res) => {
@@ -44,7 +41,6 @@ const updateUserPassword = asyncHandler(async (req, res) => {
     res.status(200).json({message: "Updated Password!"})
 
 });
-
 
 //Updates User basic info (NOT PASSWORD)
 const updateUser = asyncHandler(async(req, res) => {
@@ -104,20 +100,19 @@ const updateActiveUser = asyncHandler(async (req,res) => {
 const updateUserDetails = asyncHandler(async (req,res) => {
     
     const newUserDetails = {
-        roommate_desc: req.body.roommate_desc || null,
         budget: req.body.budget,
         cities: req.body.cities,
         room_sharing: req.body.room_sharing,
         age: req.body.age,
         gender: req.body.gender,
+        roommate_desc: req.body.roommate_desc || null,
         move_in_date: req.body.move_in_date || null,
-        pronouns: req.body.pronouns || null,
         is_smoker: req.body.is_smoker || null,
-        cooking: req.body.cooking || null,
         stay_length: req.body.stay_length || null,
-        allergies: req.body.allergies || null,
+        accomodations: req.body.accomodations || null,
         couples_ok: req.body.couples_ok || null,
         pet_owner: req.body.pet_owner || null,
+        contacts: req.body.contacts || null,
         UserId: req.user.id
     }
 

@@ -2,14 +2,13 @@ const db  = require("../database.js");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const { generateToken, generateRefreshToken } = require("../helpers/generateToken.js");
-const { logout } = require("../controllers/auth.controller.js");
 
 const User = db.models.User;
 
 const protect = asyncHandler(async (req, res, next) => {
-    //Grab user token
-    let token = req.cookies.jwt;
-    let rfshToken = req.cookies.rfshToken 
+    
+    const token = req.cookies.jwt;
+    const rfshToken = req.cookies.rfshToken;
 
     //If exists, verify, then return User info
     if (token) {
@@ -22,6 +21,10 @@ const protect = asyncHandler(async (req, res, next) => {
             next();
         } catch (error){
             res.status(401);
+
+            res.clearCookie("jwt");
+            res.clearCookie("rfshToken");
+            
             throw new Error("Not Authorized, Invalid Token")
         }
     } else {
@@ -35,20 +38,21 @@ const protect = asyncHandler(async (req, res, next) => {
                 
                 //Create new token
                 generateToken(res, decoded.userId);
-
+                
                 //Clear refresh token and then regenerate
                 res.cookie("rfshToken", "", {
                     httpOnly: true,
                     expires: new Date(0)
                 });
-
+                
                 generateRefreshToken(res, decoded.userId);
-
+                
                 next();
-
+                
             } catch (error) {
                 //Refresh token was manipulated
                 res.status(401);
+                res.clearCookie("rfshToken");
                 throw new Error("Not Authorized, Invalid Refresh Token: Log In Again")
             }
         } else {

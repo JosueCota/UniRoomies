@@ -39,25 +39,17 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING(10),
                 allowNull: false
             },
-            pronouns: {
-                //He/Him They/Them She/Her
-                type: DataTypes.STRING(25),
-            },
             is_smoker: {
                 //Whether you smoke
                 type: DataTypes.BOOLEAN()
             },
-            cooking: {
-                //How often they cook at home (1-2 a week) (3-5 a week) (every day)
-                type: DataTypes.STRING(50)
+            accomodations: {
+                //Accomodations for people with needs
+                type: DataTypes.TEXT()
             },
             stay_length: {
                 //For how long are they looking for? (1 year, 6 months etc)
                 type: DataTypes.STRING(50)
-            },
-            allergies: {
-                //Pets? Foods? Might be an array
-                type: DataTypes.TEXT()
             },
             couples_ok: {
                 //Whether user is okay with couples
@@ -67,6 +59,22 @@ module.exports = (sequelize) => {
                 //Whether they own a pet
                 type: DataTypes.BOOLEAN()
             },
+            sleep_schedule: {
+                //When they tend to sleep
+                type: DataTypes.STRING(50)
+            },
+            hobbies: {
+                //What hobbies they have
+                type: DataTypes.TEXT("medium")
+            },
+            parking_needed: {
+                //Whether they need parking
+                type: DataTypes.BOOLEAN()
+            },
+            contacts: {
+                //Contacts
+                type: DataTypes.TEXT("medium")
+            }
         },
         {
             createdAt: false,

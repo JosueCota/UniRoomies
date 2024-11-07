@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
 //Generate token for user when login or when refresh is used
 const generateToken = (res, userId) => {
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {

@@ -14,3 +14,14 @@
 .title {
     align-self: center;
 }
+
+@media screen and (max-width:950px) {
+    .formCont {
+        width: 100%;
+        margin: 2rem auto;
+        padding: 1rem;
+        border: none;
+        background: none;
+        border-radius: 0px;
+    }
+}

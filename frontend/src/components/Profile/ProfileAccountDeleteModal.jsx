@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearCredentials } from '../../features/authSlice';
 import { deleteSearch } from '../../features/searchesSlice';
 import { useDispatch } from 'react-redux';
+import { logout } from '../../utils/helperFunctions';
 
 const ProfileAccountDeleteModal = () => {
 
@@ -33,7 +34,10 @@ const ProfileAccountDeleteModal = () => {
                 toast.success("Successfully Deleted Account", {toastId:"delSuccess"});
                 navigate("/");
             } catch (err) {
-                toast.error(err?.data?.message || err.error);
+              toast.error(err?.data?.message || err.error);
+                if (err.status === 401) {
+                  logout(navigate, dispatch);
+                }
             }
         } else {
             toast.error("Please Input Your Password", {toastId:"delErr"})
@@ -45,7 +49,7 @@ const ProfileAccountDeleteModal = () => {
 
         <Modal show={show} onHide={() => setShow(false)} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Password</Modal.Title>
+          <Modal.Title>Delete Account</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{display: "flex", flexFlow: "column", alignItems:"center",textAlign:'center'}}>Input Password:
           <TextInput name={'password'} placeholder={"Password"} state={password} onChange={setPassword}/>

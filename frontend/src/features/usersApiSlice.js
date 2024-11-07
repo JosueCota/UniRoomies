@@ -7,28 +7,28 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query: (data) => ({
                 url: `${AUTH_URL}/createUser`,
                 method: "POST",
-                body: data
+                data
             }),
         }),
         resendLink: builder.mutation({
             query: (data) => ({
                 url: `${AUTH_URL}/resendLink`,
                 method: "POST",
-                body: data
+                data
             })
         }),
         verifyEmail : builder.mutation({
             query: (data) => ({
                 url: `${AUTH_URL}/register`,
                 method: "POST",
-                body: data
+                data
             })
         }),
         login: builder.mutation({
             query: (data) => ({
                 url: `${AUTH_URL}/login`,
                 method: "POST",
-                body: data
+                data
             }),
         }),
         logout: builder.mutation({
@@ -41,21 +41,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query: (data) => ({
                 url: `${USERS_URL}`,
                 method: "PUT",
-                body: data
+                data
             }),
         }),
         updateUserPassword: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}/password`,
                 method: "PUT",
-                body: data
+                data
             }),
         }),
         deleteUser: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}`,
                 method: "DELETE",
-                body: data
+                data
             }),
         }),
         activateUser: builder.mutation({

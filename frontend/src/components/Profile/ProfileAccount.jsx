@@ -7,9 +7,11 @@ import styles from "./profileaccount.module.css"
 import { setCredentials } from "../../features/authSlice"
 import { useActivateUserMutation } from '../../features/usersApiSlice'
 import ProfileAccountDeleteModal from './ProfileAccountDeleteModal';
+import { logout } from '../../utils/helperFunctions';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileAccount = () => {
-
+  const navigate = useNavigate();
   const [activateUser, {isLoading}] = useActivateUserMutation();
   const dispatch = useDispatch();
 
@@ -23,6 +25,9 @@ const ProfileAccount = () => {
       toast.success(`Successfully ${res.isActive? "Activated": "Deactivated"} Account`);
     } catch(err) {
       toast.error(err?.data?.message || err.error, {toastId: "activateUserErr"})
+      if(err.status === 401) {
+        logout(navigate, dispatch)
+      }
     }
   }
   

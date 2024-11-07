@@ -11,7 +11,7 @@ export const roommatesApiSlice = apiSlice.injectEndpoints({
             query: (data) => ({
                 url: ROOMMATES_URL,
                 method: "GET",
-                body: data
+                data
             })
         })
     })

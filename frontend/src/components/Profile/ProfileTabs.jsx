@@ -6,7 +6,7 @@ import ProfileUserTab from './ProfileUserTab';
 import ProfileRoommateTab from './ProfileRoommateTab';
 
 const ProfileTabs = () => {
-    const [key, setKey] = useState("account");
+    const [key, setKey] = useState("roommate");
 
   return (
     <div className={styles.container}>
@@ -18,11 +18,11 @@ const ProfileTabs = () => {
       className={[styles.tabHeader]}
       
       >
-      <Tab eventKey="account" title="Account" tabClassName={`${styles.tab} ${styles.ltab}`}>
-        <ProfileUserTab/>
-      </Tab>
-      <Tab eventKey="roommate" title="Roommate Details" tabClassName={`${styles.tab} ${styles.rtab}`}>
+      <Tab eventKey="roommate" title="Roommate Details" tabClassName={`${styles.tab} ${styles.ltab}`}>
         <ProfileRoommateTab/>
+      </Tab>
+      <Tab eventKey="account" title="Account" tabClassName={`${styles.tab} ${styles.rtab}`}>
+        <ProfileUserTab/>
       </Tab>
         </Tabs>
     </div>

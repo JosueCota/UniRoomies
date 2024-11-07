@@ -33,6 +33,7 @@ const LoginForm = () => {
       dispatch(setCredentials({...res}));
       navigate("/roommates")
     } catch (err) {
+      
       toast.error(err?.data?.message || err.error, {toastId: "logServerErr"})
     }
   }

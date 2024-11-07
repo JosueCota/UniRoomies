@@ -49,3 +49,10 @@
     color: wheat;
     text-align: center;
 }
+
+@media screen and (max-width:950px) {
+    .container{
+        width: 100%;
+        border-radius: 0px;
+    }
+}
