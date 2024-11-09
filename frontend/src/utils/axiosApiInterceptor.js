@@ -17,7 +17,6 @@ error => {
         localStorage.removeItem('user');
         window.location.href = '/login'; // Example: Redirect to login page
     }
-
     // Propagate other errors
     return Promise.reject(error);
 }

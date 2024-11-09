@@ -5,17 +5,21 @@ import styles from "./profileroommatetab.module.css"
 import Checkbox from '../Forms/Checkbox'
 import SingleSelect from '../Forms/SingleSelect'
 import MultiSelect from '../Forms/MultiSelect'
+import InputList from '../Forms/InputList'
 
 const ProfileRoommateTab = () => {
 
   const [city, setCity] = useState("");
   const [cities, setCities] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const [hobbies, setHobbies] = useState([]);
   const [optionalMulti, setOptionalMulti] = useState([]);
   const [allergies, setAllergies] = useState([]);
   const [couples_ok, setCouplesOk] = useState(false);
   const [isSmoker, setIsSmoker] = useState(false);
   const [petOwner, setPetOwner] = useState(false);
   const [parkingNeeded, setParkingNeeded] = useState(false);
+  const [moveInDate, setMoveInDate] = useState(Date(null));
 
   const removeCity = (city) => {
     setCities((prev) => prev.filter(cities => {
@@ -24,8 +28,8 @@ const ProfileRoommateTab = () => {
   }
 
   const addCity = () => {
-    if (cities.length !== 5){
-
+    if (cities.length !== 10){
+      
       setCities((prev) => {
         if (!prev.includes(city)){
           return [...prev, city]
@@ -37,16 +41,16 @@ const ProfileRoommateTab = () => {
 
     const options = [
       {value: "description", label: "Description"},
-      {value: "move-in-date", label: "Move In Date"},
-      {value: "is-smoker", label: "Smoker"},
-      {value: "stay-length", label: "Stay Length"},
+      {value: "move_in_date", label: "Move In Date"},
+      {value: "is_smoker", label: "Smoker"},
+      {value: "stay_length", label: "Stay Length"},
       {value: "allergies", label: "Allergies"},
-      {value: "couples-ok", label: "Ok With Couples"},
-      {value: "pet-owner", label: "Pet Owner"},
-      {value: "sleep-schedule", label: "Sleep Schedule"},
+      {value: "couples_ok", label: "Ok With Couples"},
+      {value: "pet_owner", label: "Pet Owner"},
+      {value: "sleep_schedule", label: "Sleep Schedule"},
       {value: "sharing", label: "Sharing Details"},
       {value: "hobbies", label: "Hobbies"},
-      {value: "parking-needed", label: "Parking Needed"},
+      {value: "parking_needed", label: "Parking"},
       {value: "contacts", label: "Contacts"},
     ]
 
@@ -56,8 +60,8 @@ const ProfileRoommateTab = () => {
       <div className={styles.container}>
         <h2 className={styles.title}>Update Roommate Details</h2>
         <Form>
-            <InputGroup className={styles.citiesInputGroup} style={{zIndex:0}}>
-              <p style={{fontWeight:"600", marginRight:"20px"}}>Cities Of Interest* (Max-5)</p>
+            <InputGroup className={styles.citiesInputGroup} style={{zIndex:9999}}>
+              <p style={{fontWeight:"600", marginRight:"20px"}}>Cities Of Interest* (Max-10)</p>
               <div style={{width:"60%"}} onKeyDown={(event) => {event.key === "Enter" && addCity()}}>
                 <AutoComplete address={city} onAddressChange={setCity}/>
               </div>
@@ -78,22 +82,27 @@ const ProfileRoommateTab = () => {
             
             <div className={styles.inputGroup1}>
               <FloatingLabel controlId='age' label="Age*" style={{zIndex:"0"}}>
-                <Form.Control type='number' placeholder='Age' min={18} max={100} defaultValue={20} required/>
+                <Form.Control type='number' placeholder='Age' min={18} max={99} defaultValue={20} required/>
               </FloatingLabel>
             
               <FloatingLabel controlId='budget' label="Budget*" style={{zIndex:"0"}}>
-                <Form.Control type='number' placeholder='Budget' step={100} min={100} required/>
+                <Form.Control type='number' placeholder='Budget' step={100} min={100} required max={15000}/>
               </FloatingLabel>
               
               <SingleSelect controlId={"gender"} label={"Gender*"} options={["Male", "Female", "Other"]}/>
               <SingleSelect controlId={"isSharing"} label={"Open to Sharing Room*"} options={["Yes", "No"]}/>
-              
             </div>
+
+            
+            <h2 className={styles.title} style={{marginTop:"3rem"}}><hr/>Optional Details</h2>
 
             <div style={{marginBottom:"20px", width:"90%", margin:"0px auto auto auto"}}>
               <MultiSelect options={options} value={optionalMulti} onChange={setOptionalMulti} placeholder={"Select Optional Details"} name={"optionals"}/>
             </div>
             
+
+
+
               { optionalMulti.some(item => item.value === options[0].value) &&
               <FloatingLabel controlId="floatingTextarea2" label="Description" style={{width:"90%" , margin:"20px auto", zIndex:"0"}}>
                 <Form.Control
@@ -105,7 +114,7 @@ const ProfileRoommateTab = () => {
                 }
 
 
-
+              
               <div className={styles.booleanInputs}>
               {
                 optionalMulti.some(item => item.value === options[5].value) &&
@@ -123,9 +132,6 @@ const ProfileRoommateTab = () => {
                 optionalMulti.some(item => item.value === options[10].value) &&
                 <Checkbox label="Parking Needed?" name="parking_needed" value={parkingNeeded} onChange={setParkingNeeded} />
               }
-              </div>
-              
-              <div className={styles.inputGroup2}>
               {
                 optionalMulti.some(item => item.value === options[7].value) &&
                 <div style={{width:"10rem"}}>
@@ -141,17 +147,36 @@ const ProfileRoommateTab = () => {
                   <SingleSelect options={["Year(s)", "Month(s)"]} label={"Time Frame"}/>
                 </div>
               }
+
+              {
+                optionalMulti.some(item => item.value === options[1].value) &&
+                <FloatingLabel label="Move In By:" controlId='move_in' style={{zIndex:0}}>
+                  <Form.Control aria-label="Date" type="date" placeholder='Move In By' value={moveInDate} onChange={(e)=> setMoveInDate(e.target.value)}/>
+                </FloatingLabel>
+              }
               {
                 optionalMulti.some(item => item.value === options[4].value) &&
               <MultiSelect state={allergies} onChange={setAllergies} name={"accomodations"} placeholder={"Accomodations"} options={[
                 {value: "Pet Allergies", label: "Pet Allergies"},
                 {value: "Food Allergies", label: "Food Allergies"},
-                {value: "Disabilities", label: "Disability"},
-                
+                {value: "Wheelchair Accessibility", label: "Wheelchair Accessibility"},
+                {value: "Noise Sensitivity", label: "Noise Sensitivity"},
+                {value: "Light Sensitivity", label: "Light Sensitivity"},
+                {value: "Temperature Sensitivity", label: "Temperature Sensitivity"},
+                {value: "Guide Dog", label: "Guide Dog"},
+                {value: "Shared Utility", label: "Shared Utility"},                
               ]}/>
               }
               </div>
-
+             
+              {
+                optionalMulti.some(item => item.value === options[9].value) &&
+                <InputList label={"Hobbies"} state={hobbies} onChange={setHobbies} color="black" limit={15} />
+              }
+              {
+                optionalMulti.some(item => item.value === options[11].value) &&
+                <InputList label={"Contacts"} state={contacts} onChange={setContacts} color="blue" limit={5} />
+              }
         </Form>
       </div>
     </div>

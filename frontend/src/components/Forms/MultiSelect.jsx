@@ -3,6 +3,7 @@ import Select from 'react-select'
 
 const MultiSelect = ({options, state, onChange, name, placeholder}) => {
   return (
+    
       <Select 
             options={options} 
             isMulti

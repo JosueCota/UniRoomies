@@ -1,3 +1,14 @@
+:root {
+  --global-font-family: Verdana;
+  --dark-grey: #333232;
+  --light-grey: #3d3d3c;
+  --background-white: #fff5ea;
+  --off-white: #f7f5f4;
+  --wheat: #f5dfb2;
+  --red : rgb(168, 17, 17);
+
+}
+
 html {
   font-size: 20px;
   margin: 0px;
@@ -26,7 +37,7 @@ html {
 
 .autocomplete-dropdown-container {
   position: absolute;
-  z-index: 20;
+  z-index: 9999 !important;
   display: flex;
   flex-flow: column;
   align-content: center;

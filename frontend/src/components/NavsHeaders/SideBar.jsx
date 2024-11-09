@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   useLayoutEffect(() => {
     function updateSize() {
-      if (window.innerWidth < 500) {
+      if (window.innerWidth < 550) {
         setMobile(true);
       } else {
         setMobile(false);

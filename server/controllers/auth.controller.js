@@ -81,20 +81,20 @@ const login = asyncHandler(async (req, res) => {
 
     //User doesn't exist with email
     if (!user) {
-        res.status(401);
+        res.status(400);
         throw new Error("Invalid Login")
     }
     
     //User hasn't been registered
     if (!user.isRegistered) {
-        res.status(401);
+        res.status(400);
         throw new Error("Please Confirm Your Email")
     }
 
     //User input incorrect password
     const valid = await bcrypt.compare(password, user.password);
     if(!valid) {
-        res.status(404);
+        res.status(400);
         throw new Error("Invalid Login Password")
     }
 
