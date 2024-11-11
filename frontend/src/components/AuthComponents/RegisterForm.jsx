@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import TextInput from './TextInput';
-import SubmitBtn from './SubmitBtn';
+import TextInput from '../Forms/TextInput';
+import SubmitBtn from '../Forms/SubmitBtn';
 import styles from "./form.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Form from "react-bootstrap/Form";
 import { useSelector} from "react-redux";
-import { useRegisterMutation } from '../../features/usersApiSlice';
-import { toast } from 'react-toastify';
+import { useRegisterMutation } from '../../features/authApiSlice';
 import Loader from '../Loader';
 import ResendEmailModal from './ResendEmailModal';
+import { showToastError, showToastSuccess, showToastWarning } from '../../utils/helperFunctions';
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -32,15 +32,15 @@ const RegisterForm = () => {
     const namePattern = /^[a-zA-Z-]{2,}$/;
     let err = false;
     if (!namePattern.test(firstName) || !namePattern.test(lastName)){
-      toast.error( "Make Sure Name Does Not Contain Numbers or Special Characters other than '-'", {toastId: "regNameErr"})
+      showToastWarning("Make Sure Name Does Not Contain Numbers or Special Characters other than '-'", "regNameWarning")
       err = true;
     }
     if (!emailPattern.test(email)) {
-      toast.error("Email Does Not Match .edu Pattern", {toastId: "regEmailErr"})
+      showToastWarning("Email Does Not Match .edu Pattern", "regEmailWarning")
       err = true;
     }
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match", {toastId: "regPassErr"});
+      showToastWarning("Password do not match", "regPassWarning")
       err = true;
     }
     return err
@@ -57,15 +57,13 @@ const RegisterForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     
-    if (validate()) {
-      console.log("Error with Submission");
-    } else {
+    if (!validate()) {
       try {
         await register({firstName, lastName, email, password}).unwrap();
         resetStates();
-        toast.success("Created Account, Check Email for Verification Link", {toastId: "regSuccess"});
+        showToastSuccess("Created Account, Check Email for Verification Link", "regSuccess")
       } catch(err) {
-        toast.error(err?.data?.message || err.error, {toastId: "regServerErr"});
+        showToastError(err, "regServerErr")
       }
     }
   };

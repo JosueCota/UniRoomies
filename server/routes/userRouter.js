@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const protect = require("../middleware/auth.middleware");
 
-const { deleteUser, updateUserPassword, updateUser, updateActiveUser, updateUserDetails } = require("../controllers/user.controller")
+const { deleteUser, updateUserPassword, updateUser, updateActiveUser, updateUserDetails, getUserDetails } = require("../controllers/user.controller")
 
 // @ROUTE /api/users
 
@@ -19,6 +19,9 @@ router.put("/activate", protect, updateActiveUser);
 
 //User details is either created or updated
 router.post("/userDetails", protect, updateUserDetails);
+
+//Get User Details from user
+router.get("/userDetails", protect, getUserDetails) 
 
 //Delete User : req has user id
 router.delete("/", protect, deleteUser);

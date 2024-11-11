@@ -121,17 +121,37 @@ const updateUserDetails = asyncHandler(async (req,res) => {
     if (!userDetails) {
         //Create a userDetails for user
         const user = await User.findByPk(req.user.id);
-        const newUserDet = await UserDetails.create(newUserDetails);
+        await UserDetails.create(newUserDetails);
         user.setUser_Detail(newUserDet);
 
-        res.status(200).json({userDetails: newUserDet , message: "User Details Added"});
+        res.status(200).json({message: "User Details Added"});
     } else {
         //Update users details
         Object.assign(userDetails, newUserDetails);
 
         await userDetails.save()
-        res.status(200).json({userDetails: userDetails, message: "User Details Updated"})   
+        res.status(200).json({message: "User Details Updated"})   
     }
+
+});
+
+//Return user details 
+const getUserDetails = asyncHandler(async (req,res) => {
+    
+    let userDetails = await UserDetails.findOne({
+        where: {UserId: req.user.id},
+         attributes: {
+            exclude: ["id", "UserId"]
+    } });
+    
+   console.log("user" + userDetails)
+   
+   if (!userDetails) {
+    res.status(200);
+    res.json(null)
+   } 
+   res.status(200);
+   res.json({userDetails: userDetails})
 
 });
 
@@ -171,5 +191,6 @@ module.exports = {
     updateUser,
     updateUserPassword,
     updateActiveUser,
-    updateUserDetails
+    updateUserDetails,
+    getUserDetails
 }

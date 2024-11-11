@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import styles from "./form.module.css";
-import TextInput from './TextInput';
-import SubmitBtn from './SubmitBtn';
+import TextInput from '../Forms/TextInput';
+import SubmitBtn from '../Forms/SubmitBtn';
 import { Form, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from "react-redux";
-import { useLoginMutation } from '../../features/usersApiSlice';
+import { useLoginMutation } from '../../features/authApiSlice';
 import { setCredentials } from "../../features/authSlice";
-import { toast } from "react-toastify";
 import Loader from '../Loader';
+import { showToastError } from '../../utils/helperFunctions';
 const LoginForm = () => {
 
   const [email, setEmail] = useState('');
@@ -33,8 +33,7 @@ const LoginForm = () => {
       dispatch(setCredentials({...res}));
       navigate("/roommates")
     } catch (err) {
-      
-      toast.error(err?.data?.message || err.error, {toastId: "logServerErr"})
+      showToastError(err, "logServerErr")
     }
   }
 

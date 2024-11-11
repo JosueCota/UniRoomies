@@ -1,42 +1,8 @@
 import { apiSlice } from "./apiSlice";
-import { AUTH_URL, USERS_URL } from "../utils/constants";
+import { USERS_URL } from "../utils/constants";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        register: builder.mutation({
-            query: (data) => ({
-                url: `${AUTH_URL}/createUser`,
-                method: "POST",
-                data
-            }),
-        }),
-        resendLink: builder.mutation({
-            query: (data) => ({
-                url: `${AUTH_URL}/resendLink`,
-                method: "POST",
-                data
-            })
-        }),
-        verifyEmail : builder.mutation({
-            query: (data) => ({
-                url: `${AUTH_URL}/register`,
-                method: "POST",
-                data
-            })
-        }),
-        login: builder.mutation({
-            query: (data) => ({
-                url: `${AUTH_URL}/login`,
-                method: "POST",
-                data
-            }),
-        }),
-        logout: builder.mutation({
-            query: () => ({
-                url: `${AUTH_URL}/logout`,
-                method: "POST", 
-            })
-        }),
         updateUserName: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}`,
@@ -64,7 +30,20 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method: "PUT",
             }),
         }),
+        updateUserDetails: builder.mutation({
+            query: (data) => ({
+                url: `${USERS_URL}/userDetails`,
+                method: "POST",
+                data
+            })
+        }),
+        getUserDetails: builder.query({
+            query: () => ({
+                url: `${USERS_URL}/userDetails`,
+                method: "GET",
+            })
+        })
     })
 })
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useResendLinkMutation, useVerifyEmailMutation, useUpdateUserNameMutation, useUpdateUserPasswordMutation, useActivateUserMutation, useDeleteUserMutation} = usersApiSlice;
+export const { useUpdateUserNameMutation, useUpdateUserPasswordMutation, useActivateUserMutation, useDeleteUserMutation, useUpdateUserDetailsMutation, useGetUserDetailsQuery } = usersApiSlice;

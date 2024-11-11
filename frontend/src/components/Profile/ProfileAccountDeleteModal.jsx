@@ -4,13 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import TextInput from '../Forms/TextInput';
 import { useDeleteUserMutation } from '../../features/usersApiSlice';
-import { toast } from 'react-toastify';
 import styles from "./profileaccount.module.css"
 import { useNavigate } from 'react-router-dom';
 import { clearCredentials } from '../../features/authSlice';
 import { deleteSearch } from '../../features/searchesSlice';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../utils/helperFunctions';
+import { logout, showToastError, showToastSuccess } from '../../utils/helperFunctions';
 
 const ProfileAccountDeleteModal = () => {
 
@@ -31,16 +30,16 @@ const ProfileAccountDeleteModal = () => {
                 dispatch(clearCredentials());
                 dispatch(deleteSearch());
                 
-                toast.success("Successfully Deleted Account", {toastId:"delSuccess"});
+                showToastSuccess("Successfully Deleted Account", "delSuccess");
                 navigate("/");
             } catch (err) {
-              toast.error(err?.data?.message || err.error);
+                showToastError(err)
                 if (err.status === 401) {
                   logout(navigate, dispatch);
                 }
             }
         } else {
-            toast.error("Please Input Your Password", {toastId:"delErr"})
+          showToastError("Please Input Your Password", "delErr");
         }
     }
   return (

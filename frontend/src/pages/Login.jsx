@@ -1,5 +1,5 @@
 import BrandHeader from "../components/NavsHeaders/BrandHeader";
-import LoginForm from "../components/Forms/LoginForm"
+import LoginForm from "../components/AuthComponents/LoginForm"
 
 const Login = () => {
     return (

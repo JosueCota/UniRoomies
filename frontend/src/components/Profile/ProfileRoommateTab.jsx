@@ -1,25 +1,45 @@
-import React, { useState } from 'react'
-import { Button, FloatingLabel, Form, InputGroup, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Button, FloatingLabel, Form, InputGroup } from 'react-bootstrap'
 import AutoComplete from "../NavsHeaders/AutoComplete"
 import styles from "./profileroommatetab.module.css"
 import Checkbox from '../Forms/Checkbox'
 import SingleSelect from '../Forms/SingleSelect'
 import MultiSelect from '../Forms/MultiSelect'
 import InputList from '../Forms/InputList'
+import useFetchUserDetails from '../../utils/useFetchUserDetails'
 
 const ProfileRoommateTab = () => {
 
+  const { userDetails } = useFetchUserDetails();
+
   const [city, setCity] = useState("");
+  const [req, setReq] = useState({gender: "Male", sharing: "Yes"})
   const [cities, setCities] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [hobbies, setHobbies] = useState([]);
   const [optionalMulti, setOptionalMulti] = useState([]);
   const [allergies, setAllergies] = useState([]);
-  const [couples_ok, setCouplesOk] = useState(false);
+  const [couplesOk, setCouplesOk] = useState(false);
   const [isSmoker, setIsSmoker] = useState(false);
   const [petOwner, setPetOwner] = useState(false);
   const [parkingNeeded, setParkingNeeded] = useState(false);
   const [moveInDate, setMoveInDate] = useState(Date(null));
+  
+  useEffect(() => {
+    if (userDetails.cities) {
+      setCities(userDetails.cities)
+      setReq({
+        budget: userDetails.budget,
+        gender: userDetails.gender,
+        age: userDetails.age,
+        sharing: userDetails.isSharing
+      })
+      setContacts(userDetails.contacts || [])
+      setCity(userDetails.hobbies || [])      
+
+    }
+    
+  },[userDetails])
 
   const removeCity = (city) => {
     setCities((prev) => prev.filter(cities => {
@@ -45,7 +65,7 @@ const ProfileRoommateTab = () => {
       {value: "is_smoker", label: "Smoker"},
       {value: "stay_length", label: "Stay Length"},
       {value: "allergies", label: "Allergies"},
-      {value: "couples_ok", label: "Ok With Couples"},
+      {value: "couplesOk", label: "Ok With Couples"},
       {value: "pet_owner", label: "Pet Owner"},
       {value: "sleep_schedule", label: "Sleep Schedule"},
       {value: "sharing", label: "Sharing Details"},
@@ -67,7 +87,6 @@ const ProfileRoommateTab = () => {
               </div>
               <Button className={styles.addButton} onClick={addCity}>Add City</Button>
             </InputGroup>
-          
             <div className={styles.citiesSelectedDiv}>
               <p>Cities Selected: </p> 
               <ul className={styles.citiesList}>
@@ -82,15 +101,19 @@ const ProfileRoommateTab = () => {
             
             <div className={styles.inputGroup1}>
               <FloatingLabel controlId='age' label="Age*" style={{zIndex:"0"}}>
-                <Form.Control type='number' placeholder='Age' min={18} max={99} defaultValue={20} required/>
+                <Form.Control type='number' placeholder='Age' min={18} max={99} defaultValue={20} required value={req.age || ""}
+                onChange={(e) => setReq(prev => { return {...prev, age: e.target.value} })}/>
               </FloatingLabel>
             
               <FloatingLabel controlId='budget' label="Budget*" style={{zIndex:"0"}}>
-                <Form.Control type='number' placeholder='Budget' step={100} min={100} required max={15000}/>
+                <Form.Control type='number' placeholder='Budget' step={100} min={100} required max={15000} value={req.budget || ""}
+                onChange={(e) => setReq(prev => { return {...prev, budget: e.target.value} })}/>
               </FloatingLabel>
               
-              <SingleSelect controlId={"gender"} label={"Gender*"} options={["Male", "Female", "Other"]}/>
-              <SingleSelect controlId={"isSharing"} label={"Open to Sharing Room*"} options={["Yes", "No"]}/>
+              <SingleSelect controlId={"gender"} label={"Gender*"} options={["Male", "Female", "Other"]} value={req.gender}
+                onChange={(e) => setReq(prev => { return {...prev, gender: e.target.value} })}/>
+              <SingleSelect controlId={"isSharing"} label={"Open to Sharing Room*"} options={["Yes", "No"]} value={req.sharing}
+                onChange={(e) => setReq(prev => { return {...prev, sharing: e.target.value} })}/>
             </div>
 
             
@@ -118,7 +141,7 @@ const ProfileRoommateTab = () => {
               <div className={styles.booleanInputs}>
               {
                 optionalMulti.some(item => item.value === options[5].value) &&
-                <Checkbox label="Okay with Couples?" name="couples_ok" value={couples_ok} onChange={setCouplesOk} />
+                <Checkbox label="Okay with Couples?" name="couplesOk" value={couplesOk} onChange={setCouplesOk} />
               }
               {
                 optionalMulti.some(item => item.value === options[2].value) &&

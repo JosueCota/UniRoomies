@@ -1,4 +1,4 @@
-import RegisterForm from "../components/Forms/RegisterForm";
+import RegisterForm from "../components/AuthComponents/RegisterForm";
 import BrandHeader from "../components/NavsHeaders/BrandHeader";
 
 export default function Register() {

@@ -1,11 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useLogoutMutation } from '../../features/usersApiSlice';
+import { useLogoutMutation } from '../../features/authApiSlice';
 import { clearCredentials } from "../../features/authSlice"
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import {CDBSidebarMenuItem} from "cdbreact"
 import { deleteSearch } from '../../features/searchesSlice';
+import { showToastSuccess } from '../../utils/helperFunctions';
 
 const LogoutButton = () => {
 
@@ -21,8 +22,7 @@ const LogoutButton = () => {
           dispatch(deleteSearch());
 
           navigate('/')
-          toast.success("Logged Out!", {toastId: "logoutSuccess"});
-          
+          showToastSuccess("Logged Out!", "logoutSuccess")          
         } catch (err) {
           toast.error(err?.data?.message || err.error, {toastId: "logoutServerErr"})
         }

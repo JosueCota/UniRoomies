@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from "./searchheader.module.css"
 import AutoComplete from './AutoComplete'
 import { useSelector } from 'react-redux'
