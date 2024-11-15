@@ -10,6 +10,7 @@ export class AutoComplete extends Component {
 
       handleChange = address => {
         this.setState({ address });
+        // if (address in suggestions)
         this.props.onAddressChange(address.trim());        
       };
       
@@ -19,6 +20,7 @@ export class AutoComplete extends Component {
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
+        highlightFirstSuggestion={true}
         searchOptions={{
             types: ['(cities)'],
             componentRestrictions: {country: "us"},

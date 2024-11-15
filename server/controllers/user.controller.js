@@ -98,7 +98,7 @@ const updateActiveUser = asyncHandler(async (req,res) => {
 
 //Updates user_details
 const updateUserDetails = asyncHandler(async (req,res) => {
-    
+
     const newUserDetails = {
         budget: req.body.budget,
         cities: req.body.cities,
@@ -107,12 +107,14 @@ const updateUserDetails = asyncHandler(async (req,res) => {
         gender: req.body.gender,
         roommate_desc: req.body.roommate_desc || null,
         move_in_date: req.body.move_in_date || null,
-        is_smoker: req.body.is_smoker || null,
+        is_smoker: req.body.is_smoker!== undefined ? req.body.is_smoker : null,
         stay_length: req.body.stay_length || null,
         accomodations: req.body.accomodations || null,
-        couples_ok: req.body.couples_ok || null,
-        pet_owner: req.body.pet_owner || null,
+        couples_ok: req.body.couples_ok!== undefined?req.body.couples_ok: null,
+        pet_owner:  req.body.pet_owner!== undefined?req.body.pet_owner: null,
+        parking_needed:  req.body.parking_needed!== undefined? req.body.parking_needed: null,
         contacts: req.body.contacts || null,
+        hobbies: req.body.hobbies || null,
         UserId: req.user.id
     }
 
@@ -127,12 +129,11 @@ const updateUserDetails = asyncHandler(async (req,res) => {
         res.status(200).json({message: "User Details Added"});
     } else {
         //Update users details
-        Object.assign(userDetails, newUserDetails);
+        Object.assign(userDetails, req.body);
 
         await userDetails.save()
         res.status(200).json({message: "User Details Updated"})   
     }
-
 });
 
 //Return user details 
@@ -144,13 +145,13 @@ const getUserDetails = asyncHandler(async (req,res) => {
             exclude: ["id", "UserId"]
     } });
     
-   console.log("user" + userDetails)
    
    if (!userDetails) {
     res.status(200);
     res.json(null)
    } 
    res.status(200);
+
    res.json({userDetails: userDetails})
 
 });

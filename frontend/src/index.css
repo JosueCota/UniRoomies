@@ -1,12 +1,18 @@
 :root {
   --global-font-family: Verdana;
-  --dark-grey: #333232;
-  --light-grey: #3d3d3c;
-  --background-white: #fff5ea;
-  --off-white: #f7f5f4;
-  --wheat: #f5dfb2;
-  --red : rgb(168, 17, 17);
 
+  --header : #a6272a;
+  --sidebar: #3d2221;
+  --main-background: #f3eed9;
+
+  --box-secondary: #ee6366;
+  --box-primary: #fff6f5;
+
+  --button-primary: #332315;
+  --button-secondary: #e5c295;
+
+  --light-font: #fff5ea;
+  --dark-font: #3d2221;
 }
 
 html {
@@ -15,24 +21,41 @@ html {
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+
 .location-search-input {
   width: 100%;
-  border-radius: 1rem 0rem 0rem 1rem;
-  margin: 0px;
+  border-radius: .3em 0rem 0rem .3rem;
   padding: 5px 10px;
   border: none;
-  text-align: start;
 }
 
 .location-search-input:focus {
-  outline-color: white;
+  outline-color: rgb(30, 8, 8);
   border-radius: 0rem;
 }
 
 .inputSuggestion {
-  color: black;
-  border: 1px lightgray solid;
+  
+  color: var(--box-secondary);
+  border-bottom: lightgray solid 1px;
   padding: 5px;
+}
+
+.inputSuggestion:hover {
+  background-color: #6b6960 !important;
+  color: var(--box-primary);
 }
 
 .autocomplete-dropdown-container {
@@ -40,6 +63,4 @@ html {
   z-index: 9999 !important;
   display: flex;
   flex-flow: column;
-  align-content: center;
-  justify-content: center;
 }

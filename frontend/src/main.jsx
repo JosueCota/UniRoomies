@@ -16,6 +16,9 @@ import Roommates from "./pages/Roommates.jsx"
 import Rooms from "./pages/Rooms.jsx"
 import Profile from "./pages/Profile.jsx"
 import ActivationPage from './pages/ActivationPage.jsx';
+import ProfileRoommateTab from './components/Profile/ProfileRoommateTab.jsx';
+import ProfileRoommateTabEdit from './components/Profile/ProfileRoommateTabEdit.jsx';
+import ProfileUserTab from "./components/Profile/ProfileUserTab.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,7 +30,11 @@ const router = createBrowserRouter(
       
       {/* Private Routes */}
       <Route path="" element={<PrivateRoute/>}>
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/user" element={<Profile/>}>
+          <Route index path="" element={<ProfileRoommateTab/>}/>
+          <Route path="edit-user" element={<ProfileRoommateTabEdit/>}/>
+          <Route path="account" element={<ProfileUserTab/>}/>
+        </Route>
         <Route path="/roommates" element={<Roommates/>} />
         <Route path="/rooms" element={<Rooms/>} />
       </Route>

@@ -27,14 +27,14 @@ const Sidebar = () => {
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-
+ 
   return (
     <>
     {mobile && !open && <SideBarButton onClick={() => setOpen(prev => true)}/>}
     {
       (mobile && open) || (!mobile)?
       <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial', position: `${!mobile? "sticky": "absolute"}`, top:"0rem" }}>
-      <CDBSidebar textColor="#fff" backgroundColor="#333" toggled={!open} >
+      <CDBSidebar textColor="#fff" backgroundColor="var(--sidebar)" toggled={!open} >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" onClick={(e) => setOpen(prev => !prev)}></i>} >
           <NavLink href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
             UniRoomies
@@ -49,7 +49,7 @@ const Sidebar = () => {
             <NavLink to="/rooms" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="house-user">Rooms</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/profile" className={({isActive}) => isActive? "activeClicked" : ""}>
+            <NavLink to="/user" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="user" iconType=''>Profile</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

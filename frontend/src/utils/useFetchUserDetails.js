@@ -4,23 +4,24 @@ import { useState, useEffect } from "react";
 
 //Return User Details from Get
 const useFetchUserDetails = () => {
-    const { data } = useGetUserDetailsQuery();
+    let { data, refetch, isFetching } = useGetUserDetailsQuery();
     const [userDetails, setUserDetails] = useState({});
-
+    
     useEffect(() => {
         if (data && data.userDetails) {
             setUserDetails(prev => processUserDetails(data.userDetails));  // Process the details
         }          
     }, [data]);
         
-    return {userDetails};
+    return {userDetails, isFetching, refetch};
 }
 
 const processUserDetails = (userDetailsDataObj) => {
     const arrayCities =  stringToArray(userDetailsDataObj.cities);
-    const arrayAccomodations = stringToArray(userDetailsDataObj.accomodations);
-    const arrayHobbies = stringToArray(userDetailsDataObj.hobbies);
-    
+    const arrayAccomodations = useFetchUserDetails.accomodations? stringToArray(userDetailsDataObj.accomodations): null;
+    const arrayHobbies = userDetailsDataObj.hobbies? stringToArray(userDetailsDataObj.hobbies): null;
+    const arrayContacts = userDetailsDataObj.contacts? stringToArray(userDetailsDataObj.contacts): null;
+
     return {
         cities: arrayCities,
         age: userDetailsDataObj.age,
@@ -35,7 +36,7 @@ const processUserDetails = (userDetailsDataObj) => {
         parkingNeeded: userDetailsDataObj.parking_needed || null,
         sleepSchedule: userDetailsDataObj.sleep_schedule || null,
         petOwner: userDetailsDataObj.pet_owner || null,
-        contacts: userDetailsDataObj.contacts || null,
+        contacts: arrayContacts || null,
         moveInDate: userDetailsDataObj.move_in_date || null,
         couplesOk: userDetailsDataObj.couples_ok || null
     }

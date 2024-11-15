@@ -7,7 +7,7 @@
 .listDiv{
     display: flex;
     background-color: lightgray;
-    border-radius: 1rem;
+    border-radius: 5px;
     margin-top: .5rem;
     justify-items: center;
     align-content: center;

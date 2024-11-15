@@ -1,30 +1,29 @@
-import { useState } from 'react';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Nav from 'react-bootstrap/Nav';
 import styles from "./profiletabs.module.css"
-import ProfileUserTab from './ProfileUserTab';
-import ProfileRoommateTab from './ProfileRoommateTab';
+import { NavLink } from 'react-router-dom';
 
 const ProfileTabs = () => {
-    const [key, setKey] = useState("roommate");
 
   return (
     <div className={styles.container}>
 
-    <Tabs
+    <Nav
       id="controlled-tab-example"
-      activeKey={key}
-      onSelect={(k) => setKey(k)}
+      defaultActiveKey={"roommate"}
       className={[styles.tabHeader]}
-      
+      variant='tabs'
       >
-      <Tab eventKey="roommate" title="Roommate Details" tabClassName={`${styles.tab} ${styles.ltab}`}>
-        <ProfileRoommateTab/>
-      </Tab>
-      <Tab eventKey="account" title="Account" tabClassName={`${styles.tab} ${styles.rtab}`}>
-        <ProfileUserTab/>
-      </Tab>
-        </Tabs>
+      <Nav.Item title="Roommate Details" className={[styles.tab, styles.ltab]}>
+          <NavLink to={"/user"}>
+              <Nav.Link eventKey="roommate"  href='/user'>Profile</Nav.Link>
+          </NavLink>
+      </Nav.Item>
+      <Nav.Item  title="Account" className={[styles.tab, styles.rtab]}>
+        <NavLink to={"/user/account"} className={styles.ltab}>
+          <Nav.Link href='/user/account' eventKey="account">Account</Nav.Link>
+        </NavLink>
+      </Nav.Item>
+        </Nav>
     </div>
   )
 }

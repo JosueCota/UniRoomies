@@ -35,13 +35,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 url: `${USERS_URL}/userDetails`,
                 method: "POST",
                 data
-            })
+            }),
+            invalidatesTags: ["User_Detail"]
         }),
         getUserDetails: builder.query({
             query: () => ({
                 url: `${USERS_URL}/userDetails`,
                 method: "GET",
-            })
+            }),
+            providesTags: ["User_Detail"]
         })
     })
 })

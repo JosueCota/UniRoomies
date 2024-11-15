@@ -1,22 +1,24 @@
 import React from 'react'
 import Select from 'react-select'
-
-const MultiSelect = ({options, state, onChange, name, placeholder}) => {
+import styles from "./multiselect.module.css"
+const MultiSelect = ({options, state, onChange, name, placeholder, required}) => {
   return (
-    
-      <Select 
-            options={options} 
-            isMulti
-            value={state}
-            onChange={(newValue) => onChange(newValue)}
-            name={name}
-            placeholder={placeholder}
-            className='basic-multi-select'
-            classNamePrefix="select"
-            maxMenuHeight="10rem"
-            menuPlacement='auto'
-            closeMenuOnSelect={false}
-            />
+      <div className={styles.container}>
+        <Select 
+              options={options} 
+              isMulti
+              value={state}
+              onChange={(newValue) => onChange(newValue)}
+              name={name}
+              placeholder={placeholder}
+              className='basic-multi-select'
+              classNamePrefix="select"
+              maxMenuHeight="10rem"
+              menuPlacement='auto'
+              closeMenuOnSelect={false}
+              required={required}
+              />
+        </div>
   )
 }
 
