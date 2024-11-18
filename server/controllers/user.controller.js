@@ -50,6 +50,7 @@ const updateUser = asyncHandler(async(req, res) => {
     if (user){
         user.firstName = req.body.firstName || user.firstName;
         user.lastName = req.body.lastName || user.lastName;
+        user.pfp = req.body.pfp || user.pfp;
 
         const updatedUser = await user.save()
         
@@ -58,7 +59,8 @@ const updateUser = asyncHandler(async(req, res) => {
             firstName: updatedUser.firstName,
             lastName: updatedUser.lastName,
             email: updatedUser.email,
-            isActive: updatedUser.isActive
+            isActive: updatedUser.isActive,
+            pfp: updatedUser.pfp
         })
 
     } else {
@@ -74,12 +76,21 @@ const updateActiveUser = asyncHandler(async (req,res) => {
 
     //Check user exists
     if (!user) {
+        res.status(401);
         throw new Error("User Not Found");
     }
-
+    
     //Check if they aren't registered
     if (!user.isRegistered){
+        res.status(401);
         throw new Error("User Isn't Registered")
+    }
+    
+    //Check if they have details
+    const userDetails = await UserDetails.findOne({where: {UserId: req.user.id}});
+    if (!userDetails) {
+        res.status(404);
+        throw new Error("User Hasn't Updated Details")
     }
 
     //Simply assign !current 
@@ -92,7 +103,8 @@ const updateActiveUser = asyncHandler(async (req,res) => {
         firstName: updatedUser.firstName,
         lastName: updatedUser.lastName,
         email: updatedUser.email,
-        isActive: updatedUser.isActive
+        isActive: updatedUser.isActive,
+        pfp: updatedUser.pfp
     });
 });
 
@@ -105,8 +117,8 @@ const updateUserDetails = asyncHandler(async (req,res) => {
         room_sharing: req.body.room_sharing,
         age: req.body.age,
         gender: req.body.gender,
+        move_in_date: req.body.move_in_date,
         roommate_desc: req.body.roommate_desc || null,
-        move_in_date: req.body.move_in_date || null,
         is_smoker: req.body.is_smoker!== undefined ? req.body.is_smoker : null,
         stay_length: req.body.stay_length || null,
         accomodations: req.body.accomodations || null,
@@ -123,10 +135,15 @@ const updateUserDetails = asyncHandler(async (req,res) => {
     if (!userDetails) {
         //Create a userDetails for user
         const user = await User.findByPk(req.user.id);
-        await UserDetails.create(newUserDetails);
+        const newUserDet = await UserDetails.create(newUserDetails);
+        
         user.setUser_Detail(newUserDet);
+        user.isActive = true;
 
-        res.status(200).json({message: "User Details Added"});
+        //If its being created, then its their first time, we want to make their account active 
+        await user.save()
+
+        res.status(200).json({message: "User Details Created"});
     } else {
         //Update users details
         Object.assign(userDetails, req.body);

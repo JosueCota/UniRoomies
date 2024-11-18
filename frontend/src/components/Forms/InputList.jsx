@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FloatingLabel, Button, InputGroup, Form} from 'react-bootstrap';
 import styles from "./inputlist.module.css";
 
-const InputList = ({state, onChange, label, color, limit}) => {
+const InputList = ({state, onChange, label, limit}) => {
 
     const [item, setItem] = useState(""); 
     
@@ -41,7 +41,7 @@ const InputList = ({state, onChange, label, color, limit}) => {
         state?
         state.map((val, index) => 
         <div key={`${val}${index}div`} className={styles.listDiv} onClick={() => removeItem(val)}>
-            <li key={`${val}${index}item`} className={styles.listItem} style={{color: `${color}`}} ><strong style={{color:"grey", marginLeft:'1rem', marginRight:"1rem"}}>X</strong>   {val}</li>
+            <li key={`${val}${index}item`} className={styles.listItem} ><strong style={{color:"black", marginLeft:'1rem', marginRight:"1rem"}}>X</strong>   {val}</li>
         </div>
         )
     : null}

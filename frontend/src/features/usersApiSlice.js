@@ -3,7 +3,7 @@ import { USERS_URL } from "../utils/constants";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        updateUserName: builder.mutation({
+        updateUserInfo: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}`,
                 method: "PUT",
@@ -48,4 +48,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useUpdateUserNameMutation, useUpdateUserPasswordMutation, useActivateUserMutation, useDeleteUserMutation, useUpdateUserDetailsMutation, useGetUserDetailsQuery } = usersApiSlice;
+export const { useUpdateUserInfoMutation, useUpdateUserPasswordMutation, useActivateUserMutation, useDeleteUserMutation, useUpdateUserDetailsMutation, useGetUserDetailsQuery } = usersApiSlice;

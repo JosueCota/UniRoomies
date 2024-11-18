@@ -1,5 +1,4 @@
 import { useGetUserDetailsQuery } from "../features/usersApiSlice";
-import { stringToArray } from "./dataCleaning"
 import { useState, useEffect } from "react";
 
 //Return User Details from Get
@@ -17,13 +16,9 @@ const useFetchUserDetails = () => {
 }
 
 const processUserDetails = (userDetailsDataObj) => {
-    const arrayCities =  stringToArray(userDetailsDataObj.cities);
-    const arrayAccomodations = useFetchUserDetails.accomodations? stringToArray(userDetailsDataObj.accomodations): null;
-    const arrayHobbies = userDetailsDataObj.hobbies? stringToArray(userDetailsDataObj.hobbies): null;
-    const arrayContacts = userDetailsDataObj.contacts? stringToArray(userDetailsDataObj.contacts): null;
 
     return {
-        cities: arrayCities,
+        cities: userDetailsDataObj.cities,
         age: userDetailsDataObj.age,
         budget: userDetailsDataObj.budget,
         gender: userDetailsDataObj.gender,
@@ -31,12 +26,12 @@ const processUserDetails = (userDetailsDataObj) => {
         description: userDetailsDataObj.roommate_desc || null,
         isSmoker: userDetailsDataObj.is_smoker || null,
         stayLength: userDetailsDataObj.stay_length || null,
-        hobbies: arrayHobbies || null,
-        accomodations: arrayAccomodations || null,
+        hobbies: userDetailsDataObj.hobbies || null,
+        accomodations: userDetailsDataObj.accomodations || null,
         parkingNeeded: userDetailsDataObj.parking_needed || null,
         sleepSchedule: userDetailsDataObj.sleep_schedule || null,
         petOwner: userDetailsDataObj.pet_owner || null,
-        contacts: arrayContacts || null,
+        contacts: userDetailsDataObj.contacts || null,
         moveInDate: userDetailsDataObj.move_in_date || null,
         couplesOk: userDetailsDataObj.couples_ok || null
     }

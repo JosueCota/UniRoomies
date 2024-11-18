@@ -9,7 +9,7 @@ function App() {
   const {user} = useSelector((state) => state.auth);
 
   return (
-  <div style={{display:"flex", backgroundColor:"var(--main-background)", minHeight: "100vh"}}>
+  <div style={{display:"flex", backgroundColor:"var(--main-background)", minHeight: "100vh", height:"100%"}}>
     {/* Sidebar won't show in login or register screen */}
     {user? <Sidebar/>: null}
     <ToastContainer limit={3}/>

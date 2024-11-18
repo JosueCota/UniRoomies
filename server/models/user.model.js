@@ -22,7 +22,6 @@ module.exports = (sequelize) => {
           type: DataTypes.STRING(50),
           allowNull: false,
           unique: true
-          
         },
         password: {
           type: DataTypes.STRING(250),
@@ -36,6 +35,10 @@ module.exports = (sequelize) => {
           type: DataTypes.BOOLEAN(),
           default: false,
         },
+        pfp: {
+          type: DataTypes.INTEGER().UNSIGNED,
+          allowNull: false
+        }
       },
   );
 };

@@ -14,7 +14,7 @@ response => {
 },
 error => {
     if (error.response && error.response.status === 401) {
-        localStorage.removeItem('user');
+        localStorage.removeItem('user');        
         window.location.href = '/login'; // Example: Redirect to login page
     }
     // Propagate other errors

@@ -3,13 +3,16 @@
 
   --header : #a6272a;
   --sidebar: #3d2221;
-  --main-background: #f3eed9;
 
-  --box-secondary: #ee6366;
+  /* --main-background: #f3eed9; */
+  --main-background: #e5c295;
+
+  --box-secondary: #f3eed9;
   --box-primary: #fff6f5;
 
   --button-primary: #332315;
   --button-secondary: #e5c295;
+  --button-tertiary: rgb(238, 225, 42);
 
   --light-font: #fff5ea;
   --dark-font: #3d2221;

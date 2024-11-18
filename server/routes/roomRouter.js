@@ -1,29 +1,24 @@
 const express = require("express");
 const router = express.Router();
-
+const protect = require("../middleware/auth.middleware")
 
 //Get specific room: req has room id
-router.get("/:id", (req, res) => {
+router.get("/:id", protect, (req, res) => {
     res.send("it works!" + req.params.id)
 });
 
 //Get All rooms
-router.get("/", (req, res) => {
+router.get("/", protect, (req, res) => {
     res.send("it works!")
 });
 
-//Create rooom : req has room info and user id 
-router.post("/", (req, res) => {
+//Create/Update room : req has room info and user id 
+router.post("/", protect, (req, res) => {
 
 });
 
-//Update User : req has new user data and id
-router.put("/", (req, res) => {
-
-});
-
-//Delete User : req has user id
-router.delete("/:id", (req, res) => {
+//Delete Room : protected
+router.delete("/", protect, (req, res) => {
 
 });
 

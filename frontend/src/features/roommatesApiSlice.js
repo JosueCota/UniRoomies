@@ -9,13 +9,25 @@ import { ROOMMATES_URL } from "../utils/constants";
 export const roommatesApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getRoommates: builder.query({
-            query: (data) => ({
-                url: ROOMMATES_URL,
+            query: ({location, budget, offset}) => {
+                const params = "/";
+                
+                if (location) params+=`${location}`;
+                if (budget) params+=`/${location}`;
+                
+                return ({
+                    url: `${ROOMMATES_URL}/${offset}${params}`,
+                    method: "GET",
+                })
+            }
+        }),
+        getRoommate: builder.query({
+            query: (id) => ({
+                url: `${ROOMMATES_URL}/roommate/${id}`,
                 method: "GET",
-                data
             })
-        })
+        }),
     })
 })
 
-export const { useGetRoommatesQuery } = roommatesApiSlice
+export const { useGetRoommatesQuery, useGetRoommateQuery } = roommatesApiSlice

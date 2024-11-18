@@ -14,7 +14,8 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING(200),
             },
             location: {
-                type: DataTypes.STRING(100)
+                type: DataTypes.STRING(100),
+                allowNull: false
             },
             price: {
                 type: DataTypes.FLOAT,
@@ -25,6 +26,10 @@ module.exports = (sequelize) => {
             },
             description: {
                 type: DataTypes.TEXT
+            },
+            current_household: {
+                type: DataTypes.TEXT,
+                allowNull: false
             }
         }
     );

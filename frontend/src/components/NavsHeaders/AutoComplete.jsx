@@ -20,7 +20,6 @@ export class AutoComplete extends Component {
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
-        highlightFirstSuggestion={true}
         searchOptions={{
             types: ['(cities)'],
             componentRestrictions: {country: "us"},

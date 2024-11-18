@@ -1,5 +1,5 @@
 .container {
-    background-color: #fff;
+    background-color: var(--box-secondary);
     margin: auto;
     justify-items: center;
     align-content: center;

@@ -6,10 +6,11 @@ import Form from "react-bootstrap/Form"
 import { useSelector} from "react-redux";
 import { toast } from 'react-toastify'
 import Loader from '../Loader'
-import { useUpdateUserNameMutation, useUpdateUserPasswordMutation } from '../../features/usersApiSlice'
+import { useUpdateUserInfoMutation, useUpdateUserPasswordMutation } from '../../features/usersApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from "../../features/authSlice"
 import ProfileAccount from './ProfileAccount'
+import PictureSelect from "../Forms/PictureSelect"
 
 const ProfileUserTab = () => {
 
@@ -20,8 +21,9 @@ const ProfileUserTab = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("")
   const [oldPassword, setOldPassword] = useState("")
+  const [pfp, setPfp] = useState({})
 
-  const [updateName, {isLoading}] = useUpdateUserNameMutation();
+  const [updateInfo, {isLoading}] = useUpdateUserInfoMutation();
   const [updatePassword] = useUpdateUserPasswordMutation();
 
   const dispatch = useDispatch();
@@ -30,6 +32,7 @@ const ProfileUserTab = () => {
     setFirstName(user.firstName);
     setLastName(user.lastName);
     setEmail(user.email)
+    setPfp({value: user.pfp, image: `pfp${user.pfp}`})
   }, [])
 
   const validatePassword = () => {
@@ -47,8 +50,8 @@ const ProfileUserTab = () => {
     if (!namePattern.test(firstName) || !namePattern.test(lastName)){
       toast.error( "Make Sure Name Does Not Contain Numbers or Special Characters other than '-'", {toastId: "upNameErr"})
       valid = false;
-    } else if (firstName === user.firstName && lastName === user.lastName) {
-      toast.error("First Name or Last Name must be different than current value", {toastId: "upNameErr"})
+    } else if (firstName === user.firstName && lastName === user.lastName && pfp.value === user.pfp) {
+      toast.error("A Change Must be Made", {toastId: "upNameErr"})
       valid = false;
     }
     return valid
@@ -63,11 +66,12 @@ const ProfileUserTab = () => {
     event.preventDefault();
     if (validateName()) {
       try {
-        if (firstName !== user.firstName || lastName!== user.lastName) {
-          const res = await updateName({firstName, lastName}).unwrap();
+      
+          const val = pfp.value
+          const res = await updateInfo({firstName, lastName, pfp:val}).unwrap();
           dispatch(setCredentials({...res}));
-          toast.success("Successfully Updated Name!");
-        } } catch (err) {
+          toast.success("Successfully Updated Info!");
+        } catch (err) {
           toast.error(err?.data?.message || err.error , {toastId: "updateUserServerErr"});
         }
     }
@@ -95,6 +99,7 @@ const ProfileUserTab = () => {
         <TextInput placeholder={firstName} label={"First Name"} state={firstName} onChange={setFirstName} name={"firstName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
         <TextInput placeholder={lastName} label={"Last Name"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
         <TextInput disabled placeholder={email} label={"Email"}/>
+        <PictureSelect pfp={pfp} setPfp={setPfp} size={64}/>
         <SubmitBtn name={"Update Name"} formId={"updateName"}/> 
       </Form>
       <Form className={styles.formCont} onSubmit={handlePasswordFormSubmit} id="updatePassword">

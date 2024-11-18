@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from "./profileroommatetab.module.css";
 import SubmitBtn from '../Forms/SubmitBtn';
 import ProfileRoommateTabEdit from './ProfileRoommateTabEdit';
+import ProfilePic from "../ProfilePic"
 
 const ProfileRoommateTab = () => {
   const {user} = useSelector((state) => state.auth);
@@ -16,9 +17,10 @@ const ProfileRoommateTab = () => {
   }
 
   return (
-  <div style={{display:"flex", flexDirection:"column", alignContent:"start", width:"90%", margin:"0px auto"}}>
+  <div style={{display:"flex", flexDirection:"column", alignContent:"start", width:"70%", margin:"0px auto"}}>
     {!editting?
       <div className={styles.container}>
+        <ProfilePic num={user.pfp}/>
         <h1>{`${user.firstName} ${user.lastName}`}</h1>
         {userDetails.age? 
         <ul className={styles.listContainer}>
@@ -27,6 +29,7 @@ const ProfileRoommateTab = () => {
             <li>Gender: {userDetails.gender}</li>
             <li>Budget: {userDetails.budget}</li>
             <li>Open to Room Sharing: {userDetails.room_Sharing? "Yes": "No"}</li>
+            {userDetails.description && <li>Description: {userDetails.description}</li>}
             <li>Cities Of Interest: {userDetails.cities ? userDetails.cities.map(city => <p>{city}</p>): <Loader/>}</li>
           </div>
           {userDetails.hobbies && <li>Hobbies: {userDetails.hobbies ? userDetails.hobbies.map(hobby => <p>{hobby}</p>): null}</li>}
@@ -39,7 +42,6 @@ const ProfileRoommateTab = () => {
           {userDetails.isSmoker && <li>Smoker: {userDetails.isSmoker? "Yes": "No"}</li>}
           {userDetails.moveInDate && <li>Move In Date: {userDetails.moveInDate}</li>}
           {userDetails.couplesOk && <li>Okay with Couples: {userDetails.couplesOk? "Yes": "No"}</li>}
-          {userDetails.description && <li>Description: {userDetails.description}</li>}
         </ul>
       : <p>You Must First Update Info</p>}
       </div>

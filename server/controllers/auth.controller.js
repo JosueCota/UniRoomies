@@ -9,7 +9,7 @@ const User = db.models.User;
 
 const createUser = asyncHandler(async (req, res) => {
 
-    const {firstName, lastName, email, password} = req.body
+    const {firstName, lastName, email, password, pfp} = req.body
     
     //Check email is in correct format, will also be handled in frontend
     //Want to make sure people can't send requests to backend with fake or non school emails
@@ -34,7 +34,7 @@ const createUser = asyncHandler(async (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, salt);
     
     //Create User
-    const user = await User.create({firstName: firstName, lastName:lastName, email:email, password:hashedPassword}) 
+    const user = await User.create({firstName: firstName, lastName:lastName, email:email, password:hashedPassword, pfp: pfp}) 
     
     if (user) {
         //Send confirmation email to user
@@ -106,7 +106,8 @@ const login = asyncHandler(async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        isActive: user.isActive
+        isActive: user.isActive,
+        pfp: user.pfp
     });
 });
 

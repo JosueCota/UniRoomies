@@ -22,7 +22,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/roommates")
+      navigate("/roommates/1")
     }
   }, [navigate, user]);
 

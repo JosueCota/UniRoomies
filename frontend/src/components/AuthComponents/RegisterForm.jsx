@@ -9,6 +9,7 @@ import { useRegisterMutation } from '../../features/authApiSlice';
 import Loader from '../Loader';
 import ResendEmailModal from './ResendEmailModal';
 import { showToastError, showToastSuccess, showToastWarning } from '../../utils/helperFunctions';
+import PictureSelect from '../Forms/PictureSelect';
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -16,7 +17,7 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [pfp, setPfp] = useState({value: 1, image: "pfp1"});
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);
   const [register, {isLoading}] = useRegisterMutation(); 
@@ -52,6 +53,7 @@ const RegisterForm = () => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+    setPfp({})
   }
 
   const handleSubmit = async (event) => {
@@ -59,7 +61,8 @@ const RegisterForm = () => {
     
     if (!validate()) {
       try {
-        await register({firstName, lastName, email, password}).unwrap();
+        const pic = pfp.value;
+        await register({firstName, lastName, email, password, pfp: pic}).unwrap();
         resetStates();
         showToastSuccess("Created Account, Check Email for Verification Link", "regSuccess")
       } catch(err) {
@@ -77,6 +80,7 @@ const RegisterForm = () => {
         <div className={styles.sameLine}>
             <TextInput placeholder={"Ex: John"} label={"First Name*"} state={firstName} onChange={setFirstName} name={"firstName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
             <TextInput placeholder={"Ex: Doe"} label={"Last Name*"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
+          <PictureSelect setPfp={setPfp} pfp={pfp}/>
         </div>
 
         <TextInput placeholder={"Email"} label={"Email*"} state={email} onChange={setEmail} name={"email"} required={true} maxChar={50} tip="Must be in the format: example@school.edu"/>

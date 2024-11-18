@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define(
@@ -15,8 +15,15 @@ module.exports = (sequelize) => {
             },
             cities: {
                 //Interested in what cities, array, kept in space seperated string
-                type: DataTypes.TEXT("medium"),
-                allowNull: false
+                type: DataTypes.TEXT(),
+                allowNull: false,
+                get() {
+                    return this.getDataValue("cities").split("|")
+                },
+                set(val) {
+                    val = val.join("|")
+                    this.setDataValue("cities", val);
+                }
             },
             budget: {
                 type: DataTypes.INTEGER(),
@@ -29,7 +36,8 @@ module.exports = (sequelize) => {
             },
             move_in_date: {
                 //Ready date to move in
-                type: DataTypes.DATEONLY()
+                type: DataTypes.DATEONLY(), 
+                allowNull: false
             },
             age: {
                 type: DataTypes.INTEGER(),
@@ -44,8 +52,16 @@ module.exports = (sequelize) => {
                 type: DataTypes.BOOLEAN()
             },
             accomodations: {
-                //Accomodations for people with needs
-                type: DataTypes.TEXT()
+                //Accomodations for people who need them
+                type: DataTypes.TEXT(),
+                get() {
+                    if (this.getDataValue("accomodations")){
+                        return this.getDataValue("accomodations").split("|")
+                    }
+                },
+                set(val) {
+                    val?this.setDataValue("accomodations", val.join("|")): this.setDataValue("accomodations", null);
+                }
             },
             stay_length: {
                 //For how long are they looking for? (1 year, 6 months etc)
@@ -65,7 +81,15 @@ module.exports = (sequelize) => {
             },
             hobbies: {
                 //What hobbies they have
-                type: DataTypes.TEXT("medium")
+                type: DataTypes.TEXT(),
+                get() {
+                    if (this.getDataValue("accomodations")){
+                        return this.getDataValue("hobbies").split("|")
+                    } 
+                },
+                set(val) {
+                    val? this.setDataValue("hobbies", val.join("|")): this.setDataValue("hobbies", null);
+                }
             },
             parking_needed: {
                 //Whether they need parking
@@ -73,7 +97,15 @@ module.exports = (sequelize) => {
             },
             contacts: {
                 //Contacts
-                type: DataTypes.TEXT("medium")
+                type: DataTypes.TEXT(),
+                get() {
+                    if (this.getDataValue("accomodations")){
+                        return this.getDataValue("contacts").split("|")
+                    }
+                },
+                set(val) {
+                    val? this.setDataValue("contacts", val.join("|")): this.setDataValue("contacts", null);
+                }
             }
         },
         {

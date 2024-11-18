@@ -5,6 +5,7 @@
 }
 
 .tabHeader {
+    border-bottom: none;
     width:100%;
     height: 75px;
     background-color: var(--header);
@@ -22,7 +23,8 @@
 .tab {
     position: relative;
     top: 0px;
-    background-color: var(--button-secondary);
+    background-color: rgb(179, 156, 156);
+    border: none;
 }
 
 .tab a {
@@ -30,9 +32,13 @@
     font-weight: 700;
     font-size: 1.5rem;
     text-decoration: none;
+    border: none;
 }
 
 .tab a:hover {
+    color: black;
+}
+.tab a:focus {
     color: black;
 }
 

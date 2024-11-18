@@ -43,7 +43,7 @@ const Sidebar = () => {
         
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink to="/roommates" className={({isActive}) => isActive? "activeClicked" : ""}>
+            <NavLink to="/roommates/1" className={({isActive}) => isActive? "activeClicked" : ""}>
               <CDBSidebarMenuItem icon="people-group">Roommates</CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/rooms" className={({isActive}) => isActive? "activeClicked" : ""}>
