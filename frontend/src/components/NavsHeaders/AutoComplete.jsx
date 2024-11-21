@@ -6,6 +6,7 @@ export class AutoComplete extends Component {
     constructor(props) {
         super(props);
         this.state = { address: this.props.address};
+        this.name = { name: this.props.name };
     }
 
       handleChange = address => {
@@ -31,6 +32,8 @@ export class AutoComplete extends Component {
               {...getInputProps({
                 placeholder: 'Search City ...',
                 className:'location-search-input',
+                name:this.props.name? this.props.name: undefined,
+                required:this.props.name? true: false
               })}
             />
             <div className="autocomplete-dropdown-container" >

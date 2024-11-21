@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TextInput from '../Forms/TextInput';
-import SubmitBtn from '../Forms/SubmitBtn';
+import GeneralButton from '../Forms/GeneralButton';
 import styles from "./form.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Form from "react-bootstrap/Form";
@@ -91,7 +91,7 @@ const RegisterForm = () => {
           <Link className={styles.link} to={"/login"}>Already Have An Account?</Link>
         </div>
         {isLoading && <Loader/>}
-        <SubmitBtn name={"Create Account"} /> 
+        <GeneralButton name={"Create Account"} type={"submit"}/> 
     </Form>
 
     </div>

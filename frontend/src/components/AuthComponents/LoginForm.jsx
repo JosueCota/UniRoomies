@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import styles from "./form.module.css";
 import TextInput from '../Forms/TextInput';
-import SubmitBtn from '../Forms/SubmitBtn';
+import GeneralButton from '../Forms/GeneralButton';
 import { Form, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from "react-redux";
 import { useLoginMutation } from '../../features/authApiSlice';
 import { setCredentials } from "../../features/authSlice";
 import Loader from '../Loader';
-import { showToastError } from '../../utils/helperFunctions';
+import { showToastError, showToastWarning } from '../../utils/helperFunctions';
 const LoginForm = () => {
 
   const [email, setEmail] = useState('');
@@ -21,8 +21,10 @@ const LoginForm = () => {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.isActive) {
       navigate("/roommates/1")
+    } else if (user) {
+      navigate("/user")
     }
   }, [navigate, user]);
 
@@ -31,7 +33,14 @@ const LoginForm = () => {
     try {
       const res = await login({email, password}).unwrap();
       dispatch(setCredentials({...res}));
-      navigate("/roommates")
+      console.log(res)
+
+      if (res.isActive !== false) {
+        // navigate("/roommates")
+      } else {
+        showToastWarning("Activate Your Account to Search!")
+        navigate("/user")
+      }
     } catch (err) {
       showToastError(err, "logServerErr")
     }
@@ -46,7 +55,7 @@ const LoginForm = () => {
         <Link className={styles.link} to={"/register"}>Create an Account</Link>
  
         { isLoading? <Loader/>: 
-        <SubmitBtn name={"Login"}/>
+        <GeneralButton name={"Login"} type={'submit'}/>
         }
       </Form>
     </div>

@@ -10,9 +10,13 @@
   --box-secondary: #f3eed9;
   --box-primary: #fff6f5;
 
+  /* Dark Button For Forms and More Important Stuff */
   --button-primary: #332315;
-  --button-secondary: #e5c295;
-  --button-tertiary: rgb(238, 225, 42);
+  --button-secondary: rgb(238, 225, 42);
+
+  /* Light Button for Minor Actions */
+  --button2-secondary: #058ef6;
+  --button2-primary: #ffffff;
 
   --light-font: #fff5ea;
   --dark-font: #3d2221;
@@ -51,7 +55,7 @@ html {
 
 .inputSuggestion {
   
-  color: var(--box-secondary);
+  color: var(--dark-font);
   border-bottom: lightgray solid 1px;
   padding: 5px;
 }
@@ -66,4 +70,19 @@ html {
   z-index: 9999 !important;
   display: flex;
   flex-flow: column;
+}
+
+
+div.step-indicators .default-node {
+  background-color: rgb(44, 51, 44) !important;
+  border-color: rgb(44, 51, 44);
+}
+
+div.step-indicators .active {
+  background-color: rgb(2, 153, 254) !important;
+  border-color:rgb(2, 153, 254);
+}
+
+div.step-indicators .complete {
+  background-color: green !important;
 }

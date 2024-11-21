@@ -19,6 +19,7 @@ const modelDefs = [
     require('./models/user.model'),
     require('./models/room.model'),
     require('./models/user_detail.model'),
+    require("./models/room_image.model")
 ]
 
 //Sends sequelize object to model function
@@ -37,13 +38,21 @@ const dbSetup = async () => {
 
 // Relations between Tables 
 const addAssociations = () => {
-    const {User, User_Detail, Room, } = sequelize.models;
+    const {User, User_Detail, Room, Room_Image } = sequelize.models;
 
     User.hasOne(User_Detail, {onDelete: "CASCADE"});
     User.hasMany(Room, {onDelete: "CASCADE"});
-   
+    Room.hasOne(Room_Image, 
+        {
+            onDelete:"CASCADE", 
+            foreignKey: {
+                name: 'RoomId'}
+        }
+    );
+    
     Room.belongsTo(User);
     User_Detail.belongsTo(User);
+    Room_Image.belongsTo(Room, { foreignKey: 'RoomId' });
 }
 
 dbSetup();

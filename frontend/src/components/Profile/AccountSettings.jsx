@@ -2,14 +2,14 @@ import React from 'react'
 import { useDispatch, useSelector} from "react-redux";
 import Loader from '../Loader'
 
-import styles from "./profileaccount.module.css"
+import styles from "./accountsettings.module.css"
 import { setCredentials } from "../../features/authSlice"
 import { useActivateUserMutation } from '../../features/usersApiSlice'
-import ProfileAccountDeleteModal from './ProfileAccountDeleteModal';
+import ProfileAccountDeleteModal from './AccountDeleteModal';
 import { logout, showToastError, showToastSuccess } from '../../utils/helperFunctions';
 import { useNavigate } from 'react-router-dom';
 
-const ProfileAccount = () => {
+const AccountSettings = () => {
   const navigate = useNavigate();
   const [activateUser, {isLoading}] = useActivateUserMutation();
   const dispatch = useDispatch();
@@ -44,4 +44,4 @@ const ProfileAccount = () => {
   )
 }
 
-export default ProfileAccount
+export default AccountSettings

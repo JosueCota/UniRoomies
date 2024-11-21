@@ -33,7 +33,9 @@ const processUserDetails = (userDetailsDataObj) => {
         petOwner: userDetailsDataObj.pet_owner || null,
         contacts: userDetailsDataObj.contacts || null,
         moveInDate: userDetailsDataObj.move_in_date || null,
-        couplesOk: userDetailsDataObj.couples_ok || null
+        couplesOk: userDetailsDataObj.couples_ok || null,
+        university: userDetailsDataObj.university || null,
+        livingPreferences: userDetailsDataObj.living_preferences || null
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TextInput from '../Forms/TextInput'
-import SubmitBtn from '../Forms/SubmitBtn'
-import styles from "./profileusertab.module.css"
+import GeneralButton from '../Forms/GeneralButton'
+import styles from "./accounttab.module.css"
 import Form from "react-bootstrap/Form"
 import { useSelector} from "react-redux";
 import { toast } from 'react-toastify'
@@ -9,10 +9,10 @@ import Loader from '../Loader'
 import { useUpdateUserInfoMutation, useUpdateUserPasswordMutation } from '../../features/usersApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from "../../features/authSlice"
-import ProfileAccount from './ProfileAccount'
+import AccountSettings from './AccountSettings'
 import PictureSelect from "../Forms/PictureSelect"
 
-const ProfileUserTab = () => {
+const AccountTab = () => {
 
   const { user } = useSelector((state) => state.auth);
 
@@ -100,18 +100,18 @@ const ProfileUserTab = () => {
         <TextInput placeholder={lastName} label={"Last Name"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
         <TextInput disabled placeholder={email} label={"Email"}/>
         <PictureSelect pfp={pfp} setPfp={setPfp} size={64}/>
-        <SubmitBtn name={"Update Name"} formId={"updateName"}/> 
+        <GeneralButton name={"Update Name"} formId={"updateName"} type={"submit"}/> 
       </Form>
       <Form className={styles.formCont} onSubmit={handlePasswordFormSubmit} id="updatePassword">
         <h2 className={styles.title}>Update Password</h2>
         <TextInput placeholder={"New Password"} label={"New Password"} state={newPassword} onChange={setNewPassword} name={"password"} maxChar={50} tip={"Must be Different From Current Password"} minLength={8}/>
         <TextInput placeholder={"Current Password"} label={"Current Password"} state={oldPassword} onChange={setOldPassword} name={"r-password"}  type={"password"} maxChar={50} tip={"Must Match Current Password"} minLength={8}/>
         {(isLoading) && <Loader/>}
-        <SubmitBtn name={"Update Password"} formId={"updatePassword"}/> 
+        <GeneralButton name={"Update Password"} formId={"updatePassword"} type={"submit"}/> 
       </Form>
-      <ProfileAccount/>
+      <AccountSettings/>
     </div>
   )
 }
 
-export default ProfileUserTab
+export default AccountTab

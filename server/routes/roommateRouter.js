@@ -5,11 +5,11 @@ const { getRoommates, getRoommate } = require("../controllers/roommates.controll
 const checkActive = require("../middleware/checkActive.middleware")
 // @ROUTE api/roommates/
 
+//Get Specific Roommate (all user_details returned)
+router.get("/roommate/:id", protect, checkActive, getRoommate);
+
 //Get all Roommates (10 returned, req has id which correlates to 10*(id-1) - 10*(id) 
 //Account for inclusion/exclusion 
 router.get("/:offset/:location?/:budget?",protect, checkActive, getRoommates);
-
-//Get Specific Roommate (all user_details returned)
-router.get("/roommate/:id", protect, checkActive, getRoommate);
 
 module.exports = router;

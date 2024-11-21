@@ -1,8 +1,8 @@
 import Nav from 'react-bootstrap/Nav';
-import styles from "./profiletabs.module.css"
+import styles from "./tabs.module.css"
 import { NavLink } from 'react-router-dom';
 
-const ProfileTabs = () => {
+const Tabs = () => {
 
   return (
     <div className={styles.container}>
@@ -28,4 +28,4 @@ const ProfileTabs = () => {
   )
 }
 
-export default ProfileTabs
+export default Tabs

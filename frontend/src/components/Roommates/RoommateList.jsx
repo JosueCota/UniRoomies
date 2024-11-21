@@ -4,14 +4,11 @@ import Roommate from "./Roommate";
 import Pagination from 'react-bootstrap/Pagination';
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
+import { motion } from "motion/react"
 
-export default function RoommateList() {
+export default function RoommateList({data, page}) {
     
     const [items, setItems] = useState([]);
-    
-    const { page } = useParams();
-    
-    const {data, refetch} = useGetRoommatesQuery({offset: parseInt(page)});
 
     
     useEffect(()=> {
@@ -25,17 +22,20 @@ export default function RoommateList() {
     },[])
 
     return (
-    <div>
+    <div style={{width:"100%", display:"flex", alignContent:"center", flexFlow:"column wrap", marginBottom:"2rem"}}>
+                
         {data? data.users && data.users.map(child => {
-            return (
+            return ( 
+                <motion.div
+                whileHover={{scale:1.03}}
+                style={{ width:"85%", margin:"auto"}}
+                >
                 <Roommate id={child.id} firstName={child.firstName} lastName={child.lastName} userDetails={child.User_Detail} cities={child.User_Detail.cities} pfp={child.pfp}/>
+                </motion.div>
             )}): <Loader/>}
         <Pagination style={{margin:"auto"}}>{items}</Pagination>
     </div>);
 }
 
-{/* <motion.div
-    whileHover={{scale:1.03}}
-    style={{width:"95%", margin:"auto"}}
-    ></motion.div> */}
-    // </motion.div>
+
+    

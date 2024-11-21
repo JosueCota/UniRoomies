@@ -1,22 +1,3 @@
-.container{
-    display: flex;
-    flex-flow: column;
-    justify-self: center;
-    text-align: center;
-    width: 78%;
-    margin: 2rem auto;
-    padding: 2rem;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    background-color: var(--box-secondary);
-    border: 1px lightgrey solid;
-}
-
-.title {
-    margin-bottom: 2rem; 
-    text-align: center;
-}
-
 .citiesContainer {
     border-radius: .35rem;
     padding: 1rem;
@@ -59,7 +40,7 @@
 .citiesSelected {
     display: flex;
     border-radius: 2rem;
-    background-color: var(--button-tertiary);
+    background-color: var(--button-secondary);
     font-size: .85rem;
     font-weight: 600;
     align-items: center;
@@ -92,37 +73,14 @@
 }
 
 .inputGroup1 div {
-    width: 30%;
+    width: 20%;
 }
 
-.booleanInputs {
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    width: 90%;
-    padding: .5rem;
-    border-radius: .3rem;
-    margin: 1rem auto;
-}
 
-.inputGroup2 {
-    display: flex;
-    justify-content: space-evenly;
-    align-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 90%;
-    margin: 0px auto;
-    gap: 1rem;
-}
+
 
 @media screen and (max-width: 1450px) {
-    .booleanInputs {
-        justify-content: space-around;
-        align-items: start;
-    }
+    
     .citiesInputGroup {
         flex-direction: column;
         justify-content: center;
@@ -164,28 +122,6 @@
         margin: 0px;
         padding: 0px;
     }
-    .container {
-        width: 100%;
-        border: none;
-        border-radius: 0px;
-        padding: 1rem;
-        background: none;
-    }
 }
 
 
-
-@media screen and (max-width: 500px) {
-    .booleanInputs {
-        justify-content: start;
-    }
-
-    .booleanInputs div {
-        background: none !important;
-        border: none !important;
-    }
-
-    .inputGroup2{
-        justify-content: start;
-    }
-}

@@ -17,14 +17,14 @@ const TextInput = ({name, label, placeholder, state, onChange, required, type, m
     <Form.Group as={Col} controlId={name} className={styles.container}>
       <div className={styles.labelCont}>
         <Form.Label>{label}</Form.Label> 
-        { tip? 
+        { tip && 
         <OverlayTrigger 
         placement='right'
         delay={{show:100, hide:200}}
         overlay={renderTooltip}
         >
           <i className="fa solid fa-circle-info" style={{opacity:.4}}></i>
-        </OverlayTrigger>: null
+        </OverlayTrigger>
         }
       </div>
         <Form.Control required={required} type={type} placeholder={placeholder} value={state} onChange={(e) => onChange(e.target.value)} maxLength={maxChar} minLength={minLength} disabled={disabled}/>

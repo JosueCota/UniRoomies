@@ -1,25 +1,10 @@
-import React, { useState } from 'react';
-import useFetchUserDetails from '../../utils/useFetchUserDetails';
-import Loader from "../Loader";
-import { useSelector } from 'react-redux';
-import styles from "./profileroommatetab.module.css";
-import SubmitBtn from '../Forms/SubmitBtn';
-import ProfileRoommateTabEdit from './ProfileRoommateTabEdit';
-import ProfilePic from "../ProfilePic"
+import React from 'react'
+import styles from "./user.module.css"
+import ProfilePic from './ProfilePic'
 
-const ProfileRoommateTab = () => {
-  const {user} = useSelector((state) => state.auth);
-  const [editting, setEditting] = useState(false);
-  let { userDetails, refetch, isFetching  } = useFetchUserDetails();  
-  
-  if (isFetching) {
-    return <Loader/>
-  }
-
+const User = ({userDetails, user}) => {
   return (
-  <div style={{display:"flex", flexDirection:"column", alignContent:"start", width:"70%", margin:"0px auto"}}>
-    {!editting?
-      <div className={styles.container}>
+       <div className={styles.container}>
         <ProfilePic num={user.pfp}/>
         <h1>{`${user.firstName} ${user.lastName}`}</h1>
         {userDetails.age? 
@@ -29,7 +14,7 @@ const ProfileRoommateTab = () => {
             <li>Gender: {userDetails.gender}</li>
             <li>Budget: {userDetails.budget}</li>
             <li>Open to Room Sharing: {userDetails.room_Sharing? "Yes": "No"}</li>
-            {userDetails.description && <li>Description: {userDetails.description}</li>}
+            {userDetails.description && <p style={{whiteSpace:"pre-line"}}>Description: {userDetails.description}</p>}
             <li>Cities Of Interest: {userDetails.cities ? userDetails.cities.map(city => <p>{city}</p>): <Loader/>}</li>
           </div>
           {userDetails.hobbies && <li>Hobbies: {userDetails.hobbies ? userDetails.hobbies.map(hobby => <p>{hobby}</p>): null}</li>}
@@ -43,15 +28,9 @@ const ProfileRoommateTab = () => {
           {userDetails.moveInDate && <li>Move In Date: {userDetails.moveInDate}</li>}
           {userDetails.couplesOk && <li>Okay with Couples: {userDetails.couplesOk? "Yes": "No"}</li>}
         </ul>
-      : <p>You Must First Update Info</p>}
-      </div>
-      : <ProfileRoommateTabEdit userDetails={userDetails} setEditting={setEditting} refetch={refetch}/>}
-    <div style={{justifySelf:"start"}}>
-      <SubmitBtn notSubmit={true} onClick={()=> setEditting(prev => !prev)} name={`${editting? "Back": "Edit Profile"}`}/>
-    </div>
-  
-  </div>
-)}   
-        
-export default ProfileRoommateTab
-        
+          : <p>You Must First Update Info</p>}
+        </div>
+  )
+}
+
+export default User

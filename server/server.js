@@ -6,6 +6,9 @@ const cookieParser = require("cookie-parser")
 const userRouter = require("./routes/userRouter")
 const authRouter = require("./routes/authRouter");
 const roommateRouter = require("./routes/roommateRouter")
+const multer = require("multer")
+
+const upload = multer({storage: multer.memoryStorage()});
 
 const { errorHandler, notFound } = require("./middleware/error.middleware");
 

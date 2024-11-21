@@ -3,7 +3,7 @@ const User = db.models.User;
 const asyncHandler = require("express-async-handler")
 
 const checkActive = asyncHandler(async (req, res, next) => {
-
+    console.log(req.params)
     try {
 
         const user = await User.findByPk(req.user.id, { attributes: ["isActive"]})

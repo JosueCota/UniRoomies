@@ -4,14 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import TextInput from '../Forms/TextInput';
 import { useDeleteUserMutation } from '../../features/usersApiSlice';
-import styles from "./profileaccount.module.css"
+import styles from "./accountsettings.module.css"
 import { useNavigate } from 'react-router-dom';
 import { clearCredentials } from '../../features/authSlice';
 import { deleteSearch } from '../../features/searchesSlice';
 import { useDispatch } from 'react-redux';
 import { logout, showToastError, showToastSuccess } from '../../utils/helperFunctions';
 
-const ProfileAccountDeleteModal = () => {
+const AccountDeleteModal = () => {
 
     const [deleteUser] = useDeleteUserMutation();
     const navigate = useNavigate();
@@ -47,7 +47,7 @@ const ProfileAccountDeleteModal = () => {
         <p className={`${styles.buttons} ${styles.delButton}`} onClick={() => setShow(true)}>Delete Account</p>
 
         <Modal show={show} onHide={() => setShow(false)} backdrop="static">
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Delete Account</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{display: "flex", flexFlow: "column", alignItems:"center",textAlign:'center'}}>Input Password:
@@ -66,4 +66,4 @@ const ProfileAccountDeleteModal = () => {
   )
 }
 
-export default ProfileAccountDeleteModal
+export default AccountDeleteModal

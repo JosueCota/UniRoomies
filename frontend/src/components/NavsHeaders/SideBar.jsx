@@ -10,6 +10,8 @@ import {
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './LogoutButton';
 import SideBarButton from './SideBarButton';
+import { BsFillHousesFill } from "react-icons/bs";
+
 const Sidebar = () => {
 
   const [mobile, setMobile] = useState(false)
@@ -27,7 +29,7 @@ const Sidebar = () => {
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
- 
+
   return (
     <>
     {mobile && !open && <SideBarButton onClick={() => setOpen(prev => true)}/>}
@@ -36,7 +38,8 @@ const Sidebar = () => {
       <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial', position: `${!mobile? "sticky": "absolute"}`, top:"0rem" }}>
       <CDBSidebar textColor="#fff" backgroundColor="var(--sidebar)" toggled={!open} >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" onClick={(e) => setOpen(prev => !prev)}></i>} >
-          <NavLink href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+          <NavLink href="/" className="text-decoration-none" style={{ color: 'inherit',display:"flex", alignItems:"center" }}>
+          <BsFillHousesFill style={{ width: '30px' }}/>
             UniRoomies
           </NavLink>
         </CDBSidebarHeader>

@@ -159,7 +159,7 @@ const getUserDetails = asyncHandler(async (req,res) => {
     let userDetails = await UserDetails.findOne({
         where: {UserId: req.user.id},
          attributes: {
-            exclude: ["id", "UserId"]
+            exclude: ["id", "UserId", "createdAt", "updatedAt"]
     } });
     
    

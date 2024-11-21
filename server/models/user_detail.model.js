@@ -1,5 +1,6 @@
-const { DataTypes, Sequelize } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
+//Part of User
 module.exports = (sequelize) => {
     sequelize.define(
         'User_Detail', 
@@ -83,7 +84,7 @@ module.exports = (sequelize) => {
                 //What hobbies they have
                 type: DataTypes.TEXT(),
                 get() {
-                    if (this.getDataValue("accomodations")){
+                    if (this.getDataValue("hobbies")){
                         return this.getDataValue("hobbies").split("|")
                     } 
                 },
@@ -91,15 +92,31 @@ module.exports = (sequelize) => {
                     val? this.setDataValue("hobbies", val.join("|")): this.setDataValue("hobbies", null);
                 }
             },
+            living_preferences: {
+                //What preferences do they have?
+                type: DataTypes.TEXT(),
+                get() {
+                    if (this.getDataValue("living_preferences")){
+                        return this.getDataValue("living_preferences").split("|")
+                    } 
+                },
+                set(val) {
+                    val? this.setDataValue("living_preferences", val.join("|")): this.setDataValue("living_preferences", null);
+                }
+            },
             parking_needed: {
                 //Whether they need parking
                 type: DataTypes.BOOLEAN()
+            },
+            university: {
+                //What school they are from
+                type: DataTypes.TEXT("tiny")
             },
             contacts: {
                 //Contacts
                 type: DataTypes.TEXT(),
                 get() {
-                    if (this.getDataValue("accomodations")){
+                    if (this.getDataValue("contacts")){
                         return this.getDataValue("contacts").split("|")
                     }
                 },
@@ -108,10 +125,6 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        {
-            createdAt: false,
-            updatedAt: false
-        }
     );
 };
     
