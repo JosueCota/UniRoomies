@@ -4,7 +4,7 @@ import AutoComplete from './AutoComplete'
 import { FiRefreshCw  } from 'react-icons/fi'
 
 const SearchHeader = ({placeholder, onClick, address, budget, setBudget, setAddress}) => {
-  
+
   const handleAddressChange = (address) => {
     setAddress(address)
   }

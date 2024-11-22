@@ -17,6 +17,7 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
   const [hobbies, setHobbies] = useState([]);
   const [optionalMulti, setOptionalMulti] = useState([]);
   const [accomodations, setAccomodations] = useState([]);
+  const [livingPreferences, setLivingPreferences] = useState([]);
 
   useEffect(() => {
     setCities(userDetails.cities? userDetails.cities: [])
@@ -24,6 +25,8 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
     setAccomodations(userDetails.accomodations? userDetails.accomodations.map(val =>
       ({value: val, label: val})): [])
     setContacts(userDetails.contacts? userDetails.contacts: [])
+    setLivingPreferences(userDetails.livingPreferences? userDetails.livingPreferences.map(val =>
+      ({value: val, label: val})): [])
   }, [userDetails])
   
   const validate = () => {
@@ -41,7 +44,10 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
       showToastWarning("Please Enter Some Hobbies", "enterHobbiesErr")
       valid = false;
     }
-    
+    if (optVal.includes("Living Preferences") && livingPreferences.length === 0 ){
+      showToastWarning("Please Include some Preferences", "enterPrefsErr")
+      valid = false;
+    }
     return valid
   }
 
@@ -55,6 +61,10 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
     if (optVal.includes("Contacts")) {
       body["contacts"] = contacts;
     }  
+    if (optVal.includes("Living Preferences")) {
+      const livP = extractObjectArrayVal(livingPreferences, "value")
+      body["living_preferences"] = livP
+    }
     if (optVal.includes("Accomodations")) {
       const acc = extractObjectArrayVal(accomodations, "value")
       body["accomodations"] = acc
@@ -104,7 +114,7 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
       <Form onSubmit={handleSubmit}>
           <BasicInfo cities={cities} setCities={setCities} userDetails={userDetails}/>
               
-              <Optionals optionalMulti={optionalMulti} setAccomodations={setAccomodations} setContacts={setContacts} setHobbies={setHobbies} setOptionalMulti={setOptionalMulti} accomodations={accomodations} hobbies={hobbies} contacts={contacts} userDetails={userDetails}/>
+              <Optionals optionalMulti={optionalMulti} setAccomodations={setAccomodations} setContacts={setContacts} setHobbies={setHobbies} setOptionalMulti={setOptionalMulti} accomodations={accomodations} hobbies={hobbies} contacts={contacts} userDetails={userDetails} setLivingPreferences={setLivingPreferences} livingPreferences={livingPreferences}/>
               <GeneralButton2 type={"submit"} name="Update" />
               </Form>
               </div>

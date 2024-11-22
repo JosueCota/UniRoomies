@@ -4,8 +4,10 @@ import MultiSelect from '../Forms/MultiSelect'
 import SingleSelect from '../Forms/SingleSelect'
 import { Form, FloatingLabel, InputGroup } from 'react-bootstrap'
 import InputList from '../Forms/InputList'
+import TextInput from "../Forms/TextInput"
+import FloatingInput from '../Forms/FloatingInput'
 
-const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodations, contacts, setContacts, hobbies, setHobbies, userDetails, handleNextPrevClick}) => {
+const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodations, contacts, setContacts, hobbies, setHobbies, userDetails, livingPreferences, setLivingPreferences}) => {
 
   const options = [
     {value: "description", label: "Description"},
@@ -15,7 +17,9 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
     {value: "couplesOk", label: "Ok With Couples"},
     {value: "pet_owner", label: "Pet Owner"},
     {value: "parking_needed", label: "Parking"},
+    {value: "university", label: "University Attended"},
     {value: "accomodations", label: "Accomodations"},
+    {value: "living_preferences", label: "Living Preferences"},
     {value: "hobbies", label: "Hobbies"},
     {value: "contacts", label: "Contacts"},
   ]
@@ -59,6 +63,12 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
                 optionalMulti.some(item => item.value === options[6].value) &&
                 <SingleSelect optionLabel={"Parking"} label="Parking Needed?" name="parking_needed" defaultChecked={userDetails.parkingNeeded || false} controlId={"parkingNeeded"}  options={["Yes", "No"]} def={userDetails.parkingNeeded? "Yes": "No"}/>
               }
+                {
+                  optionalMulti.some(item => item.value === options[2].value) &&
+                  <div style={{width:"10rem"}}>
+                    <SingleSelect controlId={"sleepSchedule"} name={"sleep_schedule"} options={["Early", "Late", "Varies"]} label={"Sleep Schedule"} def={userDetails.sleepSchedule? userDetails.sleepSchedule: null} optionLabel={"Hours"}/>
+                  </div> 
+                }
             </div>
               <div className={styles.inputGroup2}>
               {
@@ -71,17 +81,15 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
                     </InputGroup>
                 </div>
               }
-              {
-                optionalMulti.some(item => item.value === options[2].value) &&
-                <div style={{width:"10rem"}}>
-                  <SingleSelect controlId={"sleepSchedule"} name={"sleep_schedule"} options={["Early", "Late", "Varies"]} label={"Sleep Schedule"} def={userDetails.sleepSchedule? userDetails.sleepSchedule: null} optionLabel={"Hours"}/>
-                </div> 
-              }
 
-              
               {
                 optionalMulti.some(item => item.value === options[7].value) &&
-                <MultiSelect state={accomodations} onChange={setAccomodations} name={"accomodations"} placeholder={"Accomodations"} options={[
+                <FloatingInput controlId="university" label="University Attended" name={"university"} type={"text"} defaultVal={userDetails.university || null} required={true}/>
+              }
+
+              {
+                optionalMulti.some(item => item.value === options[8].value) &&
+                <MultiSelect state={accomodations} onChange={setAccomodations} name={"accomodations"} placeholder={"Special Accomodations"} options={[
                   {value: "Pet Allergies", label: "Pet Allergies"},
                   {value: "Food Allergies", label: "Food Allergies"},
                   {value: "Wheelchair Accessibility", label: "Wheelchair Accessibility"},
@@ -91,14 +99,25 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
                   {value: "Guide Dog", label: "Guide Dog"},
                 ]} required={true} />
               }
+              {
+                optionalMulti.some(item => item.value === options[9].value) &&
+                <MultiSelect state={livingPreferences} onChange={setLivingPreferences} name={"living_preferences"} placeholder={"Living Preferences"} options={[
+                  {value: "Near School", label: "Near School"},
+                  {value: "LGBTQ Friendly", label: "LGBTQ Friendly"},
+                  {value: "Private Bathroom", label: "Private Bathroom"},
+                  {value: "Private Bedroom", label: "Private Bedroom"},
+                  {value: "Quiet", label: "Quiet"},
+                  {value: "Same Gendered Roommate", label: "Same Gendered Roommate"},
+                ]} required={true} />
+              }
               </div>
              
              {
-               optionalMulti.some(item => item.value === options[8].value) &&
+               optionalMulti.some(item => item.value === options[10].value) &&
                <InputList label={"Hobbies"} state={hobbies} onChange={setHobbies}  limit={15} />
               }
               {
-                optionalMulti.some(item => item.value === options[9].value) &&
+                optionalMulti.some(item => item.value === options[11].value) &&
                 <InputList label={"Contacts"} state={contacts} onChange={setContacts}  limit={5} />
               }
     </div>

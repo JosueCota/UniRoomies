@@ -33,6 +33,7 @@ const dbSetup = async () => {
 
     } catch (error) {
         console.log(error)
+        throw new Error(error)
     }
 }
 

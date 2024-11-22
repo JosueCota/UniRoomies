@@ -19,6 +19,7 @@ import ActivationPage from './pages/ActivationPage.jsx';
 import UserTab from './components/Profile/UserTab.jsx';
 import AccountTab from "./components/Profile/AccountTab.jsx"
 import RoommatePage from './components/Roommates/RoommatePage.jsx';
+import RoomEdit from './components/Rooms/RoomEdit.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
         <Route path="/roommates/:page" element={<Roommates/>} />
         <Route path="/roommates/roommate/:id" element={<RoommatePage/>} />
         <Route path="/rooms" element={<Rooms/>} />
+        <Route path="/rooms/edit-room" element={<RoomEdit/>}/>
       </Route>
     </Route>
   )

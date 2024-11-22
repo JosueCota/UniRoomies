@@ -52,7 +52,7 @@ const getRoommates = asyncHandler(async (req, res) => {
             {
                 model: UserDetail,
                 attributes: [
-                    "age", "gender", "budget", "cities", "room_sharing"
+                    "age", "gender", "budget", "cities", "room_sharing", "updatedAt"
                 ],
                 where: whereClause
             }

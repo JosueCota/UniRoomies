@@ -151,7 +151,7 @@ const updateUserDetails = asyncHandler(async (req,res) => {
         await userDetails.save()
         res.status(200).json({message: "User Details Updated"})   
     }
-});
+}); 
 
 //Return user details 
 const getUserDetails = asyncHandler(async (req,res) => {
