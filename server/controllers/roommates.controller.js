@@ -2,7 +2,7 @@ const sequelize  = require("../database.js");
 const User = sequelize.models.User;
 const UserDetail = sequelize.models.User_Detail;
 const asyncHandler = require("express-async-handler");
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 //Requires offset value, checks for location or/and budget params
 const getRoommates = asyncHandler(async (req, res) => {

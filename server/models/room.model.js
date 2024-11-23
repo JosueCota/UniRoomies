@@ -11,9 +11,6 @@ module.exports = (sequelize) => {
                 primaryKey: true,
                 autoIncrement: true
             },
-            image: {
-                type: DataTypes.STRING(200),
-            },
             location: {
                 //General Location (city)
                 type: DataTypes.STRING(100),
