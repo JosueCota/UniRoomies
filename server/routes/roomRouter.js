@@ -3,6 +3,7 @@ const router = express.Router();
 const protect = require("../middleware/auth.middleware");
 const multer = require("multer");
 const { s3Upload } = require("../s3Service");
+const { createRoom, updateRoomImages } = require("../controllers/room.controller");
 
 const storage = multer.memoryStorage();
 
@@ -29,15 +30,7 @@ router.get("/", protect, (req, res) => {
 });
 
 //Create/Update room : req has room info and user id 
-router.post("/", protect, upload.array("images", 5), async (req, res) => {
-    try {
-        const results = await s3Upload(req.files, "roomImages")
-        res.send(results) 
-    } catch (err) {
-        res.status(500)
-        throw new Error(err)
-    }
-});
+router.post("/", protect, upload.array("images", 5), createRoom, updateRoomImages);
 
 //Delete Room : protected
 router.delete("/", protect, (req, res) => {

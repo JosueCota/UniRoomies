@@ -39,7 +39,7 @@ const createUser = asyncHandler(async (req, res) => {
     if (user) {
         //Send confirmation email to user
         await sendConfirmationEmail(user.email, user.id, res)
-
+        res.status(200).json({message:"Email Sent, User Created"})
     } else {
         res.status(400);
         throw new Error("Invalid user data");

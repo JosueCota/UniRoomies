@@ -23,13 +23,15 @@ exports.s3Upload = async (files, path) => {
         }
     }));
 
+    //Images sent to S3 Bucket
     await Promise.all(
         params.map(param => s3client.send(new PutObjectCommand(param))
     ));
 
+    //Url Key to be stored in db
     const urls = params.map(param => {
-        return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${param.Key}`
+        return param.Key.split("/")[2]
     })
 
-    return urls;
+    return urls
 }

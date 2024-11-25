@@ -1,56 +1,98 @@
 const db  = require("../database.js");
 const asyncHandler = require("express-async-handler")
+const { s3Upload } = require("../s3Service");
 
 const Room = db.models.Room;
 const User = db.models.User;
+const RoomImage = db.models.Room_Image;
 
-const createRoom = asyncHandler(async (req, res) => {
-        const newUserDetails = {
-            budget: req.body.budget,
-            cities: req.body.cities,
-            room_sharing: req.body.room_sharing,
-            age: req.body.age,
-            gender: req.body.gender,
-            move_in_date: req.body.move_in_date,
-            roommate_desc: req.body.roommate_desc || null,
-            is_smoker: req.body.is_smoker!== undefined ? req.body.is_smoker : null,
-            stay_length: req.body.stay_length || null,
-            accomodations: req.body.accomodations || null,
-            couples_ok: req.body.couples_ok!== undefined?req.body.couples_ok: null,
-            pet_owner:  req.body.pet_owner!== undefined?req.body.pet_owner: null,
-            parking_needed:  req.body.parking_needed!== undefined? req.body.parking_needed: null,
-            contacts: req.body.contacts || null,
-            hobbies: req.body.hobbies || null,
-            UserId: req.user.id
-        }
-     
-        let userDetails = await UserDetails.findOne({where: {UserId: req.user.id}});
+const createRoom = asyncHandler(async (req, res, next) => {
     
-        if (!userDetails) {
-            //Create a userDetails for user
-            const user = await User.findByPk(req.user.id);
-            const newUserDet = await UserDetails.create(newUserDetails);
-            
-            user.setUser_Detail(newUserDet);
-            user.isActive = true;
+    const newRoomParam = {
+        location: req.body.location,
+        price: req.body.price,
+        description: req.body.description,
+        amenities: req.body.amenities,
+        current_household: req.body.current_household,
+        UserId: req.user.id
+    }
     
-            //If its being created, then its their first time, we want to make their account active 
-            await user.save()
-    
-            res.status(200).json({message: "User Details Created"});
-        } else {
-            //Update users details
-            Object.assign(userDetails, req.body);
-    
-            await userDetails.save()
-            res.status(200).json({message: "User Details Updated"})   
-        }
+    let room = await Room.findOne({where: {UserId: req.user.id}});
+
+    if (!room) {
+        //Create a room for user
+        const user = await User.findByPk(req.user.id);
+        const newRoom = await Room.create(newRoomParam);
+        
+        user.setRooms(newRoom);
+        user.isActive = true;
+        console.log(newRoom);
+        //If its being created, then its their first time, we want to make their account active 
+        req.room = newRoom.room_id;
+        await user.save()
+        next()
+        // res.status(200).json({message: "Room Created"});
+    } else {
+        //Update users details
+        Object.assign(room, req.body);
+        await room.save()
+        req.room = room.room_id;
+        next()
+        // res.status(200).json({message: "Room Updated"})   
+    }
 });
 
 
+const updateRoomImages = asyncHandler(async (req, res) => {
+    const image = await RoomImage.findOne({where: {RoomId: req.room}})
+
+    let images = {
+        RoomId: req.room
+    }
+
+    const results = await s3Upload(req.files, "roomImages")    
+    for (let i=0; i<5; i++){
+        images[`image${i+1}`] = results[i] || null;
+    }
+    
+    if (!image) {
+        const room = await Room.findByPk(req.room.id)
+        const newImg = await RoomImage.create(images)
+
+        room.setRoom_Images(newImg);
+
+        res.status(200).json({message: "Room Created"})   
+    } else {
+        Object.assign(image, images);
+        await image.save()
+
+        res.status(200).json({message: "Room Updated"})   
+    }
+})
+
 const getRoom = asyncHandler(async (req, res) => {
     //Show room based off req.body.id
-    
+
+    const {count, rows:rooms} = await User.findAndCountAll(
+        {
+            where: {
+                id: req.user.id,
+            },
+            attributes: ["firstName", "lastName"], 
+            include: [{
+                model: Room,
+                attributes: ["location", "price"],
+                include: [
+                    {
+                        model: RoomImage,
+                        attributes:["image1"],
+                    }
+                ]
+            }]
+        })  
+    // const urls = params.map(param => {
+    //     return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${param.Key}`
+    // })
 });
 
 const getRooms = asyncHandler(async (req, res) => {
@@ -61,6 +103,7 @@ const getRooms = asyncHandler(async (req, res) => {
 
 
 module.exports = {
-    createUser,
-    login
+    createRoom,
+    getRooms,
+    updateRoomImages
 }

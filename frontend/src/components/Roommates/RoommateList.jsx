@@ -14,7 +14,8 @@ export default function RoommateList({data, page}) {
     useEffect(()=> {
         if (data) {
             let pagination = [];
-            for (let number = 1; number <= 10% data.count; number++) {
+
+            for (let number = 1; number <= Math.ceil(data.count/1); number++) {
                 pagination.push(<Pagination.Item key={number} active={number === page}><Link to={`/roommates/${number}`}>{number}</Link></Pagination.Item>);
             }
             setItems(pagination);
@@ -29,8 +30,9 @@ export default function RoommateList({data, page}) {
                 <motion.div
                 whileHover={{scale:1.03}}
                 style={{ width:"85%", margin:"auto"}}
+                key={child.id + "motion"}
                 >
-                <Roommate id={child.id} firstName={child.firstName} lastName={child.lastName} userDetails={child.User_Detail} cities={child.User_Detail.cities} pfp={child.pfp}/>
+                <Roommate key={"dawldjawkdalk" + child.id} id={child.id} firstName={child.firstName} lastName={child.lastName} userDetails={child.User_Detail} cities={child.User_Detail.cities} pfp={child.pfp}/>
                 </motion.div>
             )}): <Loader/>}
         <Pagination style={{margin:"auto"}}>{items}</Pagination>

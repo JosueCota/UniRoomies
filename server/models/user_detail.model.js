@@ -22,8 +22,7 @@ module.exports = (sequelize) => {
                     return this.getDataValue("cities").split("|")
                 },
                 set(val) {
-                    val = val.join("|")
-                    this.setDataValue("cities", val);
+                    this.setDataValue("cities", val.join("|"));
                 }
             },
             budget: {

@@ -47,8 +47,6 @@ async function sendConfirmationEmail( email, id, res) {
           }
         });
 
-        res.status(200).json({message:"Email Sent, User Created"});
-
         } catch (error) {
           res.status(400);
           throw new Error("Email Not Sent: " + error)
