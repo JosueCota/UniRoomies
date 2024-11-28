@@ -1,10 +1,11 @@
-import { useGetRoommatesQuery } from "../../features/roommatesApiSlice";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Roommate from "./Roommate";
 import Pagination from 'react-bootstrap/Pagination';
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import { motion } from "motion/react"
+
+const PER_PAGE = 10;
 
 export default function RoommateList({data, page}) {
     
@@ -15,7 +16,7 @@ export default function RoommateList({data, page}) {
         if (data) {
             let pagination = [];
 
-            for (let number = 1; number <= Math.ceil(data.count/1); number++) {
+            for (let number = 1; number <= Math.ceil(data.count/PER_PAGE); number++) {
                 pagination.push(<Pagination.Item key={number} active={number === page}><Link to={`/roommates/${number}`}>{number}</Link></Pagination.Item>);
             }
             setItems(pagination);

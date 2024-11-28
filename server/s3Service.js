@@ -1,4 +1,4 @@
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const sharp = require("sharp")
 const uuid = require("uuid").v4;
 
@@ -34,4 +34,24 @@ exports.s3Upload = async (files, path) => {
     })
 
     return urls
+}
+
+exports.s3RemoveImages = async(path, keys) => {
+
+    const s3Client = new S3Client();
+
+    //Build params for delete object request
+    const params = keys.map(k => {
+        return {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: `uploads/${path}/${k}`
+        }
+    })
+
+    //Return promise
+    return await Promise.all(
+        params.map(param => {
+            return s3Client.send(new DeleteObjectCommand(param));
+        })
+    )
 }

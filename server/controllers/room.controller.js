@@ -1,6 +1,6 @@
 const db  = require("../database.js");
 const asyncHandler = require("express-async-handler")
-const { s3Upload } = require("../s3Service");
+const { s3Upload, s3RemoveImages } = require("../s3Service");
 
 const Room = db.models.Room;
 const User = db.models.User;
@@ -44,7 +44,7 @@ const createRoom = asyncHandler(async (req, res, next) => {
 
 
 const updateRoomImages = asyncHandler(async (req, res) => {
-    const image = await RoomImage.findOne({where: {RoomId: req.room}})
+    let image = await RoomImage.findOne({where: {RoomId: req.room}})
 
     let images = {
         RoomId: req.room
@@ -54,7 +54,7 @@ const updateRoomImages = asyncHandler(async (req, res) => {
     for (let i=0; i<5; i++){
         images[`image${i+1}`] = results[i] || null;
     }
-    
+
     if (!image) {
         const room = await Room.findByPk(req.room.id)
         const newImg = await RoomImage.create(images)
@@ -63,6 +63,17 @@ const updateRoomImages = asyncHandler(async (req, res) => {
 
         res.status(200).json({message: "Room Created"})   
     } else {
+        
+        let keys = []
+        for (let i = 0; i <5; i++) {
+            if (image[`image${i}`]) {
+                keys.push(image[`image${i}`]); 
+                console.log(keys)
+            }
+        }
+
+        await s3RemoveImages(path="roomImages" ,keys);
+
         Object.assign(image, images);
         await image.save()
 
