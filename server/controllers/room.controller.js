@@ -6,6 +6,7 @@ const Room = db.models.Room;
 const User = db.models.User;
 const RoomImage = db.models.Room_Image;
 
+//Creates or Update Room 
 const createRoom = asyncHandler(async (req, res, next) => {
     
     const newRoomParam = {
@@ -26,7 +27,6 @@ const createRoom = asyncHandler(async (req, res, next) => {
         
         user.setRooms(newRoom);
         user.isActive = true;
-        console.log(newRoom);
         //If its being created, then its their first time, we want to make their account active 
         req.room = newRoom.room_id;
         await user.save()
@@ -42,15 +42,18 @@ const createRoom = asyncHandler(async (req, res, next) => {
     }
 });
 
-
+//Updates both s3 bucket and database 
 const updateRoomImages = asyncHandler(async (req, res) => {
-    let image = await RoomImage.findOne({where: {RoomId: req.room}})
+    let image = await RoomImage.findOne({
+        where: {RoomId: req.room},
+        attributes: {exclude: ["images_id", "RoomId"]}
+    })
 
     let images = {
         RoomId: req.room
     }
 
-    const results = await s3Upload(req.files, "roomImages")    
+    const results = await s3Upload(req.files, "roomImages")
     for (let i=0; i<5; i++){
         images[`image${i+1}`] = results[i] || null;
     }
@@ -63,25 +66,20 @@ const updateRoomImages = asyncHandler(async (req, res) => {
 
         res.status(200).json({message: "Room Created"})   
     } else {
-        
-        let keys = []
-        for (let i = 0; i <5; i++) {
-            if (image[`image${i}`]) {
-                keys.push(image[`image${i}`]); 
-                console.log(keys)
-            }
-        }
+
+        const keys = Object.values(image.dataValues)
 
         await s3RemoveImages(path="roomImages" ,keys);
 
         Object.assign(image, images);
         await image.save()
 
-        res.status(200).json({message: "Room Updated"})   
+        res.status(200).json({message: "Room Updated"})
     }
 })
 
-const getRoom = asyncHandler(async (req, res) => {
+//Gets all rooms
+const getRooms = asyncHandler(async (req, res) => {
     //Show room based off req.body.id
 
     const {count, rows:rooms} = await User.findAndCountAll(
@@ -89,7 +87,7 @@ const getRoom = asyncHandler(async (req, res) => {
             where: {
                 id: req.user.id,
             },
-            attributes: ["firstName", "lastName"], 
+            attributes: ["firstName", "lastName", "id"], 
             include: [{
                 model: Room,
                 attributes: ["location", "price"],
@@ -101,20 +99,56 @@ const getRoom = asyncHandler(async (req, res) => {
                 ]
             }]
         })  
+
+    //Transforms each first image of every room into the correct public URL
+    for (let i=0; i < rooms.length;i++) {
+        rooms[i].Rooms[0][`Room_Image`].image1 = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/uploads/roomImages/${rooms[i].Rooms[0]['Room_Image'].image1}`
+        
+    }
+    
+    res.status(200).json({rooms, count})
     // const urls = params.map(param => {
     //     return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${param.Key}`
     // })
 });
 
-const getRooms = asyncHandler(async (req, res) => {
+//Returns room based on Room_Id
+const getRoom = asyncHandler(async (req, res) => {
     //Show rooms
+    const id = req.params.id || null;
 
     //If pagination, might need to grab 10, then do 10(n)-9 - 10(n)
 });
 
+//Deletes Room (Room Images by cascade) and room images for s3 bucket
+const deleteRoom = asyncHandler(async (req, res) => {
+    const id = req.user.id;
+    console.log(id)
+    const room = await Room.findOne({        
+        where: {
+            UserId: id,
+        },
+        include: [{
+            model:RoomImage,
+            attributes: {
+                exclude:["images_id", "RoomId"]
+                
+            }
+        }]
+    });
+    const keys = Object.values(room["Room_Image"].dataValues)
+
+    await s3RemoveImages("roomImages", keys)
+    await room.destroy()
+
+
+    res.status(200).json(room)
+});
 
 module.exports = {
     createRoom,
     getRooms,
-    updateRoomImages
+    getRoom,
+    updateRoomImages,
+    deleteRoom
 }

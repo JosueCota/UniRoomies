@@ -1,5 +1,3 @@
-const db  = require("../database.js");
-const User = db.models.User;
 const asyncHandler = require("express-async-handler")
 
 const checkActive = asyncHandler(async (req, res, next) => {

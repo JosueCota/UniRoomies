@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const protect = require("../middleware/auth.middleware");
 const multer = require("multer");
-const { s3Upload } = require("../s3Service");
-const { createRoom, updateRoomImages } = require("../controllers/room.controller");
+const { createRoom, updateRoomImages, getRooms, deleteRoom, getRoom } = require("../controllers/room.controller");
 
 const storage = multer.memoryStorage();
 
@@ -20,21 +19,15 @@ const upload = multer({ storage, fileFilter, limits: {fileSize: 1024 * 1024 * 3}
 // @ROUTE api/rooms/
 
 //Get specific room: req has room id
-router.get("/:id", protect, (req, res) => {
-    res.send("it works!" + req.params.id)
-});
+router.get("/room/:id", protect, getRoom);
 
 //Get All rooms
-router.get("/", protect, (req, res) => {
-    res.send("it works!")
-});
+router.get("/", protect, getRooms);
 
 //Create/Update room : req has room info and user id 
 router.post("/", protect, upload.array("images", 5), createRoom, updateRoomImages);
 
 //Delete Room : protected
-router.delete("/", protect, (req, res) => {
-
-});
+router.delete("/", protect, deleteRoom);
 
 module.exports = router;

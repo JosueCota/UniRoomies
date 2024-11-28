@@ -42,16 +42,16 @@ exports.s3RemoveImages = async(path, keys) => {
 
     //Build params for delete object request
     const params = keys.map(k => {
-        return {
-            Bucket: process.env.AWS_BUCKET_NAME,
-            Key: `uploads/${path}/${k}`
+        return k && {
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Key: `uploads/${path}/${k}`
         }
     })
 
     //Return promise
     return await Promise.all(
         params.map(param => {
-            return s3Client.send(new DeleteObjectCommand(param));
+            return param && s3Client.send(new DeleteObjectCommand(param));
         })
     )
 }
