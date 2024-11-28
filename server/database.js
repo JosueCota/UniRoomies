@@ -41,19 +41,21 @@ const dbSetup = async () => {
 const addAssociations = () => {
     const {User, User_Detail, Room, Room_Image } = sequelize.models;
 
+    
     User.hasOne(User_Detail, {onDelete: "CASCADE"});
-    User.hasMany(Room, {onDelete: "CASCADE"});
+    User.hasOne(Room, {onDelete: "CASCADE", foreignKey: {name:"UserId"}});
     Room.hasOne(Room_Image, 
         {
             onDelete:"CASCADE", 
             foreignKey: {
                 name: 'RoomId'}
-        }
-    );
-    
-    Room.belongsTo(User);
+            }
+        );
+        
+    Room.belongsTo(User, {foreignKey: "UserId" });
     User_Detail.belongsTo(User);
     Room_Image.belongsTo(Room, { foreignKey: 'RoomId' });
+
 }
 
 dbSetup();

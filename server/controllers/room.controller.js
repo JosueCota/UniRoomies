@@ -1,6 +1,7 @@
 const db  = require("../database.js");
 const asyncHandler = require("express-async-handler")
 const { s3Upload, s3RemoveImages } = require("../s3Service");
+const { Op } = require("sequelize");
 
 const Room = db.models.Room;
 const User = db.models.User;
@@ -18,57 +19,55 @@ const createRoom = asyncHandler(async (req, res, next) => {
         UserId: req.user.id
     }
     
-    let room = await Room.findOne({where: {UserId: req.user.id}});
+    const room = await Room.findOne({where: {UserId: req.user.id}});
 
     if (!room) {
         //Create a room for user
         const user = await User.findByPk(req.user.id);
         const newRoom = await Room.create(newRoomParam);
         
-        user.setRooms(newRoom);
-        user.isActive = true;
-        //If its being created, then its their first time, we want to make their account active 
+        user.setRoom(newRoom);
+
         req.room = newRoom.room_id;
-        await user.save()
         next()
-        // res.status(200).json({message: "Room Created"});
+
     } else {
-        //Update users details
+        //Update room
         Object.assign(room, req.body);
         await room.save()
         req.room = room.room_id;
         next()
-        // res.status(200).json({message: "Room Updated"})   
     }
 });
 
 //Updates both s3 bucket and database 
 const updateRoomImages = asyncHandler(async (req, res) => {
-    let image = await RoomImage.findOne({
+    const image = await RoomImage.findOne({
         where: {RoomId: req.room},
-        attributes: {exclude: ["images_id", "RoomId"]}
     })
 
     let images = {
+        images_id: null,
         RoomId: req.room
     }
 
+    //Upload Images to s3 bucket
     const results = await s3Upload(req.files, "roomImages")
+    //Store keys in table properties
     for (let i=0; i<5; i++){
         images[`image${i+1}`] = results[i] || null;
     }
 
     if (!image) {
-        const room = await Room.findByPk(req.room.id)
+        const room = await Room.findByPk(req.room)
         const newImg = await RoomImage.create(images)
 
-        room.setRoom_Images(newImg);
+        room.setRoom_Image(newImg);
 
         res.status(200).json({message: "Room Created"})   
     } else {
-
+        //Remove previous images when updating
         const keys = Object.values(image.dataValues)
-
         await s3RemoveImages(path="roomImages" ,keys);
 
         Object.assign(image, images);
@@ -80,50 +79,104 @@ const updateRoomImages = asyncHandler(async (req, res) => {
 
 //Gets all rooms
 const getRooms = asyncHandler(async (req, res) => {
-    //Show room based off req.body.id
 
-    const {count, rows:rooms} = await User.findAndCountAll(
-        {
-            where: {
-                id: req.user.id,
+    if (!req.params.offset) {
+        res.status(404);
+        throw new Error("No Offset Found")
+    }
+
+    let whereClause = {}
+    if (req.params.location!=="none" && req.params.price) {
+        whereClause = {
+            [Op.and]: [
+            {
+                location: { [Op.substring]: req.params.location }
             },
-            attributes: ["firstName", "lastName", "id"], 
-            include: [{
-                model: Room,
-                attributes: ["location", "price"],
-                include: [
-                    {
-                        model: RoomImage,
-                        attributes:["image1"],
-                    }
-                ]
-            }]
+            {
+                price: { [Op.lte]: parseInt(req.params.price) }
+            }
+        ]}
+    } else if ((req.params.location!=="none" || !req.params.location) && !req.params.price){
+        whereClause = {
+            location: {
+                [Op.substring]: req.params.location                 
+            }
+        }
+    } else if (req.params.price && (req.params.location=="none" || !req.params.location)) {
+        whereClause = {            
+            price: {
+                [Op.lte]: parseInt(req.params.price)
+            } 
+        }
+    }
+
+    const offset = (req.params.offset-1)* 10;
+
+    const {count, rows:rooms} = await Room.findAndCountAll(
+        {
+            // where: whereClause,
+            attributes: ["location", "price"],
+            order: [
+                ["updatedAt", "DESC"]
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: ["firstName", "lastName", "id"], 
+                    where: {isActive : true },
+                },
+                {
+                    model: RoomImage,
+                    attributes:["image1"],
+                }    
+            ],
+            limit: 10,
+            offset: offset,
         })  
 
     //Transforms each first image of every room into the correct public URL
     for (let i=0; i < rooms.length;i++) {
-        rooms[i].Rooms[0][`Room_Image`].image1 = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/uploads/roomImages/${rooms[i].Rooms[0]['Room_Image'].image1}`
-        
-    }
+        rooms[i]["Room_Image"].image1 = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/uploads/roomImages/${rooms[i]["Room_Image"].image1}`
+    }  
     
     res.status(200).json({rooms, count})
-    // const urls = params.map(param => {
-    //     return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${param.Key}`
-    // })
+    
 });
 
 //Returns room based on Room_Id
 const getRoom = asyncHandler(async (req, res) => {
     //Show rooms
-    const id = req.params.id || null;
+    const id = req.params.id;
 
-    //If pagination, might need to grab 10, then do 10(n)-9 - 10(n)
+    const userRoom = await User.findByPk(id, {
+        attributes: ["id", "firstName", "lastName"],
+        include: [
+            {
+                model: Room,
+                attributes: {
+                    exclude: ["UserId", "room_id"]
+                },
+                include: [{
+                    model: RoomImage,
+                    attributes: {exclude: ["RoomId", "images_id"]}
+                }]
+
+            }
+        ],
+    });
+
+    if (!userRoom || !userRoom.Room) {
+        res.status(404)
+        throw new Error("User has no Room");
+
+    }
+    
+    res.status(200).json({room: userRoom})
 });
 
 //Deletes Room (Room Images by cascade) and room images for s3 bucket
 const deleteRoom = asyncHandler(async (req, res) => {
     const id = req.user.id;
-    console.log(id)
     const room = await Room.findOne({        
         where: {
             UserId: id,
@@ -141,8 +194,7 @@ const deleteRoom = asyncHandler(async (req, res) => {
     await s3RemoveImages("roomImages", keys)
     await room.destroy()
 
-
-    res.status(200).json(room)
+    res.status(200).json({message: "Deleted Room"})
 });
 
 module.exports = {

@@ -54,7 +54,10 @@ const getRoommates = asyncHandler(async (req, res) => {
                 attributes: [
                     "age", "gender", "budget", "cities", "room_sharing", "updatedAt"
                 ],
-                where: whereClause
+                where: whereClause,
+                order: [
+                    ["updatedAt", "DESC"]
+                ]
             }
         ],
         where: {
@@ -63,9 +66,6 @@ const getRoommates = asyncHandler(async (req, res) => {
                 {id: req.user.id}
             ]
         },
-        order: [
-            ["updatedAt"]
-        ],
         limit: 10,
         offset: offset,
         order: [

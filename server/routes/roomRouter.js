@@ -22,7 +22,7 @@ const upload = multer({ storage, fileFilter, limits: {fileSize: 1024 * 1024 * 3}
 router.get("/room/:id", protect, getRoom);
 
 //Get All rooms
-router.get("/", protect, getRooms);
+router.get("/:offset/:location?/:price?", protect, getRooms);
 
 //Create/Update room : req has room info and user id 
 router.post("/", protect, upload.array("images", 5), createRoom, updateRoomImages);
