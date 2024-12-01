@@ -8,6 +8,7 @@
 }
 
 .inputGroup {
+    /* display: flex; */
     justify-content: start;
     align-content: center;
     flex-wrap: wrap;
@@ -18,7 +19,6 @@
 .inputGroup div {
     margin: .5rem 0px;
 }
-
 @media screen and (max-width: 1450px) {
     .booleanInputs {
         justify-content: space-around;

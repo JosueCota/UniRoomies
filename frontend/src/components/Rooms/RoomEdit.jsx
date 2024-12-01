@@ -1,11 +1,15 @@
 import React from 'react'
 import BrandHeader from '../NavsHeaders/BrandHeader'
+import RoomBasicInfo from './RoomBasicInfo'
+import RoomOptionals from './RoomOptionals'
 
-const RoomEdit = () => {
+const RoomEdit = ({ userDetails, refetch }) => {
   return (
     <div style={{width:"100%"}}>
         <BrandHeader/>
-        Room Edit
+
+        <RoomBasicInfo/>
+        <RoomOptionals/>
     </div>
   )
 }

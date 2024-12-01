@@ -34,7 +34,7 @@ const InputList = ({state, onChange, label, limit}) => {
         <FloatingLabel label={label} controlId={label} style={{zIndex:0}}>
             <Form.Control type='text' placeholder={label} value={item} onChange={(e) => setItem(e.target.value)}/>
         </FloatingLabel>    
-            <Button onClick={addItem} >Add</Button>
+            <Button onClick={addItem} style={{zIndex:0}} >Add</Button>
     </InputGroup>
     <ul className={styles.listContainer}>
     {

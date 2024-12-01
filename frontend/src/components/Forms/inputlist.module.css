@@ -1,20 +1,19 @@
 .container {
     border-radius: .375rem;
     border: 1px solid lightgrey;
-    margin: 1rem;
+    margin: 1rem 0rem;
 }
 
 .listDiv{
     display: flex;
     font-size: .85rem;
-    background-color: rgb(238, 225, 42);
-    border-radius: 2rem;
+    background-color: #e7e7e6;
+    border-radius: .1rem;
     margin-top: .5rem;
     justify-items: center;
     align-content: center;
     width: fit-content;
     color: rgb(0, 0, 0);
-    font-weight: 600;
 }
 
 .listDiv:hover{
@@ -24,15 +23,19 @@
 
 .container {
     background-color: white;
+    color: #000;
+
 }
 .listItem {
     list-style: none;
     padding: .5rem;
+    color: #000;
 }
 
 .listContainer {
+    color: #000;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: .375rem;
+    gap: 1rem;
 }

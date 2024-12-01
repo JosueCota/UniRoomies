@@ -4,6 +4,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import { motion } from "motion/react"
+import ErrorBox from "../ErrorBox";
 
 const PER_PAGE = 10;
 
@@ -25,7 +26,9 @@ export default function RoommateList({data, page}) {
 
     return (
     <div style={{width:"100%", display:"flex", alignContent:"center", flexFlow:"column wrap", marginBottom:"2rem"}}>
-                
+        
+        { data.count===0 && <ErrorBox error={"No Roommates Found!"}/>}   
+        
         {data? data.users && data.users.map(child => {
             return ( 
                 <motion.div

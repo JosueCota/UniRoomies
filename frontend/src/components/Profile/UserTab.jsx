@@ -16,7 +16,7 @@ const UserTab = () => {
   }
 
   return (
-  <div style={{display:"flex", flexDirection:"column", alignContent:"start", width:"100%", margin:"0px auto"}}>
+  <div style={{display:"flex", flexDirection:"column", alignContent:"start", width:"100%", margin:"0px auto", color:"wheat"}}>
     {!editting && !isFetching?
       <User user={user} userDetails={userDetails}/>
       : <ProfileRoommateTabEdit userDetails={userDetails} setEditting={setEditting} refetch={refetch}/>}

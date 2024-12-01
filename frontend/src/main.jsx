@@ -37,7 +37,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="/roommates/:page" element={<Roommates/>} />
         <Route path="/roommates/roommate/:id" element={<RoommatePage/>} />
-        <Route path="/rooms" element={<Rooms/>} />
+        <Route path="/rooms/:page" element={<Rooms/>} />
         <Route path="/rooms/edit-room" element={<RoomEdit/>}/>
       </Route>
     </Route>

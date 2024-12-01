@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Form, InputGroup, FloatingLabel } from 'react-bootstrap'
+import { Button, InputGroup } from 'react-bootstrap'
 import AutoComplete from '../NavsHeaders/AutoComplete'
 import SingleSelect from '../Forms/SingleSelect'
-import styles from "./basicinfo.module.css"
+import styles from "./roombasicinfo.module.css"
 import FloatingInput from '../Forms/FloatingInput'
 
-const BasicInfo = ({cities, userDetails, setCities}) => {
+const RoomBasicInfo = ({cities, userDetails, setCities}) => {
     const [city, setCity] = useState("");
 
     const removeCity = (city) => {
@@ -34,7 +34,7 @@ const BasicInfo = ({cities, userDetails, setCities}) => {
           <div className={styles.citiesContainer}>
           <InputGroup className={styles.citiesInputGroup} style={{zIndex:9999}}>
           <p style={{fontWeight:"600", marginRight:"20px"}}>Cities Of Interest* (Max-10)</p>
-              <div style={{width:"100%"}} onKeyDown={(e) => e.key==="Enter" && addCity()} >
+              <div style={{width:"60%"}} onKeyDown={(e) => e.key==="Enter" && addCity()} >
               <AutoComplete address={city} onAddressChange={setCity}/>
               </div>
               <Button className={styles.addButton} onClick={addCity}>Add City</Button>
@@ -69,4 +69,4 @@ const BasicInfo = ({cities, userDetails, setCities}) => {
   )
 }
 
-export default BasicInfo
+export default RoomBasicInfo

@@ -108,17 +108,16 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
 
     <div className={styles.page}>
       <div className={styles.container}>
-      <h2 className={styles.title}>Update User</h2>
-      <p><strong>Note:</strong> Previously answered optional questions will not be removed from your information if not included in an update. You only need to include the information that needs updating.</p>
-      <p><strong>Warning:</strong> Don't include any sensitive information like your personal location or any contact information if you would not like it to be public!</p>
-      <Form onSubmit={handleSubmit}>
-          <BasicInfo cities={cities} setCities={setCities} userDetails={userDetails}/>
-              
-              <Optionals optionalMulti={optionalMulti} setAccomodations={setAccomodations} setContacts={setContacts} setHobbies={setHobbies} setOptionalMulti={setOptionalMulti} accomodations={accomodations} hobbies={hobbies} contacts={contacts} userDetails={userDetails} setLivingPreferences={setLivingPreferences} livingPreferences={livingPreferences}/>
-              <GeneralButton2 type={"submit"} name="Update" />
-              </Form>
-              </div>
-              </div>
+        <h2 className={styles.title}>Update User</h2>
+        <p><strong>Note:</strong> Previously answered <strong>optional questions</strong> will <strong>not</strong> be removed from your information if not included in an update. You only need to include the information that needs updating.</p>
+        <p><strong>Warning:</strong> Don't include any sensitive information like your personal location or any contact information if you would not like it to be public!</p>
+        <Form onSubmit={handleSubmit} style={{width:"90%", margin:"0 auto"}}>
+            <BasicInfo cities={cities} setCities={setCities} userDetails={userDetails}/>    
+            <Optionals optionalMulti={optionalMulti} setAccomodations={setAccomodations} setContacts={setContacts} setHobbies={setHobbies} setOptionalMulti={setOptionalMulti} accomodations={accomodations} hobbies={hobbies} contacts={contacts} userDetails={userDetails} setLivingPreferences={setLivingPreferences} livingPreferences={livingPreferences}/>
+            <GeneralButton2 type={"submit"} name="Update"/>
+        </Form>
+      </div>
+    </div>
             )
 }
         

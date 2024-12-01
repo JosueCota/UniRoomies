@@ -39,10 +39,10 @@
 
 .citiesSelected {
     display: flex;
-    border-radius: .1rem;
-    background-color: #e7e7e6;
-    color: black;
+    border-radius: 2rem;
+    background-color: var(--button-secondary);
     font-size: .85rem;
+    font-weight: 600;
     align-items: center;
     margin: .25rem;
     width: fit-content;

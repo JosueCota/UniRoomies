@@ -1,12 +1,12 @@
 import React from 'react'
-import styles from "./optionals.module.css"
+import styles from "./roomoptionals.module.css"
 import MultiSelect from '../Forms/MultiSelect'
 import SingleSelect from '../Forms/SingleSelect'
 import { Form, FloatingLabel, InputGroup } from 'react-bootstrap'
 import InputList from '../Forms/InputList'
 import FloatingInput from '../Forms/FloatingInput'
 
-const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodations, contacts, setContacts, hobbies, setHobbies, userDetails, livingPreferences, setLivingPreferences}) => {
+const RoomOptionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodations, contacts, setContacts, hobbies, setHobbies, userDetails, livingPreferences, setLivingPreferences}) => {
 
   const options = [
     {value: "description", label: "Description"},
@@ -27,14 +27,12 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
     <div>
       <h2 className={styles.title} style={{marginTop:"3rem"}}>Optional Details</h2>
               
-              <div style={{flexWrap:"wrap"}}>
-
-              <MultiSelect options={options} state={optionalMulti} onChange={setOptionalMulti} placeholder={"Select Optional Details"}/>
-              </div>
-        
+              <div style={{marginBottom:"20px"}}>
+              <MultiSelect options={options} value={optionalMulti} onChange={setOptionalMulti} placeholder={"Select Optional Details"}/>
+            </div>
             
             { optionalMulti.some(item => item.value === options[0].value) &&
-              <FloatingLabel controlId="floatingTextarea2" label="Description (500 Characters)" style={{margin:"20px auto", zIndex:"0"}}>
+              <FloatingLabel controlId="floatingTextarea2" label="Description (500 Characters)" style={{width:"90%" , margin:"20px auto", zIndex:"0"}}>
               <Form.Control
               as="textarea"
               placeholder="Introduce yourself and include any other information you'd like to include. (Note: Don't Include sensitive information.)"
@@ -76,7 +74,7 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
                 optionalMulti.some(item => item.value === options[1].value) &&
                
                 <InputGroup>
-                  <FloatingInput controlId="stay_length" label="Stay Length" name={"stay_length"} type={"number"} defaultVal={userDetails.stayLength? userDetails.stayLength: null} required={true} min={1} max={50} />
+                  <FloatingInput controlId="stay_length" label="Stay Length" name={"stay_length"} type={"number"} defaultVal={userDetails.stayLength? userDetails.stayLength: null} required={true}/>
                   <InputGroup.Text>Months</InputGroup.Text>
                 </InputGroup>
               }
@@ -123,4 +121,4 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
   )
 }
 
-export default Optionals
+export default RoomOptionals

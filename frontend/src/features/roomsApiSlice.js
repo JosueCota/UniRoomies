@@ -37,4 +37,4 @@ export const roommatesApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetRoommatesQuery, useGetRoommateQuery } = roommatesApiSlice
+export const { useGetRoomQuery, useGetRoomsQuery, useDeleteRoomQuery, useCreateUpdateRoomQuery } = roommatesApiSlice

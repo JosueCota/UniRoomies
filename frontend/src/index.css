@@ -4,15 +4,16 @@
   --header : #a6272a;
   --sidebar: #3d2221;
 
-  /* --main-background: #f3eed9; */
-  --main-background: #e5c295;
-
+  --main-background: #f3eed9;
+  
   --box-secondary: #f3eed9;
   --box-primary: #fff6f5;
+  --box-secondary: hsl(359, 62%, 60%);
 
   /* Dark Button For Forms and More Important Stuff */
   --button-primary: #332315;
-  --button-secondary: rgb(238, 225, 42);
+  --button-secondary: rgb(219, 206, 194);
+  --error: #6d190c;
 
   /* Light Button for Minor Actions */
   --button2-secondary: #058ef6;

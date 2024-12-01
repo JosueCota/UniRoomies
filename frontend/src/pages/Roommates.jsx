@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useFetchRoommates } from "../utils/useFetchRoommates";
 import useDebounce from "../utils/useDebounce";
 import Loader from "../components/Loader";
+import ErrorBox from "../components/ErrorBox";
 
 export default function Roommates() {
     
@@ -46,13 +47,7 @@ export default function Roommates() {
         { !error && data &&  
             <RoommateList data={data} page={page}/>
         }
-        { error &&
-            <div style={{padding:"1rem", backgroundColor: "var(--box-secondary)", width:"40%", borderRadius:"1rem", color:"var(--dark-font)", margin: "auto"}}>
-                <p style={{width:"40%",fontSize:"1.5rem", margin:"4rem auto", textAlign:"center"}}>
-                    {error?.data?.message || error.error || error}
-                </p>
-            </div>
-        }
+        { error && <ErrorBox error={error}/>}
         
     </div>);
 }

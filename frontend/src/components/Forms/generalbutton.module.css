@@ -1,13 +1,16 @@
-.button {
+.button, .button2 {
     padding: .5rem;
     border-radius: .4rem;
     border: none;
-    background-color: var(--button-primary);
-    color: var(--light-font);    
     width: 250px;
     margin: .5rem auto;
     margin-top: .75rem;
     font-weight: 700;
+}
+
+.button {
+    background-color: var(--button-primary);
+    color: var(--light-font);    
 }
 
 .button:hover {
@@ -21,15 +24,8 @@
 }
 
 .button2 {
-    padding: .5rem;
-    border-radius: .4rem;
-    border: none;
     background-color: var(--button2-primary);
     color: var(--dark-font);    
-    width: 250px;
-    margin: .5rem auto;
-    margin-top: .75rem;
-    font-weight: 700;
 }
 
 
