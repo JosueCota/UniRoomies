@@ -1,5 +1,5 @@
 .container {
-    background-color: var(--box-secondary);
+    background-color: var(--form-background);
     margin: auto;
     justify-items: center;
     align-content: center;

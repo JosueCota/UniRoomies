@@ -16,6 +16,7 @@
 .button:hover {
     background-color: var(--button-secondary);
     color: var(--dark-font);
+    border: 1px black solid;
     opacity: .9;
 }
 

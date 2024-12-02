@@ -10,13 +10,22 @@ const RoomImage = db.models.Room_Image;
 //Creates or Update Room 
 const createRoom = asyncHandler(async (req, res, next) => {
     
+    console.log(req.body.date_available)
     const newRoomParam = {
+        UserId: req.user.id,
         location: req.body.location,
         price: req.body.price,
-        description: req.body.description,
-        amenities: req.body.amenities,
         current_household: req.body.current_household,
-        UserId: req.user.id
+        sharing: req.body.sharing,
+        date_available: req.body.date_available,
+        description: req.body.description || null,
+        amenities: req.body.amenities || null,
+        pets: req.body.pets || null,
+        utility_included: req.body.utility_included || null,
+        size: req.body.size || null,
+        furnished: req.body.furnished || null,
+        places_near: req.body.places_near || null,
+        parking_space: req.body.parking_space || null,
     }
     
     const room = await Room.findOne({where: {UserId: req.user.id}});
@@ -85,7 +94,7 @@ const getRooms = asyncHandler(async (req, res) => {
         throw new Error("No Offset Found")
     }
 
-    let whereClause = {}
+    var whereClause = {}
     if (req.params.location!=="none" && req.params.price) {
         whereClause = {
             [Op.and]: [
@@ -114,8 +123,8 @@ const getRooms = asyncHandler(async (req, res) => {
 
     const {count, rows:rooms} = await Room.findAndCountAll(
         {
-            // where: whereClause,
-            attributes: ["location", "price"],
+            where: whereClause,
+            attributes: ["location", "price", "date_available", "sharing"],
             order: [
                 ["updatedAt", "DESC"]
             ],
@@ -171,7 +180,12 @@ const getRoom = asyncHandler(async (req, res) => {
 
     }
     
-    res.status(200).json({room: userRoom})
+    let images =  Object.values(userRoom.Room["Room_Image"].dataValues)
+    images = images.filter(image => image !== null).map(image => {
+        return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/uploads/roomImages/${image}`
+    })
+
+    res.status(200).json({room: userRoom, images: images})
 });
 
 //Deletes Room (Room Images by cascade) and room images for s3 bucket

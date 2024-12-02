@@ -20,6 +20,7 @@ import UserTab from './components/Profile/UserTab.jsx';
 import AccountTab from "./components/Profile/AccountTab.jsx"
 import RoommatePage from './components/Roommates/RoommatePage.jsx';
 import RoomEdit from './components/Rooms/RoomEdit.jsx';
+import RoomPage from "./components/Rooms/RoomPage.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
         <Route path="/roommates/:page" element={<Roommates/>} />
         <Route path="/roommates/roommate/:id" element={<RoommatePage/>} />
         <Route path="/rooms/:page" element={<Rooms/>} />
+        <Route path="/rooms/room/:id" element={<RoomPage/>} />
         <Route path="/rooms/edit-room" element={<RoomEdit/>}/>
       </Route>
     </Route>

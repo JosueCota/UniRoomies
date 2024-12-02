@@ -6,10 +6,10 @@
     margin: 2rem auto;
     padding: 2rem;
     border: 1px lightgrey solid;
-    background-color: var(--box-secondary);
+    background-color: var(--form-background);
     border-radius: 1rem;
     margin-bottom: 3rem;
-    color: wheat;
+    color: var(--dark-font);
 }
 
 .title {

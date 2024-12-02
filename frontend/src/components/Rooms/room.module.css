@@ -1,0 +1,33 @@
+.link {
+    margin: 1rem auto;
+    padding: 0px;
+    text-decoration:none ;
+    color: black;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.link:hover {
+    opacity: .95;
+}
+
+.roommateCardContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 200px;
+    background-color: var(--box-secondary);
+    border-radius: .375rem;
+    color: var(--dark-font);
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: 600;
+}

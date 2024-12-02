@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 //Return User Details from Get
 const useFetchUserDetails = () => {
-    let { data, refetch, isFetching } = useGetUserDetailsQuery();
+    const { data, refetch, isFetching } = useGetUserDetailsQuery();
     const [userDetails, setUserDetails] = useState({});
     
     useEffect(() => {

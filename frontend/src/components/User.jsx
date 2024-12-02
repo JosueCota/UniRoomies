@@ -26,6 +26,7 @@ const User = ({userDetails, user}) => {
           {userDetails.accomodations && <li>Accomodations: {userDetails.accomodations.map(accomodation=> <p>{accomodation}</p>)}</li>}
           {userDetails.isSmoker && <li>Smoker: {userDetails.isSmoker? "Yes": "No"}</li>}
           {userDetails.moveInDate && <li>Move In Date: {userDetails.moveInDate}</li>}
+          {userDetails.university && <li>Attending {userDetails.university}</li>}
           {userDetails.couplesOk && <li>Okay with Couples: {userDetails.couplesOk? "Yes": "No"}</li>}
         </ul>
           : <p>You Must First Update Info</p>}

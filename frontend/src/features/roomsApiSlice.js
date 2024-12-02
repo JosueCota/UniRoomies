@@ -1,14 +1,14 @@
 import { apiSlice } from "./apiSlice";
 import { ROOMS_URL } from "../utils/constants";
 
-export const roommatesApiSlice = apiSlice.injectEndpoints({
+export const roomsApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getRooms: builder.query({
-            query: ({location, budget, offset}) => {
+            query: ({location, price, offset}) => {
                 let params = "/";
                 
                 params += location? `${location}`: `none`;
-                if (budget) params+=`/${budget}`;
+                if (price) params+=`/${price}`;
 
                 return ({
                     url: `${ROOMS_URL}/${offset}${params}`,
@@ -18,23 +18,24 @@ export const roommatesApiSlice = apiSlice.injectEndpoints({
         }),
         getRoom: builder.query({
             query: ({id}) => ({
-                url: `${ROOMS_URL}/roommate/${id}`,
+                url: `${ROOMS_URL}/room/${id}`,
                 method: "GET",
             })
         }),
         createUpdateRoom: builder.query({
-            query: ({id}) => ({
-                url: `${ROOMS_URL}/roommate/${id}`,
-                method: "GET",
+            query: ({data}) => ({
+                url: `${ROOMS_URL}`,
+                method: "POST",
+                data
             })
         }),
         deleteRoom: builder.query({
-            query: ({id}) => ({
-                url: `${ROOMS_URL}/roommate/${id}`,
+            query: () => ({
+                url: `${ROOMS_URL}`,
                 method: "DELETE",
             })
         }),
     })
 })
 
-export const { useGetRoomQuery, useGetRoomsQuery, useDeleteRoomQuery, useCreateUpdateRoomQuery } = roommatesApiSlice
+export const { useGetRoomQuery, useGetRoomsQuery, useDeleteRoomQuery, useCreateUpdateRoomQuery } = roomsApiSlice
