@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useVerifyEmailMutation } from '../features/authApiSlice'
 import { useEffect } from 'react'
-import Loader from '../components/Loader'
+import Loader from '../components/Misc/Loader'
 import { toast } from 'react-toastify'
 
 const ActivationPage = () => {

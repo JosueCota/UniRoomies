@@ -69,13 +69,24 @@ module.exports = (sequelize) => {
                 //Size of room
                 type: DataTypes.TEXT("tiny")
             },
-            utility_included: {
-                type: DataTypes.BOOLEAN()
+            utilities_included: {
+                //What utilities are included (internet, electric, gas, water, etc)
+                type: DataTypes.TEXT(),
+                get() {
+                    if (this.getDataValue("utilities_included")){
+                        return this.getDataValue("utilities_included").split("|")
+                    } 
+                },
+                set(val) {
+                    val? this.setDataValue("utilities_included", val.join("|")): this.setDataValue("utilities_included", null);
+                }
             },
             pets: {
+                //Are pets present
                 type: DataTypes.BOOLEAN()
             },
             furnished: {
+                //Is the room furished
                 type: DataTypes.BOOLEAN()
             }
         }

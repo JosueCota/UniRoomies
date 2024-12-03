@@ -34,7 +34,7 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
         
             
             { optionalMulti.some(item => item.value === options[0].value) &&
-              <FloatingLabel controlId="floatingTextarea2" label="Description (500 Characters)" style={{margin:"20px auto", zIndex:"0"}}>
+              <FloatingLabel controlId="floatingTextarea2" label="Description (500 Characters)" style={{margin:"1.5rem auto", zIndex:"0"}}>
               <Form.Control
               as="textarea"
               placeholder="Introduce yourself and include any other information you'd like to include. (Note: Don't Include sensitive information.)"
@@ -66,7 +66,7 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
               }
                 {
                   optionalMulti.some(item => item.value === options[2].value) &&
-                  <div style={{width:"10rem"}}>
+                  <div>
                     <SingleSelect controlId={"sleepSchedule"} name={"sleep_schedule"} options={["Early", "Late", "Varies"]} label={"Sleep Schedule"} def={userDetails.sleepSchedule? userDetails.sleepSchedule: null} optionLabel={"Hours"}/>
                   </div> 
                 }

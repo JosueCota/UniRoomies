@@ -1,0 +1,38 @@
+.container{
+    display: flex;
+    flex-flow: column;
+    justify-self: center;
+    text-align: center;
+    width: 80%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--form-background);
+    color: var(--dark-font);
+    border: 1px lightgrey solid;
+}
+
+.title {
+    margin-bottom: 2rem; 
+    text-align: center;
+}
+
+
+@media screen and (max-width: 950px) {
+    .container {
+        border: none;
+        border-radius: 0px;
+        padding: 1rem;
+        width: 80%;
+        background: none;
+    }
+}
+
+
+
+@media screen and (max-width: 500px) {
+    .container{
+        width: 100%;
+    }
+}

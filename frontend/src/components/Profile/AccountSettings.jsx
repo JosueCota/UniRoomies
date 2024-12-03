@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector} from "react-redux";
-import Loader from '../Loader'
+import Loader from '../Misc/Loader'
 
 import styles from "./accountsettings.module.css"
 import { setCredentials } from "../../features/authSlice"
@@ -33,7 +33,7 @@ const AccountSettings = () => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.info}>If you are no longer searching for a roommate or room, you can deactivate your account. This will remove you from searches in the Roommates and Rooms Pages.</p>
+      <p className={styles.info}>If you are no longer searching for a roommate or room, you can deactivate your account. This will remove you from searches in the Roommates and Rooms Pages. You will also not be able to search for others. </p>
       {isLoading? <Loader/>:
       <div className={styles.buttonCont}>
         <button className={`${styles.buttons} ${user.isActive && styles.activeButton || styles.inactiveButton}`} onClick={handleActivateAccount}>{user.isActive? "Deactivate": "Activate"} Account</button>

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Form from "react-bootstrap/Form";
 import { useSelector} from "react-redux";
 import { useRegisterMutation } from '../../features/authApiSlice';
-import Loader from '../Loader';
+import Loader from '../Misc/Loader';
 import ResendEmailModal from './ResendEmailModal';
 import { showToastError, showToastSuccess, showToastWarning } from '../../utils/helperFunctions';
 import PictureSelect from '../Forms/PictureSelect';

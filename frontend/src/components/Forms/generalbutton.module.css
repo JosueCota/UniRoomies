@@ -10,7 +10,9 @@
 
 .button {
     background-color: var(--button-primary);
-    color: var(--light-font);    
+    color: var(--light-font);  
+    color: wheat;  
+    border: 1px solid var(--button-primary);
 }
 
 .button:hover {
@@ -26,7 +28,8 @@
 
 .button2 {
     background-color: var(--button2-primary);
-    color: var(--dark-font);    
+    color: var(--dark-font);   
+    border: 1px solid lightgrey; 
 }
 
 

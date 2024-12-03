@@ -1,5 +1,4 @@
 #snackbar {
-    min-width: 250px;
     margin-left: -125px;
     background-color: #333;
     color: var(--light-font);
@@ -7,8 +6,14 @@
     padding: .75rem;
     position: fixed;
     z-index: 1;
-    left: 50%;
+    left: calc(50% + 80px);
     bottom: 30px;
     font-size: 1rem;
-    border-radius: 1rem;
+    border-radius: .375rem;
   }
+  
+  @media screen and (max-width:500px) {
+    #snackbar {
+      left: calc(50% + 40px);
+    }
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./userroom.module.css"
 import Carousel from 'react-bootstrap/Carousel';
 
-const UserRoom = ({room, user, images}) => {
+const UserRoom = ({room, user, images, children}) => {
     
     const carouselImages = images.map(image => (
         <Carousel.Item>
@@ -29,7 +29,7 @@ const UserRoom = ({room, user, images}) => {
         {room.description && <li>Description: {room.description}</li>}
         {room.amenities && <p>Amenities:{room.amenities.map(amenity => <li>{amenity}</li>)}</p>}
         {room.placesNear && <p>Places Near:{room.placesNear.map(place => <li>{place}</li>)}</p>}
-
+        {children}
     </div>
   )
 }

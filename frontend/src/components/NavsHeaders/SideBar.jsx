@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
     CDBSidebar, 
     CDBSidebarContent, 
@@ -11,9 +11,11 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './LogoutButton';
 import SideBarButton from './SideBarButton';
 import { BsFillHousesFill } from "react-icons/bs";
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
 
+  const { user } = useSelector((state) => state.auth);
   const [mobile, setMobile] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -29,6 +31,12 @@ const Sidebar = () => {
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
+
+  useEffect(() => {
+    if (!mobile) {
+    setOpen(false);  
+  }
+  }, [mobile])
 
   return (
     <>
@@ -64,6 +72,7 @@ const Sidebar = () => {
               padding: '20px 5px',
             }}
             >
+              { open  &&  <p style={{color:"wheat", fontWeight:"600", fontSize:"1.5rem", overflow:"hidden"}}>{user.firstName} {user.lastName}</p> }
             <LogoutButton/>
           </div>
         </CDBSidebarFooter>

@@ -15,16 +15,17 @@ export const useFetchRooms = ({page, location, price}) => {
 }
 
 export const useFetchRoom = ({id}) => {
-
     const { data, refetch, isFetching, error } = useGetRoomQuery({id});
     const [roomData, setRoomData] = useState({});
-    
     useEffect(() => {
         if (data && data.room) {
             setRoomData(prev => processRoomData(data.room, data.images));  // Process the details
         }          
+
     }, [data]);
-    return {roomData, isFetching, refetch};
+
+
+    return {roomData, isFetching, refetch, error};
 }
 
 const processRoomData = (room, images) => {
@@ -45,7 +46,7 @@ const processRoomData = (room, images) => {
             description: room.Room.description || null,
             pets: room.Room.pets || null,
             furnished: room.Room.furnished || null,
-            utilityIncluded: room.Room.utility_included || null,
+            utilitiesIncluded: room.Room.utilities_included || null,
             size: room.Room.size || null,
             placesNear: room.Room.places_near || null,
             parkingSpace: room.Room.parking_space || null,

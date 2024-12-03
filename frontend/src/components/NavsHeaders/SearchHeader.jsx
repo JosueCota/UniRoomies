@@ -2,15 +2,21 @@ import React from 'react'
 import styles from "./searchheader.module.css"
 import AutoComplete from './AutoComplete'
 import { FiRefreshCw  } from 'react-icons/fi'
+import Loader from "../Misc/Loader"
 
-const SearchHeader = ({placeholder, onClick, address, budget, setBudget, setAddress}) => {
+const SearchHeader = ({placeholder, onClick, address, budget, setBudget, setAddress, loading, children}) => {
 
   const handleAddressChange = (address) => {
     setAddress(address)
   }
 
   return (
-    <div className={styles.headerContainer} >
+    <div className={styles.container} >
+      {children && <div className={styles.invisibleItem}>Centering Item</div>}
+      <div className={styles.headerContainer}>
+      <div style={{position:"relative", right:"25px"}}>
+      {loading && <Loader/>}
+      </div>
       <div className={`${styles.inputDiv} ${styles.searchBar}`} style={{width: "40%", minWidth:"100px"}}>
           <AutoComplete onAddressChange={handleAddressChange} address={address} name={"location"}/>
       </div>
@@ -20,7 +26,10 @@ const SearchHeader = ({placeholder, onClick, address, budget, setBudget, setAddr
         <button className={styles.searchButton} onClick={onClick}>
           <FiRefreshCw size={35}/>
         </button>
-      
+      </div>
+        <div style={{marginRight:"1rem"}}>
+          {children}
+        </div>
         </div>
   )
 }

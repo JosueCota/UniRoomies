@@ -1,13 +1,13 @@
 import RoomList from "../components/Rooms/RoomList";
 import SearchHeader from "../components/NavsHeaders/SearchHeader";
 import { setRoomSearch } from '../features/searchesSlice'
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useDebounce from "../utils/useDebounce";
-import Loader from "../components/Loader";
-import ErrorBox from "../components/ErrorBox";
+import ErrorBox from "../components/Misc/ErrorBox";
 import { useFetchRooms } from "../utils/useFetchRooms";
+import GeneralButton from "../components/Forms/GeneralButton"
 
 export default function Rooms() {
     
@@ -37,13 +37,10 @@ export default function Rooms() {
 
     return (
     <div style={{display:"flex", flexFlow:"column wrap", width: "100%", backgroundColor:"var(--main-background)"}}>
-        <SearchHeader placeholder={"Price"} onClick={handleRefresh} address={address} setAddress={setAddress} budget={price} setBudget={setPrice}/>
-        {
-            loading && 
-            <div style={{position:"relative", top:"4rem", left:"0%"}}>
-                <Loader/>
-            </div>
-        }
+        <SearchHeader placeholder={"Price"} onClick={handleRefresh} address={address} setAddress={setAddress} budget={price} setBudget={setPrice} loading={loading}> 
+            <Link to={"/rooms/edit-room"}>
+            <GeneralButton name={"Create/Edit Room"} type={"button"}/></Link>
+        </SearchHeader>
         { !error && data &&  
             <RoomList data={data} page={page}/>
         }

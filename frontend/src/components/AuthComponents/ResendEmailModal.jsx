@@ -6,7 +6,7 @@ import TextInput from '../Forms/TextInput';
 import { useResendLinkMutation } from '../../features/authApiSlice';
 import styles from "./form.module.css"
 import { showToastError, showToastSuccess } from '../../utils/helperFunctions';
-import Loader from '../Loader';
+import Loader from '../Misc/Loader';
 
 const ResendEmailModal = () => {
 

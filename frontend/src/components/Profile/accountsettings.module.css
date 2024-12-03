@@ -20,7 +20,7 @@
     align-items: center;
     padding: 2rem;
     height: 50px;
-    border-radius: 25px;
+    border-radius: .375rem;
     border: none;
     width: 46%;
 }

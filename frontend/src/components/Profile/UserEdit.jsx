@@ -8,7 +8,7 @@ import { useUpdateUserDetailsMutation } from '../../features/usersApiSlice'
 import BasicInfo from "./BasicInfo"
 import Optionals from "./Optionals"
 
-const UserEdit = ({userDetails, refetch, setEditting }) => {
+const UserEdit = ({userDetails, refetch, setEditting, children}) => {
 
   const [updateDetails] = useUpdateUserDetailsMutation()
 
@@ -46,6 +46,10 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
     }
     if (optVal.includes("Living Preferences") && livingPreferences.length === 0 ){
       showToastWarning("Please Include some Preferences", "enterPrefsErr")
+      valid = false;
+    }
+    if (optVal.includes("Accomodations") && accomodations.length === 0 ){
+      showToastWarning("Please Include Some Accomodations", "enterAccomErr")
       valid = false;
     }
     return valid
@@ -114,7 +118,10 @@ const UserEdit = ({userDetails, refetch, setEditting }) => {
         <Form onSubmit={handleSubmit} style={{width:"90%", margin:"0 auto"}}>
             <BasicInfo cities={cities} setCities={setCities} userDetails={userDetails}/>    
             <Optionals optionalMulti={optionalMulti} setAccomodations={setAccomodations} setContacts={setContacts} setHobbies={setHobbies} setOptionalMulti={setOptionalMulti} accomodations={accomodations} hobbies={hobbies} contacts={contacts} userDetails={userDetails} setLivingPreferences={setLivingPreferences} livingPreferences={livingPreferences}/>
-            <GeneralButton2 type={"submit"} name="Update"/>
+            <div style={{marginTop:"2rem",display:"flex"}}>
+              {children}
+              <GeneralButton2 type={"submit"} name="Update"/>
+            </div>
         </Form>
       </div>
     </div>

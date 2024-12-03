@@ -1,13 +1,23 @@
+.container {
+    display: flex;
+    background-color: var(--header);
+    align-content: space-between;
+}
+
 .headerContainer {
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
     height: 75px;
     margin-top: 0px;
-    background-color: var(--header);
     justify-content: center;
     align-items: center;
     align-content: center;
+}
+.invisibleItem {
+    margin-left: 1rem;
+    width: 250px;
+    visibility: hidden;
 }
 
 .numberInput:focus {

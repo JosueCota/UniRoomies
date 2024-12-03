@@ -32,7 +32,7 @@ const InputList = ({state, onChange, label, limit}) => {
 <div className={styles.container}>
     <InputGroup onKeyDown={(event) => {event.key === "Enter" && addItem()}}>
         <FloatingLabel label={label} controlId={label} style={{zIndex:0}}>
-            <Form.Control type='text' placeholder={label} value={item} onChange={(e) => setItem(e.target.value)}/>
+            <Form.Control type='text' placeholder={label} value={item} onChange={(e) => setItem(e.target.value)} onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}/>
         </FloatingLabel>    
             <Button onClick={addItem} style={{zIndex:0}} >Add</Button>
     </InputGroup>

@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import Roommate from "./Roommate";
 import Pagination from 'react-bootstrap/Pagination';
 import { useEffect, useState } from "react";
-import Loader from "../Loader";
+import Loader from "../Misc/Loader";
 import { motion } from "motion/react"
-import ErrorBox from "../ErrorBox";
+import ErrorBox from "../Misc/ErrorBox";
 
 const PER_PAGE = 10;
 

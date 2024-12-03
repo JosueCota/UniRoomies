@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import TextInput from '../Forms/TextInput'
-import GeneralButton from '../Forms/GeneralButton'
+import GeneralButton2 from '../Forms/GeneralButton2'
 import styles from "./accounttab.module.css"
 import Form from "react-bootstrap/Form"
 import { useSelector} from "react-redux";
 import { toast } from 'react-toastify'
-import Loader from '../Loader'
+import Loader from '../Misc/Loader'
 import { useUpdateUserInfoMutation, useUpdateUserPasswordMutation } from '../../features/usersApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from "../../features/authSlice"
@@ -95,19 +95,19 @@ const AccountTab = () => {
   return (
     <div>
       <Form className={styles.formCont} onSubmit={handleNameFormSubmit} id='updateName'>
-        <h2 className={styles.title}>Update User</h2>
+        <h2 className={styles.title}>Change Info</h2>
         <TextInput placeholder={firstName} label={"First Name"} state={firstName} onChange={setFirstName} name={"firstName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
         <TextInput placeholder={lastName} label={"Last Name"} state={lastName} onChange={setLastName} name={"lastName"} required={true} maxChar={20} tip={"No Numbers or Special Symbols"} minLength={2}/>
         <TextInput disabled placeholder={email} label={"Email"}/>
         <PictureSelect pfp={pfp} setPfp={setPfp} size={64}/>
-        <GeneralButton name={"Update Name"} formId={"updateName"} type={"submit"}/> 
+        <GeneralButton2 name={"Update User"} formId={"updateName"} type={"submit"}/> 
       </Form>
       <Form className={styles.formCont} onSubmit={handlePasswordFormSubmit} id="updatePassword">
-        <h2 className={styles.title}>Update Password</h2>
+        <h2 className={styles.title}>Change Password</h2>
         <TextInput placeholder={"New Password"} label={"New Password"} state={newPassword} onChange={setNewPassword} name={"password"} maxChar={50} tip={"Must be Different From Current Password"} minLength={8}/>
         <TextInput placeholder={"Current Password"} label={"Current Password"} state={oldPassword} onChange={setOldPassword} name={"r-password"}  type={"password"} maxChar={50} tip={"Must Match Current Password"} minLength={8}/>
         {(isLoading) && <Loader/>}
-        <GeneralButton name={"Update Password"} formId={"updatePassword"} type={"submit"}/> 
+        <GeneralButton2 name={"Update Password"} formId={"updatePassword"} type={"submit"}/> 
       </Form>
       <AccountSettings/>
     </div>

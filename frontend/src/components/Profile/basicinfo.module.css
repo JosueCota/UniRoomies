@@ -4,15 +4,16 @@
 }
 
 .citiesInputGroup{
-    padding-top: 10px;
-    border-radius: .5rem;
-    display: flex;
-    justify-content: center;
+    margin-top: 1rem;
     flex-flow: row nowrap;
 }
 
+.citiesInputGroup input {
+    height: 3rem;
+}
+
 .addButton {
-    height: 2rem;
+    height: 3rem;
     padding: 0px .5rem;
     min-width: 5rem;
 }
@@ -22,7 +23,6 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
 }
 
 .citiesSelectedDiv p {
@@ -64,7 +64,7 @@
 
 .inputGroup {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: .5rem;

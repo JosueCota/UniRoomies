@@ -6,7 +6,7 @@ import { Form, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from "react-redux";
 import { useLoginMutation } from '../../features/authApiSlice';
 import { setCredentials } from "../../features/authSlice";
-import Loader from '../Loader';
+import Loader from '../Misc/Loader';
 import { showToastError, showToastWarning } from '../../utils/helperFunctions';
 const LoginForm = () => {
 

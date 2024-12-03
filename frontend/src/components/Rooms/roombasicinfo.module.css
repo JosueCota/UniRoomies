@@ -1,81 +1,29 @@
-.citiesContainer {
-    border-radius: .35rem;
-    padding: 1rem;
-}
 
 .citiesInputGroup{
-    padding-top: 10px;
-    border-radius: .5rem;
-    display: flex;
     justify-content: center;
-    flex-flow: row nowrap;
+    align-content: center;
 }
 
-.addButton {
-    height: 2rem;
-    padding: 0px .5rem;
-    min-width: 5rem;
+.citiesInputGroup input {
+    height: 3rem;
+    border-radius: 10px !important;
 }
-
-.citiesSelectedDiv {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
+.citiesInputGroup p {
+    margin-bottom: 5px !important;
 }
-
-.citiesSelectedDiv p {
-    margin: .5rem 0px;
-}
-
-.citiesList {
-    list-style: none;
-    margin: .5rem 0px;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-
-.citiesSelected {
-    display: flex;
-    border-radius: 2rem;
-    background-color: var(--button-secondary);
-    font-size: .85rem;
-    font-weight: 600;
-    align-items: center;
-    margin: .25rem;
-    width: fit-content;
-    padding: .5rem;
-}
-
-.citiesSelected::before {
-    content: "X";
-    font-weight: 800;
-    color: rgb(0, 0, 0);
-    margin-left: 1rem;
-    margin-right:1rem;
-}
-
-.citiesSelected:hover {
-    cursor: pointer;
-    opacity: .75;
+.citiesInputGroup div {
+    width: 100% !important;
+    margin: 0px auto !important;
 }
 
 .inputGroup {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: .5rem;
     margin: 1rem auto;
 }
-
-.inputGroup1 div {
-    width: 20%;
-}
-
-
 
 
 @media screen and (max-width: 1450px) {
@@ -86,10 +34,7 @@
         align-items: center;
 
     }
-    .citiesInputGroup button {
-        margin-top: 5px;
-        border-radius: 10px !important;
-    }
+
     .citiesInputGroup input {
         border-radius: 10px !important;
     }
@@ -100,26 +45,12 @@
         width: 100% !important;
         margin: 0px auto !important;
     }
-    .inputGroup1 {
+    .inputGroup {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        width: 100%;
         gap: 10px;
-    }
-    
-    .inputGroup1 div {
-        width: 90%;
-        margin: 0px auto;
-    }
-    .citiesSelectedDiv{
-        flex-direction: column;
-    }
-    .citiesList{ 
-        justify-content: center;
-        margin: 0px;
-        padding: 0px;
     }
 }
 

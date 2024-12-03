@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetRoommateQuery } from '../../features/roommatesApiSlice';
 import User from '../User';
-import Loader from '../Loader';
+import Loader from '../Misc/Loader';
 import BrandHeader from '../NavsHeaders/BrandHeader';
 import GeneralButton from '../Forms/GeneralButton';
 

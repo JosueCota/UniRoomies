@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useFetchRoommates } from "../utils/useFetchRoommates";
 import useDebounce from "../utils/useDebounce";
-import Loader from "../components/Loader";
-import ErrorBox from "../components/ErrorBox";
+import ErrorBox from "../components/Misc/ErrorBox";
 
 export default function Roommates() {
     
@@ -37,13 +36,7 @@ export default function Roommates() {
 
     return (
     <div style={{display:"flex", flexFlow:"column wrap", width: "100%", backgroundColor:"var(--main-background)"}}>
-        <SearchHeader placeholder={"Budget"} onClick={handleRefresh} address={address} setAddress={setAddress} budget={budget} setBudget={setBudget}/>
-        {
-            loading && 
-            <div style={{position:"relative", top:"4rem", left:"0%"}}>
-                <Loader/>
-            </div>
-        }
+        <SearchHeader placeholder={"Budget"} onClick={handleRefresh} address={address} setAddress={setAddress} budget={budget} setBudget={setBudget} loading={loading}/>
         { !error && data &&  
             <RoommateList data={data} page={page}/>
         }

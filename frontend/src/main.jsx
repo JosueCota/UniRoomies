@@ -7,8 +7,8 @@ import { Provider } from "react-redux"
 import store from "./app/store.js"
 
 import App from './app/App.jsx'
-import ErrorBound from "./components/ErrorBound.jsx";
-import PrivateRoute from './components/PrivateRoute.jsx';
+import ErrorBound from "./components/Misc/ErrorBound.jsx";
+import PrivateRoute from './components/Misc/PrivateRoute.jsx';
 import Login from "./pages/Login.jsx"
 import Register from "./pages/Register.jsx"
 import Homepage from "./pages/Homepage.jsx";

@@ -10,7 +10,7 @@ const RoomImage = db.models.Room_Image;
 //Creates or Update Room 
 const createRoom = asyncHandler(async (req, res, next) => {
     
-    console.log(req.body.date_available)
+    console.log(req.body)
     const newRoomParam = {
         UserId: req.user.id,
         location: req.body.location,
@@ -21,7 +21,7 @@ const createRoom = asyncHandler(async (req, res, next) => {
         description: req.body.description || null,
         amenities: req.body.amenities || null,
         pets: req.body.pets || null,
-        utility_included: req.body.utility_included || null,
+        utilities_included: req.body.utility_included || null,
         size: req.body.size || null,
         furnished: req.body.furnished || null,
         places_near: req.body.places_near || null,
@@ -36,7 +36,7 @@ const createRoom = asyncHandler(async (req, res, next) => {
         const newRoom = await Room.create(newRoomParam);
         
         user.setRoom(newRoom);
-
+ 
         req.room = newRoom.room_id;
         next()
 
