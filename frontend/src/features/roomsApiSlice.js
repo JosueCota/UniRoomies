@@ -38,7 +38,8 @@ export const roomsApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: `${ROOMS_URL}`,
                 method: "DELETE",
-            })
+            }),
+            invalidatesTags: ["Room"]
         }),
     })
 })

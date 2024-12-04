@@ -14,28 +14,3 @@
     width: 60%;
     padding: 1.5rem;
 }
-
-.button {
-    margin: 10px;
-    border-radius: .5rem;
-    text-decoration: none;
-    padding: 1rem;
-    background-color: #4c4c4c;
-    color: white;
-}
-
-.button:hover {
-    background-color: white;
-    color: black;
-}
-
-.buttons {
-    background-color: #342f2f;
-    margin-left: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-flow: column;
-}

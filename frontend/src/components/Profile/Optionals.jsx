@@ -50,19 +50,19 @@ const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodat
             <div className={styles.booleanInputs}>
               {
                 optionalMulti.some(item => item.value === options[3].value) &&
-                <SingleSelect label="Do You Smoke?" name="is_smoker" defaultValue={userDetails.isSmoker} controlId={"isSmoker"} options={["Yes", "No"]} def={userDetails.isSmoker? "Yes": "No"} optionLabel={"Option"}/>
+                <SingleSelect label="Do You Smoke?" name="is_smoker" controlId={"isSmoker"} options={["Yes", "No"]} def={userDetails.isSmoker? "Yes": "No"} optionLabel={"Option"}/>
               }
               {
                 optionalMulti.some(item => item.value === options[4].value) &&
-                <SingleSelect label="Okay with Couples?" name="couples_ok" defaultValue={userDetails.couplesOk || false} controlId={"couplesOk"} options={["Yes", "No"]} def={userDetails.couplesOk? "Yes": "No"} optionLabel={"Option"}/>
+                <SingleSelect label="Okay with Couples?" name="couples_ok" controlId={"couplesOk"} options={["Yes", "No"]} def={userDetails.couplesOk? "Yes": "No"} optionLabel={"Option"}/>
               }
               {
                 optionalMulti.some(item => item.value === options[5].value) &&
-                <SingleSelect label="Pet Owner?" name="pet_owner" defaultValue={userDetails.petOwner || false} controlId={"petOwner"} options={["Yes", "No"]} def={userDetails.petOwner? "Yes": "No"} optionLabel={"Option"}/>
+                <SingleSelect label="Pet Owner?" name="pet_owner" controlId={"petOwner"} options={["Yes", "No"]} def={userDetails.petOwner? "Yes": "No"} optionLabel={"Option"}/>
               }
               {
                 optionalMulti.some(item => item.value === options[6].value) &&
-                <SingleSelect optionLabel={"Parking"} label="Parking Needed?" name="parking_needed" defaultChecked={userDetails.parkingNeeded || false} controlId={"parkingNeeded"}  options={["Yes", "No"]} def={userDetails.parkingNeeded? "Yes": "No"}/>
+                <SingleSelect optionLabel={"Parking"} label="Parking Needed?" name="parking_needed" controlId={"parkingNeeded"}  options={["Yes", "No"]} def={userDetails.parkingNeeded? "Yes": "No"}/>
               }
                 {
                   optionalMulti.some(item => item.value === options[2].value) &&

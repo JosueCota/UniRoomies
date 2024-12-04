@@ -44,12 +44,12 @@ const processRoomData = (room, images) => {
             sharing: room.Room.sharing,
             amenities: room.Room.amenities || null,
             description: room.Room.description || null,
-            pets: room.Room.pets || null,
-            furnished: room.Room.furnished || null,
+            pets: room.Room.pets!==null? (room.Room.pets === true? "Yes": "No" ) :null,
+            furnished: room.Room.furnished!==null? room.Room.furnished ===true ? "Yes": "No" : null,
             utilitiesIncluded: room.Room.utilities_included || null,
             size: room.Room.size || null,
             placesNear: room.Room.places_near || null,
-            parkingSpace: room.Room.parking_space || null,
+            parkingSpace: room.Room.parking_space!==null? room.Room.parking_space ===true ? "Yes": "No" :null,
         },
         images: images || null
     }

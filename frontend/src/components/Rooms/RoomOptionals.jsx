@@ -45,15 +45,15 @@ const RoomOptionals = ({optionalMulti, setOptionalMulti, placesNear, setPlacesNe
             <div className={styles.booleanInputs}>
               {
                 optionalMulti.some(item => item.value === options[2].value) &&
-                <SingleSelect label="Are there Pets?" name="pets" controlId={"pets"} options={["Yes", "No"]} def={roomDetails && roomDetails.pets? "Yes": "No"} optionLabel={"Option"}/>
+                <SingleSelect label="Are there Pets?" name="pets" controlId={"pets"} options={["Yes", "No"]} def={roomDetails && roomDetails.pets} optionLabel={"Option"}/>
               }
               {
                 optionalMulti.some(item => item.value === options[5].value) &&
-                <SingleSelect label="Is the room Furnished?" name="furnished" controlId={"furnished"} options={["Yes", "No"]} def={roomDetails && roomDetails.furnished? "Yes": "No"} optionLabel={"Option"}/>
+                <SingleSelect label="Is the room Furnished?" name="furnished" controlId={"furnished"} options={["Yes", "No"]} def={roomDetails && roomDetails.furnished} optionLabel={"Option"}/>
               }
               {
                 optionalMulti.some(item => item.value === options[7].value) &&
-                <SingleSelect label="Parking Space Offered?" name="parking_space" controlId={"parkingSpace"} options={["Yes", "No"]} def={roomDetails && roomDetails.parkingSpace? "Yes": "No"} optionLabel={"Option"}/>
+                <SingleSelect label="Parking Space Offered?" name="parking_space" controlId={"parkingSpace"} options={["Yes", "No"]} def={roomDetails && roomDetails.parkingSpace} optionLabel={"Option"}/>
               }
             </div>
               <div className={styles.inputGroup}>

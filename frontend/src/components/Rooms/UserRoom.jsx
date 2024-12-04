@@ -22,13 +22,13 @@ const UserRoom = ({room, user, images, children}) => {
         <p>{room.location}</p>
         <p>{room.sharing}</p>
         {room.size && <li>Parking Space: {room.size}</li>}
-        {room.parkingSpace && <li>Parking Space: {room.parkingSpace? "Yes": "No"}</li>}
-        {room.pets && <li>Pets: {room.pets? "Yes": "No"}</li>}
-        {room.utilityIncluded && <li>Pets: {room.utilityIncluded? "Yes": "No"}</li>}
-        {room.furnished && <li>Furnished: {room.furnished? "Yes": "No"}</li>}
+        {room.parkingSpace && <li>Parking Space: {room.parkingSpace}</li>}
+        {room.pets && <li>Pets: {room.pets}</li>}
+        {room.furnished && <li>Furnished: {room.furnished}</li>}
         {room.description && <li>Description: {room.description}</li>}
         {room.amenities && <p>Amenities:{room.amenities.map(amenity => <li>{amenity}</li>)}</p>}
         {room.placesNear && <p>Places Near:{room.placesNear.map(place => <li>{place}</li>)}</p>}
+        {room.utilitiesIncluded && <p>Places Near:{room.utilitiesIncluded.map(util => <li>{util}</li>)}</p>}
         {children}
     </div>
   )

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import BrandHeader from '../NavsHeaders/BrandHeader'
 import RoomBasicInfo from './RoomBasicInfo'
 import RoomOptionals from './RoomOptionals'
-import { useCreateUpdateRoomMutation } from '../../features/roomsApiSlice'
+import { useCreateUpdateRoomMutation, useDeleteRoomMutation } from '../../features/roomsApiSlice'
 import { useFetchRoom } from '../../utils/useFetchRooms'
 import { useSelector } from 'react-redux'
 import styles from "./roomedit.module.css"
@@ -13,11 +13,13 @@ import GeneralButton from '../Forms/GeneralButton'
 import { extractObjectArrayVal } from '../../utils/dataCleaning'
 import { showToastError, showToastWarning, showToastSuccess } from '../../utils/helperFunctions'
 import { useNavigate } from 'react-router-dom'
+import ModalConfirm from '../Misc/ModalConfirm'
 
 const RoomEdit = () => {
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);
 
+  const [deleteRoom, {isLoading}] = useDeleteRoomMutation();
   const {roomData, refetch, error} = useFetchRoom({id: user.id});
   const roomDetails = roomData.room;
 
@@ -76,17 +78,25 @@ const RoomEdit = () => {
         formData.append("utilities_included[]", utils[i])
       }
     }
+
   }
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     const formData  = new FormData(e.currentTarget);
+    setWaiting(true);
 
     if (validate()) {
       try {
-        
+        for (let [key, value] of formData.entries()){
+          if (value === "Yes") {
+            formData.set(key, true)
+          } else if(value === "No") {
+            formData.set(key, false)
+          }
+        }
+
         checkLists(formData);
-        setWaiting(true);
 
         const res = await updateRoom(formData).unwrap();
         setWaiting(false);
@@ -102,6 +112,21 @@ const RoomEdit = () => {
     }
 
   }
+
+  const handleDelete = async() => {
+    try {
+      if (isLoading) {
+        setWaiting(true)
+      }
+      navigate("/rooms/1")
+      await deleteRoom().unwrap();
+      !isLoading && setWaiting(false);
+    } catch (err) {
+
+    }
+
+  }
+
 
 
   return (
@@ -119,9 +144,12 @@ const RoomEdit = () => {
 
             <RoomBasicInfo roomDetails={roomDetails}/>
             <RoomOptionals optionalMulti={optionalMulti} setOptionalMulti={setOptionalMulti} amenities={amenities} setAmenities={setAmenities} placesNear={placesNear} setPlacesNear={setPlacesNear} utilities={utilities} setUtilities={setUtilities} roomDetails={roomDetails}/>
-            <div style={{marginTop:"2rem",display:"flex"}}>
-            <GeneralButton name={"Cancel"} type={'button'} onClick={() => navigate(-1)}/>
-            <GeneralButton2 type={"submit"} name="Update"/>
+             <div style={{marginTop:"2rem",display:"flex"}}>
+              <GeneralButton name={"Cancel"} type={'button'} onClick={() => navigate(-1)}/>
+                {roomDetails &&
+                  <ModalConfirm name={"Delete"} handleConfirm={handleDelete} title={"Delete Room"}/>
+                }
+              <GeneralButton2 type={"submit"} name="Update"/>
             </div>
           </Form> : <Loader/>
          }

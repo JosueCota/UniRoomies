@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from "./pictureselect.module.css"
 import Select from 'react-select'
 import Form from 'react-bootstrap/Form';
 
