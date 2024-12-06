@@ -10,6 +10,7 @@ import Loader from '../Misc/Loader';
 import ResendEmailModal from './ResendEmailModal';
 import { showToastError, showToastSuccess, showToastWarning } from '../../utils/helperFunctions';
 import PictureSelect from '../Forms/PictureSelect';
+import PasswordInput from '../Forms/PasswordInput';
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -84,8 +85,10 @@ const RegisterForm = () => {
         </div>
 
         <TextInput placeholder={"Email"} label={"Email*"} state={email} onChange={setEmail} name={"email"} required={true} maxChar={50} tip="Must be in the format: example@school.edu"/>
-        <TextInput placeholder={"Password"} label={"Password*"} state={password} onChange={setPassword} name={"password"} required={true} type={"password"} maxChar={50} tip={"Must be Eight Characters Or Longer"} minLength={8}/>
-        <TextInput placeholder={"Re-Type Password"} label={"Confirm Password*"} state={confirmPassword} onChange={setConfirmPassword} name={"r-password"} required={true} type={"password"} maxChar={50} tip={"Must Match Password"}/>
+       
+        <PasswordInput placeholder={"Password"} label={"Password"} state={password} onChange={setPassword} name={"password"}  tip={"Must be Eight Characters Or Longer"} />
+        <PasswordInput placeholder={"Re-Type Password"} label={"Confirm Password*"} state={confirmPassword} onChange={setConfirmPassword} name={"r-password"} tip={"Must Match Password"}/>
+        
         <div className={styles.regLinks}>
           <ResendEmailModal/>
           <Link className={styles.link} to={"/login"}>Already Have An Account?</Link>

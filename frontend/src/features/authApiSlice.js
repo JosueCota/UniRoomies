@@ -37,7 +37,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: "POST", 
             })
         }),
+        checkAuth: builder.query({
+            query: () => ({
+                url: `${AUTH_URL}/checkAuth`,
+                method: "GET"
+            })
+        })
     })
 })
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useResendLinkMutation, useVerifyEmailMutation } = authApiSlice;
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useResendLinkMutation, useVerifyEmailMutation, useCheckAuthQuery } = authApiSlice;

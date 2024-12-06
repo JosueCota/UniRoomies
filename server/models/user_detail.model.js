@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
         'User_Detail', 
         {
             id : {
-                type: DataTypes.INTEGER(),
+                type: DataTypes.BIGINT(),
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true
@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             },
             cities: {
                 //Interested in what cities, array, kept in space seperated string
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 allowNull: false,
                 get() {
                     return this.getDataValue("cities").split("|")
@@ -40,11 +40,11 @@ module.exports = (sequelize) => {
                 allowNull: false
             },
             age: {
-                type: DataTypes.INTEGER(),
+                type: DataTypes.SMALLINT().UNSIGNED,
                 allowNull: false
             },
             gender: {
-                type: DataTypes.STRING(10),
+                type: DataTypes.STRING(20),
                 allowNull: false
             },
             is_smoker: {
@@ -53,7 +53,7 @@ module.exports = (sequelize) => {
             },
             accomodations: {
                 //Accomodations for people who need them
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("accomodations")){
                         return this.getDataValue("accomodations").split("|")
@@ -81,7 +81,7 @@ module.exports = (sequelize) => {
             },
             hobbies: {
                 //What hobbies they have
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("hobbies")){
                         return this.getDataValue("hobbies").split("|")
@@ -93,7 +93,7 @@ module.exports = (sequelize) => {
             },
             living_preferences: {
                 //What preferences do they have?
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("living_preferences")){
                         return this.getDataValue("living_preferences").split("|")
@@ -109,11 +109,11 @@ module.exports = (sequelize) => {
             },
             university: {
                 //What school they are from
-                type: DataTypes.TEXT("tiny")
+                type: DataTypes.TEXT(100)
             },
             contacts: {
                 //Contacts
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("contacts")){
                         return this.getDataValue("contacts").split("|")

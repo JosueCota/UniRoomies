@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     'User',
       {
         id: {
-          type: DataTypes.INTEGER(),
+          type: DataTypes.BIGINT(),
           allowNull: false,
           autoIncrement: true,
           primaryKey: true
@@ -19,12 +19,12 @@ module.exports = (sequelize) => {
           allowNull: false
         },
         email: {
-          type: DataTypes.STRING(50),
+          type: DataTypes.STRING(100),
           allowNull: false,
           unique: true
         },
         password: {
-          type: DataTypes.STRING(250),
+          type: DataTypes.STRING(100),
           allowNull: false
         },
         isActive: {
@@ -36,8 +36,11 @@ module.exports = (sequelize) => {
           default: false,
         },
         pfp: {
-          type: DataTypes.INTEGER().UNSIGNED,
+          type: DataTypes.SMALLINT().UNSIGNED,
           allowNull: false
+        },
+        socket_id: {
+          type: DataTypes.TEXT()
         }
       },
   );

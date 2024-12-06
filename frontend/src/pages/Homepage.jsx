@@ -9,9 +9,9 @@ const Homepage = () => {
       <BrandHeader/>
       <div className={styles.container}>
         <div className={styles.box}>
-            <h2>Welcome!</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis eligendi, harum quisquam minima optio delectus maiores repellendus nostrum ex eaque iste, debitis possimus quod quam dolorem reiciendis. Explicabo enim alias quidem commodi esse possimus ullam non eum vitae culpa quasi, rerum eaque? Autem, odio sunt vero doloribus officiis aut expedita dolor quis, perspiciatis atque dignissimos quo. Minus at inventore eius architecto? Ad qui autem adipisci?</p>
-            <img src='groupofpeople.jpg' width={500}/>
+            <h2 style={styles.title}>Welcome to UniRoomies!</h2>
+            <p style={styles.inform}>Here at UniRoomies, we aim to provide users with a pleasant roommate finding experience. Tailored exclusively for university students to help find their perfect roommate. We offer multiple features along with roommate finding to help ease your decision making including room finding, searching by location or budget, chatting, and much more! All you'll need is a student account with an email that has a <strong>".edu" domain</strong> and you can sign up as easy as that!</p>
+            <img className={styles.img} src='groupofpeople.jpg'/>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useGetRoomsQuery, useGetRoomQuery } from "../features/roomsApiSlice";
 import { useState, useEffect } from "react";
+
 //Return User Details from Get
 export const useFetchRooms = ({page, location, price}) => {
        

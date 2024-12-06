@@ -20,9 +20,9 @@
     display: flex;
     justify-content: space-between;
     height: 200px;
-    background-color: var(--box-secondary);
+    background-color: var(--box-primary);
     border-radius: .375rem;
-    color: var(--dark-font);
+    color: var(--light-font);
     padding: 1rem;
     overflow: hidden;
 }
@@ -30,4 +30,60 @@
 .name {
     font-size: 2rem;
     font-weight: 600;
+}
+
+.cardInfo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-flow: column wrap;
+}
+
+.cardInfoPar {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2rem;
+}
+
+
+@media screen and (max-width: 1500px) {
+    .dissappearing {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .name {
+        font-size: 1.5rem;
+    }
+    /* .roommateCardContainer img {
+        display: none;
+    } */
+    .roommateCardContainer{
+
+        border-radius: 0px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .cardInfoPar:nth-child(2) {
+        display: none;
+    }
+    .cardInfoPar:nth-child(1) {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .roommateCardContainer {
+        flex-direction: column;
+        height: auto;
+    }
+    .cardInfoPar:nth-child(1){
+        margin-top: .5rem;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
 }

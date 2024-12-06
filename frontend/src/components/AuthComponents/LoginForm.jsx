@@ -8,6 +8,7 @@ import { useLoginMutation } from '../../features/authApiSlice';
 import { setCredentials } from "../../features/authSlice";
 import Loader from '../Misc/Loader';
 import { showToastError, showToastWarning } from '../../utils/helperFunctions';
+import PasswordInput from '../Forms/PasswordInput';
 const LoginForm = () => {
 
   const [email, setEmail] = useState('');
@@ -51,7 +52,7 @@ const LoginForm = () => {
       <h2>Login</h2>
       <Form onSubmit={submitHandler} className={styles.formCont} id='loginForm'>
         <TextInput placeholder={"Email"} label={"Email"} state={email} onChange={setEmail} name={"email"} required={true} type={"text"}/>
-        <TextInput placeholder={"Password"} label={"Password"} state={password} onChange={setPassword} name={"password"} required={true} type={"password"}/>
+        <PasswordInput placeholder={"Password"} label={"Password"} state={password} onChange={setPassword} name={"password"}/>
         <Link className={styles.link} to={"/register"}>Create an Account</Link>
  
         { isLoading? <Loader/>: 

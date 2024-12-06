@@ -19,9 +19,11 @@ const modelDefs = [
     require('./models/user.model'),
     require('./models/room.model'),
     require('./models/user_detail.model'),
-    require("./models/room_image.model")
+    require("./models/room_image.model") ,
+    require("./models/chat.model"),
+    require("./models/chat_participant.model"),
+    require("./models/message.model") 
 ]
-
 //Sends sequelize object to model function
 for (const modelDef of modelDefs) {
     modelDef(sequelize);
@@ -39,10 +41,14 @@ const dbSetup = async () => {
 
 // Relations between Tables 
 const addAssociations = () => {
-    const {User, User_Detail, Room, Room_Image } = sequelize.models;
+    const {User, User_Detail, Room, Room_Image, Chat, Chat_Participant, Message } = sequelize.models;
     
     User.hasOne(User_Detail, {onDelete: "CASCADE"});
     User.hasOne(Room, {onDelete: "CASCADE", foreignKey: {name:"UserId"}});
+    User.hasMany(Chat_Participant, {onDelete: "CASCADE", foreignKey: {name: "user_id"}})
+    Chat_Participant.hasOne(Chat, {onDelete: "CASCADE", foreignKey:"chat_id"})
+    Message.hasOne(Chat, {onDelete: "CASCADE", foreignKey:"chat_id"})
+    
     Room.hasOne(Room_Image, 
         {
             onDelete:"CASCADE", 
@@ -50,7 +56,10 @@ const addAssociations = () => {
                 name: 'RoomId'}
             }
         );
-        
+
+    Chat.belongsTo(Chat_Participant, {foreignKey: "chat_id"})
+    Chat.belongsTo(Chat, {foreignKey: "chat_id"})
+    Chat_Participant.belongsTo(User, {foreignKey: "user_id"})
     Room.belongsTo(User, {foreignKey: "UserId" });
     User_Detail.belongsTo(User);
     Room_Image.belongsTo(Room, { foreignKey: 'RoomId' });

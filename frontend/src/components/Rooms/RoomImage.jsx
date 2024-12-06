@@ -1,9 +1,7 @@
 import React from 'react'
-import styles from "./roomimage.module.css"
-
 
 function RoomImage({url}) {
-  return (<img src={url} className={styles.image} alt='room-image'/>)
+  return (<img style={{borderRadius: ".375rem"}} src={url} alt='room-image'/>)
 }
 
 export default RoomImage

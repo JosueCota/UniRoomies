@@ -130,7 +130,7 @@ const RoomEdit = () => {
 
 
   return (
-    <div style={{width:"100%"}}>
+    <div >
         <BrandHeader/>
         <div className={styles.page}>
       <div className={styles.container}>
@@ -140,11 +140,11 @@ const RoomEdit = () => {
 
         <p><strong>Warning:</strong> Don't include any sensitive information like your personal location or any contact information if you would not like it to be public!</p>
         { !waiting?
-          <Form onSubmit={handleSubmit} style={{width:"90%", margin:"0 auto"}} encType="multipart/form-data">
+          <Form onSubmit={handleSubmit}  encType="multipart/form-data">
 
             <RoomBasicInfo roomDetails={roomDetails}/>
             <RoomOptionals optionalMulti={optionalMulti} setOptionalMulti={setOptionalMulti} amenities={amenities} setAmenities={setAmenities} placesNear={placesNear} setPlacesNear={setPlacesNear} utilities={utilities} setUtilities={setUtilities} roomDetails={roomDetails}/>
-             <div style={{marginTop:"2rem",display:"flex"}}>
+             <div className={styles.buttons} style={{marginTop:"2rem",display:"flex", flexWrap:"wrap"}}>
               <GeneralButton name={"Cancel"} type={'button'} onClick={() => navigate(-1)}/>
                 {roomDetails &&
                   <ModalConfirm name={"Delete"} handleConfirm={handleDelete} title={"Delete Room"}/>

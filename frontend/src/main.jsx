@@ -21,6 +21,7 @@ import AccountTab from "./components/Profile/AccountTab.jsx"
 import RoommatePage from './components/Roommates/RoommatePage.jsx';
 import RoomEdit from './components/Rooms/RoomEdit.jsx';
 import RoomPage from "./components/Rooms/RoomPage.jsx"
+import Chats from './components/Chats/Chats.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,10 +42,13 @@ const router = createBrowserRouter(
         <Route path="/rooms/:page" element={<Rooms/>} />
         <Route path="/rooms/room/:id" element={<RoomPage/>} />
         <Route path="/rooms/edit-room" element={<RoomEdit/>}/>
+        <Route path="/chats" element={<Chats/>}/>
       </Route>
     </Route>
   )
 )
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>

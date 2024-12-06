@@ -28,9 +28,6 @@ const TextInput = ({name, label, placeholder, state, onChange, required, type, m
         }
       </div>
         <Form.Control required={required} type={type} placeholder={placeholder} value={state} onChange={(e) => onChange(e.target.value)} maxLength={maxChar} minLength={minLength} disabled={disabled}/>
-        
-      <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
-      <Form.Control.Feedback type='invalid'>Cannot be Empty!</Form.Control.Feedback>
     </Form.Group>
   )
 }

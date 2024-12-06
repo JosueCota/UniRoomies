@@ -4,16 +4,21 @@ import styles from "./room.module.css"
 
 export default function Roommate({User, roomDetails, roomImage}) {
     
-    console.log(roomDetails)
     return (
     <Link to={`/rooms/room/${User.id}`} className={styles.link}>
         <div className={styles.roommateCardContainer}>
             <RoomImage  url={roomImage.image1}/>
-            <p className={styles.name}>{User.firstName} {User.lastName}</p>
-            <p>Price: ${roomDetails.price}</p>
-            <p>Location: {roomDetails.location}</p>
-            <p>{roomDetails.sharing}</p>
-            <p>Date For Move In: {roomDetails.date_available}</p>
+            <div className={styles.cardInfo}>
+                <div className={styles.cardInfoPar}>
+                    <p className={styles.name}>{roomDetails.location}</p>
+                    <p><strong>Monthly Rent: ${roomDetails.price}</strong></p>
+                </div>
+                <div className={styles.cardInfoPar}>
+                    <p>User: {User.firstName} {User.lastName}</p>
+                    <p className={styles.dissappearing}>Offering {roomDetails.sharing}</p>
+                    <p>Available On: {roomDetails.date_available}</p>
+                </div>
+            </div>
         </div>
     </Link>
     );

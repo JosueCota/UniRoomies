@@ -6,20 +6,24 @@
 
   --main-background: #f3eed9;
   
-  --box-primary: #fff6f5;
-  --box-secondary: hsl(359, 30%, 32%);
+  --box-primary: #333;
+  --box-secondary: hsl(0, 41%, 97%);
   
   --form-background: #f5efef;
+  --form-border: #dee2e6;
 
   /* Dark Button For Naviagtion */
   --button-primary: #332315;
   --button-secondary: rgb(255, 255, 255);
+  
   --error: #6d190c;
 
   /* Light Button for Form Actions */
   --button2-secondary: #058ef6;
   --button2-primary: #ffffff;
 
+
+  /* Font Colors */
   --light-font: #fff5ea;
   --dark-font: #3d2221;
 }

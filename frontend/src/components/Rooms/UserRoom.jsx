@@ -1,9 +1,12 @@
 import React from 'react'
 import styles from "./userroom.module.css"
 import Carousel from 'react-bootstrap/Carousel';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const UserRoom = ({room, user, images, children}) => {
-    
+
+    const {user:self} = useSelector((state) => state.auth)
     const carouselImages = images.map(image => (
         <Carousel.Item>
             <img src={image} width={600}/>
@@ -12,15 +15,20 @@ const UserRoom = ({room, user, images, children}) => {
 
   return (
     <div className={styles.container}>
-        <Carousel style={{width: "600px", height:"500px", flexDirection:"column", alignContent:"center"}}>
-        {carouselImages}
-        </Carousel>
-        <p>{user.firstName} {user.lastName}</p>
-        <p>{room.dateAvailable}</p>
-        <p>{room.currentHousehold}</p>
-        <p>{room.price}</p>
-        <p>{room.location}</p>
-        <p>{room.sharing}</p>
+        <div className={styles.headerContainer}>
+
+          <Carousel className={styles.carousel}>
+          {carouselImages}
+          </Carousel>
+          <div className={styles.headerRight}>
+            <Link className={styles.name} to={user.id !== self.id?`/roommates/roommate/${user.id}`: "/user"}><spam>{user.firstName} {user.lastName}</spam></Link>
+            <p>Room Available: {room.dateAvailable}</p>
+            <p>There are {room.currentHousehold} people currently in the house/apartment.</p>
+            <p>Monthly Rent: {room.price}</p>
+            <p>Room is Located in {room.location}</p>
+            <p>Offering a {room.sharing}</p>
+          </div>
+        </div>
         {room.size && <li>Parking Space: {room.size}</li>}
         {room.parkingSpace && <li>Parking Space: {room.parkingSpace}</li>}
         {room.pets && <li>Pets: {room.pets}</li>}
@@ -29,7 +37,10 @@ const UserRoom = ({room, user, images, children}) => {
         {room.amenities && <p>Amenities:{room.amenities.map(amenity => <li>{amenity}</li>)}</p>}
         {room.placesNear && <p>Places Near:{room.placesNear.map(place => <li>{place}</li>)}</p>}
         {room.utilitiesIncluded && <p>Places Near:{room.utilitiesIncluded.map(util => <li>{util}</li>)}</p>}
-        {children}
+        <div style={{display:"flex", alignItems:"center"}}>
+         {children}
+
+        </div>
     </div>
   )
 }

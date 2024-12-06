@@ -17,21 +17,28 @@
     text-align: center;
 }
 
+.buttons {
+    margin-top:2rem;
+    display:flex; 
+    flex-wrap:wrap-reverse;
+}
 
-@media screen and (max-width: 950px) {
+
+@media screen and (max-width: 1150px) {
     .container {
         border: none;
         border-radius: 0px;
         padding: 1rem;
-        width: 80%;
+        width: 100%;
         background: none;
+
     }
 }
 
 
 
-@media screen and (max-width: 500px) {
-    .container{
-        width: 100%;
+@media screen and (max-width: 850px) {
+    .buttons{ 
+        flex-direction: column-reverse;
     }
 }

@@ -6,25 +6,25 @@ module.exports = (sequelize) => {
         'Room_Image', 
         {
             images_id: {
-                type: DataTypes.INTEGER(),
+                type: DataTypes.BIGINT(),
                 autoIncrement: true,
                 primaryKey: true,
                 allowNull: false
             },
             image1: {
-                type: DataTypes.TEXT("medium"),
+                type: DataTypes.TEXT(300),
             },
             image2: {
-                type: DataTypes.TEXT("medium"),
+                type: DataTypes.TEXT(300),
             },
             image3: {
-                type: DataTypes.TEXT("medium"),
+                type: DataTypes.TEXT(300),
             },
             image4: {
-                type: DataTypes.TEXT("medium"),
+                type: DataTypes.TEXT(300),
             },
             image5: {
-                type: DataTypes.TEXT("medium"),
+                type: DataTypes.TEXT(300),
             },
         },
         {

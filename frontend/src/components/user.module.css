@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-flow: column;
-    background-color: var(--box-secondary);
+    background-color: var(--box-primary);
     width: 80%;
     margin: 2rem auto;
     color: var(--light-font);
@@ -52,12 +52,72 @@
     
 }
 
+.cities {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .city {
-    padding: .5rem;
+    font-size: 1rem;
+    /* padding: .5rem; */
+}
+
+.item {
+    font-weight: 600;
+    margin-left: 3rem;
 }
 
 .pfp img {
     width: 100%;
     height: auto;
     border-radius: .5rem;
+}
+
+.tabs {
+    width:100%;
+    height: 75px;
+    display: flex;
+    align-content: end;
+}
+
+@media screen and (max-width: 1450px) {
+    .name {
+        font-size: 2rem;
+    }
+    .sideHeader span, .sideHeader div{
+        font-size: 1rem;
+    }
+
+    .sideHeader {
+        gap: 0px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .headerContainer {
+        flex-direction: column;
+        justify-items: start;
+        align-items: center;
+    }
+    .sideHeader {
+        align-items: start;
+    }
+    .cities {
+        flex-wrap: wrap;
+    }
+    .baseInf {
+        flex-direction: column;
+        justify-content: start;
+    }
+    .pfp {
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+        border-radius: 0px;
+    }
 }

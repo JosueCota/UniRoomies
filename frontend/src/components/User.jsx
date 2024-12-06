@@ -2,6 +2,8 @@ import React from 'react'
 import styles from "./user.module.css"
 import ProfilePic from './ProfilePic'
 import ErrorBox from './Misc/ErrorBox'
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 const User = ({userDetails, user, children}) => {
 
@@ -21,26 +23,35 @@ const User = ({userDetails, user, children}) => {
                 <span>Open to Room Sharing: {userDetails.roomSharing? "Yes": "No"}</span>
                 <span>Move In Date: {userDetails.moveInDate}</span>
               </div>
-                <div>Cities Of Interest: {userDetails.cities && userDetails.cities.map(city => <p className={styles.city}>{city}</p>)}</div>
+                <div className={styles.cities}>Cities Of Interest: {userDetails.cities && userDetails.cities.map(city => <p className={styles.city}>{city}</p>)}</div>
               </>
                 : <ErrorBox error={"Please Edit Your Profile"}/>
               }
             </div>
           </header>
         <div className={styles.listContainer}>
-          
-          {userDetails.description && <p style={{whiteSpace:"pre-line"}}>Description: {userDetails.description}</p>}
-          {userDetails.hobbies && <li>Hobbies: {userDetails.hobbies ? userDetails.hobbies.map(hobby => <p>{hobby}</p>): null}</li>}
-          {userDetails.contacts && <li>Contacts: {userDetails.contacts ? userDetails.contacts.map(link => <p>{link}</p>):null}</li>}
-          {userDetails.parkingNeeded!=null && <li>Parking Needed: {userDetails.parkingNeeded? "Yes": "No"}</li>}
-          {userDetails.sleepSchedule && <li>Sleep Schedule: {userDetails.sleepSchedule}</li>}
-          {userDetails.petOwner!=null && <li>Pet Owner: {userDetails.petOwner? "Yes": "No"}</li>}
-          {userDetails.stayLength && <li>Stay Length: {userDetails.stayLength} Months</li>}
-          {userDetails.accomodations && <li>Accomodations: {userDetails.accomodations.map(accomodation=> <p>{accomodation}</p>)}</li>}
-          {userDetails.livingPreferences && <li>Living Preferences: {userDetails.livingPreferences.map(pref=> <p>{pref}</p>)}</li>}
-          {userDetails.isSmoker!=null && <li>Smoker: {userDetails.isSmoker? "Yes": "No"}</li>}
-          {userDetails.university && <li>Attending {userDetails.university}</li>}
-          {userDetails.couplesOk!=null && <li>Okay with Couples: {userDetails.couplesOk? "Yes": "No"}</li>}
+          <Tabs
+          defaultActiveKey="about-me"
+          id="uncontrolled-tab-example"
+          className={`mb-3 ${styles.tabs}`}
+          >
+            <Tab eventKey="about-me" title="About Me">
+              {userDetails.description && <p style={{whiteSpace:"pre-line"}}>Description: {userDetails.description}</p>}
+              {userDetails.hobbies && <li>Hobbies: {userDetails.hobbies ? userDetails.hobbies.map(hobby => <p className={styles.item}>{hobby}</p>): null}</li>}
+              {userDetails.contacts && <li>Contacts: {userDetails.contacts ? userDetails.contacts.map(link => <p className={styles.item}>{link}</p>):null}</li>}
+            </Tab>
+            <Tab eventKey="living-preferences" title="Living Preferences">
+              {userDetails.parkingNeeded!=null && <li>Do I need parking? {userDetails.parkingNeeded? "Yes": "No"}</li>}
+              {userDetails.petOwner!=null && <li>Do I own pets? {userDetails.petOwner? "Yes": "No"}</li>}
+              {userDetails.isSmoker!=null && <li>Do I smoke? {userDetails.isSmoker? "Yes": "No"}</li>}
+              {userDetails.couplesOk!=null && <li>Am I okay living with couples? {userDetails.couplesOk? "Yes": "No"}</li>}
+              {userDetails.sleepSchedule && <li>I usually sleep: {userDetails.sleepSchedule}</li>}
+              {userDetails.stayLength && <li>Looking to stay: {userDetails.stayLength} Months</li>}
+              {userDetails.university && <li>I am attending {userDetails.university}</li>}
+              {userDetails.accomodations && <li>Accomodations: {userDetails.accomodations.map(accomodation=> <p className={styles.item}>{accomodation}</p>)}</li>}
+              {userDetails.livingPreferences && <li>Lifestyle Preferences: {userDetails.livingPreferences.map(pref=> <p className={styles.item}>{pref}</p>)}</li>}
+            </Tab>
+          </Tabs>
         </div>
         </>
           : <p>You Must First Update Info</p>}

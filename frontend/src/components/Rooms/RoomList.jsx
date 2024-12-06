@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Misc/Loader";
 import { motion } from "motion/react"
 import ErrorBox from "../Misc/ErrorBox";
+import styles from "./roomlist.module.css";
 
 const PER_PAGE = 10;
 
@@ -25,15 +26,15 @@ export default function RoomList({data, page}) {
     },[])
 
     return (
-    <div style={{width:"100%", display:"flex", alignContent:"center", flexFlow:"column wrap", marginBottom:"2rem"}}>
+    <div className={styles.container}>
         
         { data.count===0 && <ErrorBox error={"No Rooms Found!"}/>}   
         
         {data? data.rooms && data.rooms.map(child => {
             return ( 
                 <motion.div
-                whileHover={{scale:1.03}}
-                style={{ width:"85%", margin:"auto"}}
+                whileHover={{scale:0.97}}
+                className={styles.roomListContainer}
                 key={child.id + "motion"}
                 >
                 <Room key={"dawldjawkdalk" + child.id} User={child.User} roomDetails={child} roomImage={child["Room_Image"]}/>

@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
         'Room', 
         {
             room_id: {
-                type: DataTypes.INTEGER(),
+                type: DataTypes.BIGINT(),
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
             },
             current_household: {
                 //How many people are in current house
-                type: DataTypes.TEXT(),
+                type: DataTypes.SMALLINT(),
                 allowNull: false
             },
             date_available: {
@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
             },
             amenities: {
                 //What amenities does the property offer
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("amenities")){
                         return this.getDataValue("amenities").split("|")
@@ -52,7 +52,7 @@ module.exports = (sequelize) => {
             },
             places_near: {
                 //What places are nearby
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("places_near")){
                         return this.getDataValue("places_near").split("|")
@@ -63,7 +63,7 @@ module.exports = (sequelize) => {
                 }
             },
             description: {
-                type: DataTypes.TEXT()
+                type: DataTypes.TEXT(500)
             },
             size: {
                 //Size of room
@@ -71,7 +71,7 @@ module.exports = (sequelize) => {
             },
             utilities_included: {
                 //What utilities are included (internet, electric, gas, water, etc)
-                type: DataTypes.TEXT(),
+                type: DataTypes.TEXT("medium"),
                 get() {
                     if (this.getDataValue("utilities_included")){
                         return this.getDataValue("utilities_included").split("|")
