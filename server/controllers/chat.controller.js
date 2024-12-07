@@ -79,13 +79,20 @@ const getChats = asyncHandler(async (req, res) => {
                 }
             ]
         },
+        {
+            model: Message,
+            limit: 1,
+            attributes: ["message", "createdAt"],
+            order: [["createdAt", "DESC"]]
+
+        }
     ],
     order: [
         ["updatedAt", "DESC"]
     ]
     })
 
-    res.status(200).json({ message: chats})
+    res.status(200).json(chats)
 });
 
 // Filter messages based on createdAt date (newestLast)
@@ -103,8 +110,18 @@ const getPreviousMessages = asyncHandler(async (req, res) => {
             ["createdAt", "ASC"]
         ]
       });
+    
+    const chat = Chat_Participant.findOne({
+        where: {
+            chat_id: chat_id,
+            user_id: req.user.id
+        }
+    })
 
-      res.status(200).json({ messages })
+    chat.seen = true;
+    await chat.save();
+
+    res.status(200).json({ messages })
 });
 
 // Changes chat to hidden
