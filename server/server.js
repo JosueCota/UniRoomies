@@ -7,10 +7,9 @@ const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/authRouter");
 const roommateRouter = require("./routes/roommateRouter");
 const roomRouter = require("./routes/roomRouter");
+const chatRouter = require("./routes/chatRouter");
 const { errorHandler, notFound } = require("./middleware/error.middleware");
-const { Server } = require("socket.io");
 const port = process.env.PORT || "8081";
-const http = require("http");
 const app = express();
  
 //Middleware
@@ -29,6 +28,7 @@ const startApp = async () => {
         app.use('/api/auth', authRouter);
         app.use('/api/roommates', roommateRouter);
         app.use('/api/rooms', roomRouter);
+        app.use('/api/chats', chatRouter);
         
         app.use(errorHandler);                                  //Error handling for custom errors
         app.use(notFound);                                      //Error handling for incorrect api route

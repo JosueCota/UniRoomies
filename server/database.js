@@ -42,12 +42,14 @@ const dbSetup = async () => {
 // Relations between Tables 
 const addAssociations = () => {
     const {User, User_Detail, Room, Room_Image, Chat, Chat_Participant, Message } = sequelize.models;
+
+    // Message.sync({force:true})
     
     User.hasOne(User_Detail, {onDelete: "CASCADE"});
     User.hasOne(Room, {onDelete: "CASCADE", foreignKey: {name:"UserId"}});
     User.hasMany(Chat_Participant, {onDelete: "CASCADE", foreignKey: {name: "user_id"}})
-    Chat_Participant.hasOne(Chat, {onDelete: "CASCADE", foreignKey:"chat_id"})
-    Message.hasOne(Chat, {onDelete: "CASCADE", foreignKey:"chat_id"})
+    Chat.hasMany(Chat_Participant, {onDelete: "CASCADE", foreignKey:"chat_id"})
+    Chat.hasMany(Message, {onDelete: "CASCADE", foreignKey:"chat_id"})
     
     Room.hasOne(Room_Image, 
         {
@@ -57,8 +59,9 @@ const addAssociations = () => {
             }
         );
 
-    Chat.belongsTo(Chat_Participant, {foreignKey: "chat_id"})
-    Chat.belongsTo(Chat, {foreignKey: "chat_id"})
+    Chat_Participant.belongsTo(User, {foreignKey: "user_id"})
+    Chat_Participant.belongsTo(Chat, {foreignKey: "chat_id"})
+    Message.belongsTo(Chat, {foreignKey: "chat_id"})
     Chat_Participant.belongsTo(User, {foreignKey: "user_id"})
     Room.belongsTo(User, {foreignKey: "UserId" });
     User_Detail.belongsTo(User);

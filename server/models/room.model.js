@@ -63,7 +63,7 @@ module.exports = (sequelize) => {
                 }
             },
             description: {
-                type: DataTypes.TEXT(500)
+                type: DataTypes.STRING(500)
             },
             size: {
                 //Size of room

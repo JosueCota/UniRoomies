@@ -1,4 +1,6 @@
 const { DataTypes } = require('sequelize');
+const { encrypt, decryption } = require('../helpers/encryption');
+const { decrypt } = require('dotenv');
 
 //Part of Room Model
 module.exports = (sequelize) => {  
@@ -8,7 +10,8 @@ module.exports = (sequelize) => {
             message_id: {
                 type: DataTypes.BIGINT(),
                 primaryKey: true,
-                allowNull: false
+                allowNull: false,
+                autoIncrement: true,
             },
             sender_id: {
                 type: DataTypes.BIGINT(),
@@ -16,7 +19,15 @@ module.exports = (sequelize) => {
             },
             message: {
                 type: DataTypes.TEXT("medium"),
-                allowNull: false
+                allowNull: false,
+                get() {
+                    const decrypted = decryption(this.getDataValue("message"));
+                    return decrypted
+                },
+                set(val) {
+                    const enc = encrypt(val);
+                    this.setDataValue("message", enc);
+                }
             },
             chat_id: {
                 type: DataTypes.BIGINT(),

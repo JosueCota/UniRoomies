@@ -22,6 +22,7 @@ import RoommatePage from './components/Roommates/RoommatePage.jsx';
 import RoomEdit from './components/Rooms/RoomEdit.jsx';
 import RoomPage from "./components/Rooms/RoomPage.jsx"
 import Chats from './components/Chats/Chats.jsx';
+import Chat from './components/Chats/Chat.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

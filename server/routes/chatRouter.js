@@ -1,13 +1,20 @@
 const express = require("express")
 const router = express.Router();
 const protect = require("../middleware/auth.middleware");
-const checkActive = require("../middleware/checkActive.middleware")
+const { makeChat, getChats, getPreviousMessages, changeChatHidden } = require("../controllers/chat.controller")
+
 // @ROUTE api/chats/
 
-//
-router.get("", protect );
+//Makes Chat if not made | If already made and hidden, unhides it
+router.post("/", protect, makeChat);
 
-//Account for inclusion/exclusion 
-router.get("/:offset/:location?/:budget?",protect, checkActive);
+//Gets all non-hidden chats  
+router.get("/",protect, getChats);
+
+//Grabs messages between users (returns message/user_id)
+router.get("/messages",protect, getPreviousMessages);
+
+//Expects chad_id to hide certain chats
+router.post("/hideChat", protect, changeChatHidden);
 
 module.exports = router;

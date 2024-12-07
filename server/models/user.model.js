@@ -29,11 +29,11 @@ module.exports = (sequelize) => {
         },
         isActive: {
           type: DataTypes.BOOLEAN(),
-          default: false
+          defaultValue: false
         },
         isRegistered: {
           type: DataTypes.BOOLEAN(),
-          default: false,
+          defaultValue: false,
         },
         pfp: {
           type: DataTypes.SMALLINT().UNSIGNED,

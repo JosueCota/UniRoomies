@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
             chat_id: {
                 type: DataTypes.BIGINT(),
                 primaryKey: true,
+                autoIncrement: true,
                 allowNull: false
             },
         },

@@ -109,7 +109,7 @@ module.exports = (sequelize) => {
             },
             university: {
                 //What school they are from
-                type: DataTypes.TEXT(100)
+                type: DataTypes.STRING(100)
             },
             contacts: {
                 //Contacts

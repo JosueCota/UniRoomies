@@ -12,19 +12,19 @@ module.exports = (sequelize) => {
                 allowNull: false
             },
             image1: {
-                type: DataTypes.TEXT(300),
+                type: DataTypes.STRING(300),
             },
             image2: {
-                type: DataTypes.TEXT(300),
+                type: DataTypes.STRING(300),
             },
             image3: {
-                type: DataTypes.TEXT(300),
+                type: DataTypes.STRING(300),
             },
             image4: {
-                type: DataTypes.TEXT(300),
+                type: DataTypes.STRING(300),
             },
             image5: {
-                type: DataTypes.TEXT(300),
+                type: DataTypes.STRING(300),
             },
         },
         {

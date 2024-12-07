@@ -8,8 +8,7 @@ const { Op } = require("sequelize");
 const getRoommates = asyncHandler(async (req, res) => {
     
     // if req.body.budget or req.body.location do query based on that
-    // for pagination, also expects a offsetNum (page number) (offset-1)*10
-    // for pagination, need count
+    // for pagination, need offset
 
     if (!req.params.offset) {
         res.status(404);
@@ -42,9 +41,6 @@ const getRoommates = asyncHandler(async (req, res) => {
     }
 
     const offset = (req.params.offset-1)* 10;
-
-
-    // TODO: FIX ORDERING WHEN I RESET DB TO MATCH NEW MODEL
 
     const {count, rows:users} = await User.findAndCountAll({
         attributes: ["id", "firstName", "lastName", "pfp"],
