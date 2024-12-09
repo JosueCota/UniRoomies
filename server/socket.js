@@ -29,7 +29,6 @@ module.exports = function (server) {
         
         user.socket_id = socket_id;
         await user.save()
-        console.log(connected);
         //Messages are encrypted through model set and get methods
         socket.on("message", async (data) => {
           const to =  await User.findByPk(to_id);
@@ -37,9 +36,7 @@ module.exports = function (server) {
           if (to) {
             await createMessage(user_id, to_id, data)
             
-            console.log(connected) 
             const con = connected.some(u => {
-              console.log(u.user_id === to_id && u.to_id ===  user_id)
               return u.user_id === to_id && u.to_id ===  user_id
             })
 
@@ -47,7 +44,6 @@ module.exports = function (server) {
             //Check if User is connected to our chat
             if (to.socket_id && con){    
                 io.to(to.socket_id).emit("message", data);
-                console.log("Hello I am really not gettin gthis AWLDKJALWKDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")    
               } else {
               await changeSeenMessage(user_id, to_id)
             }
@@ -60,7 +56,6 @@ module.exports = function (server) {
           connected = connected.filter(u =>{
             return u.user_id !== user_id
           })
-          console.log(connected)
           await user.save();
 
         })

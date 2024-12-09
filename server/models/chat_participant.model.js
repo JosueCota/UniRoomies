@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-//Part of Room Model
+//Part of Chat Model and User Model
 module.exports = (sequelize) => {  
     sequelize.define(
         'Chat_Participant', 

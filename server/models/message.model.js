@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { encrypt, decryption } = require('../helpers/encryption');
-const { decrypt } = require('dotenv');
 
-//Part of Room Model
+//Part of Chat Model
 module.exports = (sequelize) => {  
     sequelize.define(
         'Message', 

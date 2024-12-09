@@ -42,6 +42,7 @@ const Chat = () => {
         }
     }, [chat_id, to_id]);
 
+    //Socket listener
     useEffect(() => {
         if (socket===null) return
         socket.on("message", (data) => {

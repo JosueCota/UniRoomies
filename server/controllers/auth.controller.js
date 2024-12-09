@@ -13,7 +13,7 @@ const createUser = asyncHandler(async (req, res) => {
     
     //Check email is in correct format, will also be handled in frontend
     //Want to make sure people can't send requests to backend with fake or non school emails
-    if (email) {
+    if (email && process.env.NODE_ENV !== "dev") {
  
     }
 
