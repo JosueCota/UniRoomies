@@ -42,8 +42,6 @@ const dbSetup = async () => {
 // Relations between Tables 
 const addAssociations = () => {
     const {User, User_Detail, Room, Room_Image, Chat, Chat_Participant, Message } = sequelize.models;
-
-    // Message.sync({force:true})
     
     User.hasOne(User_Detail, {onDelete: "CASCADE"});
     User.hasOne(Room, {onDelete: "CASCADE", foreignKey: {name:"UserId"}});

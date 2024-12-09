@@ -43,7 +43,9 @@ const router = createBrowserRouter(
         <Route path="/rooms/:page" element={<Rooms/>} />
         <Route path="/rooms/room/:id" element={<RoomPage/>} />
         <Route path="/rooms/edit-room" element={<RoomEdit/>}/>
-        <Route path="/chats" element={<Chats/>}/>
+        <Route path="/chats" element={<Chats/>}>
+          <Route path='/chats/chat/:chat_id/:to_id' element={<Chat/>} />
+        </Route>
       </Route>
     </Route>
   )

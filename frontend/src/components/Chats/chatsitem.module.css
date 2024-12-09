@@ -1,0 +1,16 @@
+.chats {
+    display: flex;
+    height: 150px;
+    padding: .5rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    color: var(--light-font);
+    border: 1px solid var(--form-border);
+    margin-bottom: 1rem;
+}
+
+.chatsActive {
+    background-color: var(--box-secondary);
+    color: var(--dark-font);
+    border-color: var(--box-secondary);
+}

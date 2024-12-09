@@ -1,34 +1,46 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetChatsQuery } from '../../features/chatApiSlice'
 import Loader from "../Misc/Loader"
-import ProfilePic from "../ProfilePic"
+import ChatsItem from './ChatsItem'
+import { Outlet } from 'react-router-dom'
+import styles from "./chats.module.css"
+import ChatTemp from './ChatTemp'
+import { apiSlice } from '../../features/apiSlice'
+import { useDispatch } from 'react-redux'
 
 const Chats = () => {
-
   const { data, isFetching } = useGetChatsQuery()
+  const dispatch = useDispatch();
 
   //uses chat_id
   const [selectedChat, setSelectedChat] = useState(null);
-
-  console.log(selectedChat)
+  
+  useEffect(() => {
+    dispatch(apiSlice.util.invalidateTags(["Messages"]))  
+  }, [selectedChat])
 
   return (
-    <div>
-        <ul>
-          {data && !isFetching? 
-            data.map(chat => {
-              const user = chat.Chat_Participants[0].User
-              return (
-              <div onClick={() => setSelectedChat(chat.chat_id)}>
-                <ProfilePic num={user.pfp}/>
-                <p>{user.firstName} {user.lastName}</p>
-                <p>{chat.Messages[0] && chat.Messages[0].message}</p>
-
-              </div>
-              )})
+    <div className={styles.container}>
+        <div className={styles.chatsContainer}>
+          {data && !isFetching?
+            data.chats.map((chat, ind) => {
+              const user = data.recipients[ind].User
+              return <ChatsItem user={user} message={chat.Messages[0]? chat.Messages[0].message: "No Messages..."} setSelectedChat={setSelectedChat} selectedChat={selectedChat} chatId={chat.chat_id}/>
+              })
             : <Loader/>
           }
-        </ul>
+          {
+            data && data.chats.length === 0 && 
+            <p className={styles.warning}><p><strong>Notice</strong></p>Go to a users profile and send a message for this to fill up with chats! <p><strong>Note:</strong> Some chats may be hidden if you clicked on the top left X. They are recoverable by finding the user and sending a message again, all messages will be restored as well!</p></p>
+          }
+        </div>
+        <div className={styles.chatContainer}>
+          {
+            selectedChat? 
+            <Outlet context={{setSelectedChat}} /> :
+            <ChatTemp/>
+          }
+        </div>
     </div>
   )
 }

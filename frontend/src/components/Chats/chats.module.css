@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+
+}
+
+.chatContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.chatsContainer{
+    overflow-y: scroll;
+    min-height: 100vh;
+    width: 700px;
+    padding: 10px;
+    background-color: var(--box-primary);
+}
+
+.warning {
+    /* background-color: var(--box-secondary); */
+    color: wheat;
+    padding: 1rem;
+    border: 1px solid var(--form-border);
+    border-radius: 1rem;
+}

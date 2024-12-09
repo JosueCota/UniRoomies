@@ -31,7 +31,7 @@ const baseQuery = axiosBaseQuery({
 
 export const apiSlice = createApi({
     baseQuery,
-    tagTypes: ["User", "User_Detail", "Room"],
+    tagTypes: ["User", "User_Detail", "Room", "Messages", "Chats"],
     endpoints(build) {
         return {
           query: build.query({ query: () => ({ url: '/query', method: 'get' }) }),

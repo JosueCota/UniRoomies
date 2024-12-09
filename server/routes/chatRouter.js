@@ -10,11 +10,11 @@ router.post("/", protect, makeChat);
 
 //Gets all non-hidden chats  
 router.get("/",protect, getChats);
-
+ 
 //Grabs messages between users (returns message/user_id)
-router.get("/messages",protect, getPreviousMessages);
+router.get("/messages/:chatId", protect, getPreviousMessages);
 
 //Expects chad_id to hide certain chats
-router.post("/hideChat", protect, changeChatHidden);
+router.post("/hideChat/:chatId", protect, changeChatHidden);
 
 module.exports = router;

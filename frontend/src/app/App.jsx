@@ -12,8 +12,7 @@ function App() {
 
   try {
     if (user) {
-      const { auth } = useCheckAuthQuery()
-      console.log(auth)
+      useCheckAuthQuery()
     }
   } catch(err) {
     showToastError(err, "authError")

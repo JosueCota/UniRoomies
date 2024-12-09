@@ -3,34 +3,36 @@ import { CHATS_URL } from "../utils/constants";
 
 export const chatApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        createChat: builder.query({
+        createChat: builder.mutation({
             query: (data) => ({
                 url: `${CHATS_URL}`,
                 method: "POST",
                 data
             }),
+            invalidatesTags: ["Chats", "Messages"]
         }),
         getChats: builder.query({
             query: () => ({
                 url: `${CHATS_URL}`,
                 method: "GET",
-            })
+            }),
+            providesTags: ["Chats"]
         }),
         getMessages: builder.query({
-            query: ({chat_id}) => ({
-                url: `${CHATS_URL}/messages`,
+            query: ({chatId}) => ({
+                url: `${CHATS_URL}/messages/${chatId}`,
                 method: "GET",
-                data: chat_id
-            })
+            }),
+            providesTags: ["Messages"]
         }),
-        changeHideChat: builder.query({
-            query: ({chat_id}) => ({
-                url: `${CHATS_URL}/hideChat`,
+        changeHideChat: builder.mutation({
+            query: ({chatId}) => ({
+                url: `${CHATS_URL}/hideChat/${chatId}`,
                 method: "POST",
-                data: chat_id
-            })
+            }),
+            invalidatesTags: ["Chats", "Messages"]
         }),
     })
 })
 
-export const { useChangeHideChatQuery, useCreateChatQuery, useGetChatsQuery, useGetMessagesQuery } = chatApiSlice
+export const { useChangeHideChatMutation, useCreateChatMutation, useGetChatsQuery, useGetMessagesQuery } = chatApiSlice
