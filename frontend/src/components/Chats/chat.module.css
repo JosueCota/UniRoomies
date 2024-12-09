@@ -2,7 +2,7 @@
 .chatContainer{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
 
 }
 
@@ -47,13 +47,19 @@
     display: flex;
     min-width: 200px;
     padding: .5rem;
+    width: 200px;
+
     border-radius: 5rem;
     padding: 20px;
     max-width: 70%;
+    flex-wrap: wrap;
 }
 
 .messageContent{
     margin: 0px;
+    width: 100%;
+    word-wrap: break-word;
+
 }
 
 .bottom {
@@ -64,7 +70,7 @@
     align-items: baseline;
 }
 .bottom input {
-    height: 51px;
+    height: 2.5rem;
     width: 70%;
     border: 1px solid;
     padding: .5rem;
@@ -74,3 +80,16 @@
 .bottom button {
     width: 30%;
 }
+
+@media screen and (max-width:1150px) {
+    .chatbox {
+        height: 60vh;
+    }
+    .chatContainer{
+        width: 100%;
+    }
+    .name {
+        text-align: center;
+    }
+}
+

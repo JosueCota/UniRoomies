@@ -1,3 +1,8 @@
+.superContainer {
+    width:85%;
+    margin:auto;
+}
+
 .link {
     margin: 1rem auto;
     padding: 0px;
@@ -5,10 +10,8 @@
     color: black;
     display: flex;
     width: 100%;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+    align-items: start;
+    /* flex-wrap: wrap; */
 }
 
 .link:hover {
@@ -18,16 +21,120 @@
 .roommateCardContainer {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     height: 200px;
-    background-color: var(--box-secondary);
+    background-color: var(--box-primary);
     border-radius: .375rem;
-    color: var(--dark-font);
+    color: var(--light-font);
     padding: 1rem;
     overflow: hidden;
+    align-items: center;
+}
+
+.headerContainer {
+    display: flex;
+    height: 100%;
+    padding-right: 10px;
+    border-right: 1px solid var(--light-font);
+}
+
+.headerContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    width: 100%;
+    margin: 0px;
+    width: max-content;
 }
 
 .name {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.price {
+    font-size: 1.0rem;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.details{
+    display: flex;
+    justify-content: space-around;
+    gap: .5rem;
+}
+
+.cities{
+    display: flex;
+    justify-content: space-around;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1250px){
+    .name {
+        font-size: 1.6rem;
+    }
+    .superContainer {
+        width: 100%;
+    }
+    .roommateCardContainer {
+        border-radius: 0px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .pfp {
+        display: flex;
+        justify-content: center;
+        width: 30%;
+    }
+    .headerContent {
+        padding-left: 2rem;
+        justify-content: center;
+        align-content: center;
+        border: none;
+        width: fit-content;
+        padding: 0px;
+    }
+    .name {
+        font-size: 2rem;
+    }
+    .price {
+        font-size: 1.2rem;
+    }
+    .cities {
+        display: flex;
+    }
+    .headerContainer {
+        border: none;
+        margin-bottom: .5rem;
+        padding: 0px;
+    }
+    .roommateCardContainer {
+        flex-direction: column;
+        height: auto;
+        flex-wrap: wrap;
+        align-items: start;
+    }
+    
+    .cities, .details {
+        font-size: 1.1rem;
+        flex-wrap: wrap;
+        justify-content: start;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .pfp {
+        align-self: center;
+    }
+    .pfp img {
+        width: 100%;
+    }
 }

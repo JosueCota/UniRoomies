@@ -14,3 +14,70 @@
     color: var(--dark-font);
     border-color: var(--box-secondary);
 }
+
+.closeBtn{
+    position:"absolute"; 
+    z-Index:200; 
+    border: "1px solid"; 
+    border-radius:"1rem"; 
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.lastMessage{
+    font-style: italic;
+    padding-left: 1rem;
+}
+
+@media screen and (max-width: 1350px) {
+    .lastMessage {
+        padding-left: 0px;        
+        overflow: hidden;
+    }
+    .hide {
+        display: none;
+    }
+
+    .chats{
+        height: 150px;
+        overflow: hidden;
+    }
+    .pfp {
+        align-content: center;
+    }
+    
+    .pfp img {
+        height: 80%;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .chats {
+        width: 500px !important;
+        height: 125px;
+        margin-bottom: 0px;
+        max-width: 500px;
+        min-width: 500px;
+        margin-left: 10px;
+    }
+    .hide {
+        display:inline;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .chats {
+        margin-left: 50px;
+    }
+
+}
+
+@media screen {
+    .pfp img {
+        height: 100%;
+    }
+}

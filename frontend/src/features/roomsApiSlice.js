@@ -15,6 +15,7 @@ export const roomsApiSlice = apiSlice.injectEndpoints({
                     method: "GET",
                 })
             },
+            providesTags: ["Room"]
         }),
         getRoom: builder.query({
             query: ({id}) => ({

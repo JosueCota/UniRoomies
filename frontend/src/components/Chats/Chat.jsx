@@ -7,7 +7,6 @@ import styles from "./chat.module.css"
 import Loader from '../Misc/Loader'
 import { IoMdClose } from "react-icons/io";
 import { InputGroup } from 'react-bootstrap'
-
 const Chat = () => {
     //Exitting out of chat
     const { setSelectedChat }= useOutletContext();
@@ -26,7 +25,6 @@ const Chat = () => {
     useEffect(()=> {
         if (!data) return
         setMessages(data && data.messages? data.messages.map(message => message): [])
-        console.log(data)
     }, [data]);
 
     //Scrolls down into last message
@@ -47,12 +45,10 @@ const Chat = () => {
     useEffect(() => {
         if (socket===null) return
         socket.on("message", (data) => {
-            console.log(data)
             appendMessage(data, to_id)
         });
 
         socket.on("getOther", (data) => {
-            console.log("got it", data)
             setOther(data);
         })
 
@@ -95,7 +91,6 @@ const Chat = () => {
         }
     };
 
-    console.log(data)
   if (isFetching) {
         return <Loader/>
   }
@@ -111,7 +106,7 @@ const Chat = () => {
                 <p className={styles.messageContent}>{m && m.message}</p></p>))}
         </div>
             <InputGroup className={styles.bottom}>
-                <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Message' onKeyDown={(e) => {e.key==="Enter" && sendMessage}}></input>
+                <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Message' onKeyDown={(e) => e.key === "Enter" && sendMessage(e)}></input>
                 <GeneralButton2 type={"button"} name={"Send"} onClick={sendMessage}/>
             </InputGroup>
     </div>

@@ -30,3 +30,25 @@
 .buttons a {
     margin: 0px .5rem;
 }
+
+@media screen and (max-width:950px ) {
+    .brandCont {
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        height: auto;
+        padding-bottom: .5rem;
+    }
+    .buttons {
+        display: flex;
+        padding: 0px;
+        margin: 0px;
+        flex-wrap: wrap;
+        gap: .5rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .buttons button{ 
+        margin: 0px;
+    }
+}

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Misc/Loader";
 import { motion } from "motion/react"
 import ErrorBox from "../Misc/ErrorBox";
+import styles from "./roommate.module.css"
 
 const PER_PAGE = 10;
 
@@ -32,8 +33,8 @@ export default function RoommateList({data, page}) {
         {data? data.users && data.users.map(child => {
             return ( 
                 <motion.div
-                whileHover={{scale:1.03}}
-                style={{ width:"85%", margin:"auto"}}
+                whileHover={{scale:0.99}}
+                className={styles.superContainer}
                 key={child.id + "motion"}
                 >
                 <Roommate key={"dawldjawkdalk" + child.id} id={child.id} firstName={child.firstName} lastName={child.lastName} userDetails={child.User_Detail} cities={child.User_Detail.cities} pfp={child.pfp}/>
