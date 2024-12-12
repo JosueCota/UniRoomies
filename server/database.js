@@ -1,9 +1,8 @@
 const Sequelize = require("sequelize");
-
-//Create .env file with MySQL db info
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 const dbHost = process.env.DB_HOST || "localhost";
+
 
 const sequelize = new Sequelize(
     dbName, 
@@ -11,7 +10,7 @@ const sequelize = new Sequelize(
     dbPassword, 
     {
         host: dbHost,
-        dialect: "mysql"
+        dialect: "mysql",
     }
 );
 

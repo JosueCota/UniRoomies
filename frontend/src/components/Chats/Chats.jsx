@@ -16,8 +16,9 @@ const Chats = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   
   useEffect(() => {
-    dispatch(apiSlice.util.invalidateTags(["Messages"]))  
+    dispatch(apiSlice.util.invalidateTags(["Messages", "Chats"]))  
   }, [selectedChat])
+
 
   return (
     <div className={styles.container}>
@@ -25,7 +26,7 @@ const Chats = () => {
           {data && !isFetching?
             data.chats.map((chat, ind) => {
               const user = data.recipients[ind].User
-              return <ChatsItem user={user} message={chat.Messages[0]? chat.Messages[0].message: "No Messages..."} setSelectedChat={setSelectedChat} selectedChat={selectedChat} chatId={chat.chat_id}/>
+              return <ChatsItem user={user} message={chat.Messages[0]? chat.Messages[0].message: "No Messages..."} setSelectedChat={setSelectedChat} selectedChat={selectedChat} chatId={chat.chat_id} seen={chat.Chat_Participants[0].seen}/>
               })
             : <Loader/>
           }

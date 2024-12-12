@@ -37,7 +37,7 @@ export default function RoommateList({data, page}) {
                 className={styles.superContainer}
                 key={child.id + "motion"}
                 >
-                <Roommate key={"dawldjawkdalk" + child.id} id={child.id} firstName={child.firstName} lastName={child.lastName} userDetails={child.User_Detail} cities={child.User_Detail.cities} pfp={child.pfp}/>
+                <Roommate key={"dawldjawkdalk" + child.id} id={child.id} firstName={child.firstName} lastName={child.lastName} userDetails={child.User_Detail} cities={child.User_Detail.cities} pfp={child.pfp} updated={child.User_Detail.updatedAt}/>
                 </motion.div>
             )}): <Loader/>}
         <Pagination style={{margin:"auto"}}>{items}</Pagination>

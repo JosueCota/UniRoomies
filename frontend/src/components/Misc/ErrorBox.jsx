@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./errorbox.module.css";
-import { animate, color, motion } from "motion/react";
+import { motion } from "motion/react";
 
 const ErrorBox = ({error}) => {
   return (

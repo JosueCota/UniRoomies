@@ -36,16 +36,21 @@ html {
 
 @media screen and (max-width: 500px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 800px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
+@media screen and (max-width: 1500px) {
+  html {
+    font-size: 18px;
+  }
+}
 
 .location-search-input {
   width: 100%;

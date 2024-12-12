@@ -14,7 +14,10 @@ const createUser = asyncHandler(async (req, res) => {
     //Check email is in correct format, will also be handled in frontend
     //Want to make sure people can't send requests to backend with fake or non school emails
     if (email && process.env.NODE_ENV !== "dev") {
- 
+        const emailPattern= /^[a-zA-Z0-9._-]{3,}@[a-zA-Z.]{2,}?.edu$/;
+        if (!emailPattern.test(email)) {
+            throw new Error("Email Does Not Match .edu Pattern")
+        }
     }
 
     //Check if user with email already exists and is registered, if not registered, allow the user
@@ -61,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     if (user.isRegistered) {
-        res.status(404);
+        res.status(400);
         throw new Error("User already Confirmed")
     }
 

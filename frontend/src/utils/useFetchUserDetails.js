@@ -23,6 +23,7 @@ const processUserDetails = (userDetailsDataObj) => {
         budget: userDetailsDataObj.budget,
         gender: userDetailsDataObj.gender,
         roomSharing: userDetailsDataObj.room_sharing,
+        moveInDate: userDetailsDataObj.move_in_date,
         description: userDetailsDataObj.roommate_desc || null,
         isSmoker: userDetailsDataObj.is_smoker !== null? userDetailsDataObj.is_smoker: null,
         stayLength: userDetailsDataObj.stay_length || null,
@@ -32,7 +33,6 @@ const processUserDetails = (userDetailsDataObj) => {
         sleepSchedule: userDetailsDataObj.sleep_schedule || null,
         petOwner: userDetailsDataObj.pet_owner!== null? userDetailsDataObj.pet_owner: null,
         contacts: userDetailsDataObj.contacts || null,
-        moveInDate: userDetailsDataObj.move_in_date || null,
         couplesOk: userDetailsDataObj.couples_ok !== null? userDetailsDataObj.couples_ok:null,
         university: userDetailsDataObj.university || null,
         livingPreferences: userDetailsDataObj.living_preferences || null

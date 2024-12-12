@@ -6,12 +6,14 @@ import Loader from '../Misc/Loader';
 import BrandHeader from '../NavsHeaders/BrandHeader';
 import GeneralButton from '../Forms/GeneralButton';
 import { useCreateChatMutation } from '../../features/chatApiSlice';
+import { useFetchRoommate } from '../../utils/useFetchRoommates';
+import ErrorBox from '../Misc/ErrorBox';
 
 const RoommatePage = () => {
 
   const navigate = useNavigate();
   const { id } = useParams()
-  const {data, isLoading} = useGetRoommateQuery({id});
+  const {roommate, error} = useFetchRoommate(id);
   const [createChat] = useCreateChatMutation();
   
   const handleClick = async () => {
@@ -25,13 +27,14 @@ const RoommatePage = () => {
       <BrandHeader/>
       <div style={{display:"flex", flexFlow:"column"}}>
         <GeneralButton name={"Go Back"} type={'button'} onClick={() => navigate(-1)}/>
-      {data? data.user && <>
-        <User userDetails={data.user.User_Detail} user={data.user}>
+      {roommate? roommate.user && <>
+        <User userDetails={roommate.details} user={roommate.user}>
           <GeneralButton name="Send Message" type={"button"} onClick={handleClick}/>
         </User>
       </>
         : <Loader/>
       }
+      {error && <ErrorBox error={error}/>}
       </div>
     </div>
   )

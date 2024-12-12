@@ -59,6 +59,7 @@
 
 .city {
     font-size: 1rem;
+    font-weight: 600;
     /* padding: .5rem; */
 }
 
@@ -89,6 +90,7 @@
     }
 
     .sideHeader {
+        justify-content: space-around;
         gap: 0px;
     }
 }

@@ -6,7 +6,6 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 const User = ({userDetails, user, children}) => {
-
   return (
        <div className={styles.container}>
         {user.firstName? <>
