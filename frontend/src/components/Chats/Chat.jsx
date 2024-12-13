@@ -21,8 +21,8 @@ const Chat = () => {
     const [socket, setSocket] = useState(null);
     const [message, setMessage] = useState();
     const [other, setOther] = useState(null);
-
-    //Gets old messages on load
+  
+    //Gets old messages on load 
     useEffect(()=> {
         if (!data) return
         setMessages(data && data.messages? data.messages.map(message => message): [])
@@ -35,7 +35,7 @@ const Chat = () => {
 
     //Connects socket and sets it
     useEffect(()=> {
-        const socket = io.connect("http://localhost:8081", {query: {user_id: self.id, to_id: to_id}})
+        const socket = io.connect(import.meta.env.VITE_BACKEND_URL, {query: {user_id: self.id, to_id: to_id}})
         setSocket(socket);
 
         return () => {
