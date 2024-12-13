@@ -5,6 +5,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import Tooltip from 'react-bootstrap/Tooltip';
 import styles from "./textinput.module.css"
 
+//Specifically for text inputs with tips
 const TextInput = ({name, label, placeholder, state, onChange, required, type, maxChar, tip, minLength, disabled}) => {
   
   const renderTooltip = (props) => (

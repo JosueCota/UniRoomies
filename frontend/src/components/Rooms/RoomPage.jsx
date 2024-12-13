@@ -7,6 +7,8 @@ import { useFetchRoom } from '../../utils/useFetchRooms';
 import UserRoom from './UserRoom';
 import { useSelector } from 'react-redux';
 import ErrorBox from '../Misc/ErrorBox';
+
+//Specific room page logic handler
 const RoomPage = () => {
 
   const {user} = useSelector((state) => state.auth);

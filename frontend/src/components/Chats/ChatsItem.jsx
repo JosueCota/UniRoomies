@@ -6,6 +6,7 @@ import { useChangeHideChatMutation } from '../../features/chatApiSlice'
 import { MdClose } from 'react-icons/md'
 import { FaDotCircle } from "react-icons/fa";
 
+//An Item of the Users Current Open (not hidden) Chats
 const ChatsItem = ({user, message, setSelectedChat, selectedChat, chatId, seen}) => {
 
   const [hideChat] = useChangeHideChatMutation();

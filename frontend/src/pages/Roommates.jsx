@@ -8,6 +8,7 @@ import { useFetchRoommates } from "../utils/useFetchRoommates";
 import useDebounce from "../utils/useDebounce";
 import ErrorBox from "../components/Misc/ErrorBox";
 
+//Handles all the main logic of the roommates page (not roommate)
 export default function Roommates() {
     
     const { roommateSearch } = useSelector((state) => state.search);

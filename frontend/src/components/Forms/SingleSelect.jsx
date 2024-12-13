@@ -1,7 +1,7 @@
 import React from 'react'
 import { FloatingLabel, Form } from 'react-bootstrap'
 
-
+//Single selection from a list of options
 const SingleSelect = ({controlId, label, options, name, def, optionLabel}) => {
   return (
     <FloatingLabel controlId={controlId} label={label} style={{zIndex:"0"}}>

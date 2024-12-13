@@ -5,6 +5,7 @@ import {BiSolidHide, BiHide} from "react-icons/bi"
 import { MdVisibility } from "react-icons/md";
 import styles from "./textinput.module.css"
 
+//For password inputs (show/hide button)
 const PasswordInput = ({tip, name, state, onChange, placeholder, label}) => {
   const [hidden, setHidden] = useState(true); 
   const renderTooltip = (props) => (

@@ -87,7 +87,6 @@
  
     .roommateCardContainer {
         height: auto;
-        min-width: 0;
     }
     
     .cities, .details {
@@ -100,17 +99,28 @@
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
     .roommateCardContainer {
         flex-direction: column;
-        padding: 5px;
     }
 
     .details {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: start;
+        flex-direction: column;
     }
 
+    .pfp {
+        justify-content: center;
+        width: 40%;
+        height: auto;
+        margin: 0px;
+    }
+    .headerContainer {
+        flex-direction: column;
+    }
 
+    .pfp image {
+        width: auto;
+        height: auto;
+        width: 100%;
+    }
 }

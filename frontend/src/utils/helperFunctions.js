@@ -15,8 +15,6 @@ export const logout = async (navigate, dispatch) => {
     navigate("/login");
 }
 
-
-
 //Toast Error Utility Functions
 export const showToastError = (err, id) => {
     toast.error(err?.data?.message || err.error || err, id ? {toastId: id}:null)

@@ -8,6 +8,7 @@ import ChatTemp from './ChatTemp'
 import { apiSlice } from '../../features/apiSlice'
 import { useDispatch } from 'react-redux'
 
+//Grabs all chats from User
 const Chats = () => {
   const { data, isFetching } = useGetChatsQuery()
   const dispatch = useDispatch();

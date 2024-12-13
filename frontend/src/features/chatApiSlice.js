@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { CHATS_URL } from "../utils/constants";
 
+//Responsible for api calls on chat route
 export const chatApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         createChat: builder.mutation({

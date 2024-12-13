@@ -1,5 +1,7 @@
 import React from 'react'
 import { Spinner } from "react-bootstrap"
+
+//Classic loader 
 const Loader = () => {
   return (
     <Spinner

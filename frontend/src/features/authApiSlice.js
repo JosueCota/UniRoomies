@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { AUTH_URL } from "../utils/constants";
 
+//Responsible for auth route calls
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         register: builder.mutation({

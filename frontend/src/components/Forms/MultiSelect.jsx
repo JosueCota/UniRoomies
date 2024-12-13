@@ -1,6 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
 import styles from "./multiselect.module.css"
+
+//Multiple Selectable Items from a predetermined list of options
 const MultiSelect = ({options, state, onChange, name, placeholder, required}) => {
   return (
       <div className={styles.container}>

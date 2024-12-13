@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FloatingLabel, Button, InputGroup, Form} from 'react-bootstrap';
 import styles from "./inputlist.module.css";
 
+//User can input multiple items into an array and remove them as well
 const InputList = ({state, onChange, label, limit}) => {
 
     const [item, setItem] = useState(""); 

@@ -9,6 +9,8 @@ import { setCredentials } from "../../features/authSlice";
 import Loader from '../Misc/Loader';
 import { showToastError, showToastWarning } from '../../utils/helperFunctions';
 import PasswordInput from '../Forms/PasswordInput';
+
+//Login form responsible for logins and setting credential states
 const LoginForm = () => {
 
   const [email, setEmail] = useState('');

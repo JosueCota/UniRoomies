@@ -6,7 +6,8 @@ import styles from "./roombasicinfo.module.css"
 import FloatingInput from '../Forms/FloatingInput'
 import { Form } from 'react-bootstrap'
 
-const RoomBasicInfo = ({roomDetails, setImages}) => {
+//Room form required data
+const RoomBasicInfo = ({roomDetails}) => {
     
   const [city, setCity] = useState(roomDetails? roomDetails.location: null);
   

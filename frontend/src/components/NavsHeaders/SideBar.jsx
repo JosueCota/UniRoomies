@@ -13,6 +13,7 @@ import SideBarButton from './SideBarButton';
 import { BsFillHousesFill } from "react-icons/bs";
 import { useSelector } from 'react-redux';
 
+//Overall nav bar for logged in users
 const Sidebar = () => {
 
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +22,7 @@ const Sidebar = () => {
 
   useLayoutEffect(() => {
     function updateSize() {
-      if (window.innerWidth < 550) {
+      if (window.innerWidth < 750) {
         setMobile(true);
       } else {
         setMobile(false);

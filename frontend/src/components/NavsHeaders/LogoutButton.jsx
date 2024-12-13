@@ -8,6 +8,7 @@ import {CDBSidebarMenuItem} from "cdbreact"
 import { deleteSearch } from '../../features/searchesSlice';
 import { showToastSuccess } from '../../utils/helperFunctions';
 
+//Lougout button logic (clears memory and states)
 const LogoutButton = () => {
 
     const dispatch = useDispatch();

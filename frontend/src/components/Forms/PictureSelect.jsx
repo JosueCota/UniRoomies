@@ -2,6 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import Form from 'react-bootstrap/Form';
 
+//Picture select for profile pictures (could be generalized too if we want to pass the pictures)
 const PictureSelect = ({pfp, setPfp, size}) => {
     
     const pictures = [

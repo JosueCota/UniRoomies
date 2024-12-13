@@ -6,6 +6,7 @@ import { Form, FloatingLabel, InputGroup } from 'react-bootstrap'
 import InputList from '../Forms/InputList'
 import FloatingInput from '../Forms/FloatingInput'
 
+//Room optional form data
 const RoomOptionals = ({optionalMulti, setOptionalMulti, placesNear, setPlacesNear, amenities, setAmenities, utilities, setUtilities, roomDetails}) => {
 
   const options = [

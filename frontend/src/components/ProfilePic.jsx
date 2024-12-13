@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "./profilepic.module.css"
 
+//UI component for displaying pfp
 const ProfilePic = ({num, style}) => {
 
   return (

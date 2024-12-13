@@ -8,6 +8,7 @@ import styles from "./form.module.css"
 import { showToastError, showToastSuccess } from '../../utils/helperFunctions';
 import Loader from '../Misc/Loader';
 
+//Resend email form in case user doesnt receive first activation link
 const ResendEmailModal = () => {
 
     const [resendLink, {isLoading}] = useResendLinkMutation();

@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { ROOMMATES_URL } from "../utils/constants";
 
+//Responsible for roommates api calls on rommmates route
 export const roommatesApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getRoommates: builder.query({

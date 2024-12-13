@@ -15,6 +15,7 @@ export const useFetchRoommates = ({page, location, budget}) => {
     return {data, error, refetch};
 }
 
+//Returns all roommate public info
 export const useFetchRoommate = (id) => {
        
     const [roommate, setRoommate] = useState({});
@@ -29,6 +30,7 @@ export const useFetchRoommate = (id) => {
     return {roommate, error};
 }
 
+//Returns data in a nicer format
 const processRoommate = (userP) => {
 
     return {

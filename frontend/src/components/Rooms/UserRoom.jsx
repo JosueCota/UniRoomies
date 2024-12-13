@@ -4,6 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+//UI component for a user's room page
 const UserRoom = ({room, user, images, children}) => {
 
     const {user:self} = useSelector((state) => state.auth)

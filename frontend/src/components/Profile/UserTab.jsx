@@ -6,6 +6,7 @@ import GeneralButton from '../Forms/GeneralButton';
 import UserEdit from './UserEdit';
 import User from '../User';
 
+//User tab that displays both user info and edit user
 const UserTab = () => {
   const {user} = useSelector((state) => state.auth);
   const [editting, setEditting] = useState(false);

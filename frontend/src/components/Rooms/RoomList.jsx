@@ -9,6 +9,7 @@ import styles from "./roomlist.module.css";
 
 const PER_PAGE = 10;
 
+//Shows a list of rooms and pagination
 export default function RoomList({data, page}) {
     
     const [items, setItems] = useState([]);

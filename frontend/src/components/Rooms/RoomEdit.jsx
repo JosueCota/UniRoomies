@@ -15,6 +15,7 @@ import { showToastError, showToastWarning, showToastSuccess } from '../../utils/
 import { useNavigate } from 'react-router-dom'
 import ModalConfirm from '../Misc/ModalConfirm'
 
+//Room form logic handler
 const RoomEdit = () => {
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);

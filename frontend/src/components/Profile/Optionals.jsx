@@ -6,6 +6,7 @@ import { Form, FloatingLabel, InputGroup } from 'react-bootstrap'
 import InputList from '../Forms/InputList'
 import FloatingInput from '../Forms/FloatingInput'
 
+//Optional info for users profile
 const Optionals = ({optionalMulti, setOptionalMulti, accomodations, setAccomodations, contacts, setContacts, hobbies, setHobbies, userDetails, livingPreferences, setLivingPreferences}) => {
 
   const options = [

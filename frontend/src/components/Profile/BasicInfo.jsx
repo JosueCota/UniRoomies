@@ -5,6 +5,7 @@ import SingleSelect from '../Forms/SingleSelect'
 import styles from "./basicinfo.module.css"
 import FloatingInput from '../Forms/FloatingInput'
 
+//Required info for user profile
 const BasicInfo = ({cities, userDetails, setCities}) => {
     const [city, setCity] = useState("");
 

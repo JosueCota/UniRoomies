@@ -5,6 +5,7 @@ const initialState = {
     roomSearch: null
 }
 
+//responsible for saving searches and deleting them
 const searchSlice = createSlice({
     name: "search",
     initialState: initialState,

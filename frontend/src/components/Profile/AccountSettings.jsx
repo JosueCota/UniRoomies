@@ -9,6 +9,7 @@ import ProfileAccountDeleteModal from './AccountDeleteModal';
 import { logout, showToastError, showToastSuccess } from '../../utils/helperFunctions';
 import { useNavigate } from 'react-router-dom';
 
+//For activating or deactivity account/deleting
 const AccountSettings = () => {
   const navigate = useNavigate();
   const [activateUser, {isLoading}] = useActivateUserMutation();

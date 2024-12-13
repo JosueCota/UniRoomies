@@ -11,6 +11,7 @@ import { deleteSearch } from '../../features/searchesSlice';
 import { useDispatch } from 'react-redux';
 import { logout, showToastError, showToastSuccess } from '../../utils/helperFunctions';
 
+//Modal for deleting account, requires password input
 const AccountDeleteModal = () => {
 
     const [deleteUser] = useDeleteUserMutation();

@@ -15,6 +15,7 @@ const useFetchUserDetails = () => {
     return {userDetails, isFetching, refetch};
 }
 
+//Returns details in a nicer format
 const processUserDetails = (userDetailsDataObj) => {
 
     return {

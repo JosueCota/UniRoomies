@@ -4,6 +4,7 @@ const initialState = {
     user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")): null
 }
 
+//Responsible for credential global state
 const authSlice = createSlice({
     name: "auth",
     initialState: initialState,

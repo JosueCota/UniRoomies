@@ -5,6 +5,7 @@ import ErrorBox from './Misc/ErrorBox'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
+//UI Component for user pages
 const User = ({userDetails, user, children}) => {
   return (
        <div className={styles.container}>

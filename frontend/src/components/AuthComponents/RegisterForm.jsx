@@ -12,6 +12,7 @@ import { showToastError, showToastSuccess, showToastWarning } from '../../utils/
 import PictureSelect from '../Forms/PictureSelect';
 import PasswordInput from '../Forms/PasswordInput';
 
+//Register form responsible for creating user and sending email activation link to user
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

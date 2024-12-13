@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import RoomImage from "./RoomImage";
 import styles from "./room.module.css"
 
-export default function Roommate({User, roomDetails, roomImage}) {
+//UI component for a room in the list of rooms
+export default function Room({User, roomDetails, roomImage}) {
     
     return (
     <Link to={`/rooms/room/${User.id}`} className={styles.link}>

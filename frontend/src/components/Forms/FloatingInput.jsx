@@ -1,6 +1,7 @@
 import React from 'react'
 import { FloatingLabel, Form } from 'react-bootstrap'
 
+//General input with floating label 
 const FloatingInput = ({type, required, name, label, defaultVal, step, max, min}) => {
   return (
     <FloatingLabel controlId={name} label={label} style={{zIndex:"0", color:"black"}}>

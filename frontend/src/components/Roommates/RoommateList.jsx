@@ -9,6 +9,7 @@ import styles from "./roommate.module.css"
 
 const PER_PAGE = 10;
 
+//displays pagination and list of roommates
 export default function RoommateList({data, page}) {
     
     const [items, setItems] = useState([]);

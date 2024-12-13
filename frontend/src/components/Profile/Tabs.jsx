@@ -2,6 +2,7 @@ import Nav from 'react-bootstrap/Nav';
 import styles from "./tabs.module.css"
 import { NavLink } from 'react-router-dom';
 
+//Tabs in User 
 const Tabs = () => {
 
   return (

@@ -12,6 +12,7 @@ import { setCredentials } from "../../features/authSlice"
 import AccountSettings from './AccountSettings'
 import PictureSelect from "../Forms/PictureSelect"
 
+//Tab that shows basic account user info for editting
 const AccountTab = () => {
 
   const { user } = useSelector((state) => state.auth);

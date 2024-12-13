@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import Loader from '../components/Misc/Loader'
 import { toast } from 'react-toastify'
 
+//Activation page that reroutes to login if successful
 const ActivationPage = () => {
 
     const {token} = useParams("token");

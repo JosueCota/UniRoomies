@@ -9,6 +9,7 @@ import ErrorBox from "../components/Misc/ErrorBox";
 import { useFetchRooms } from "../utils/useFetchRooms";
 import GeneralButton from "../components/Forms/GeneralButton"
 
+//Handles all the logic of the rooms page (not room)
 export default function Rooms() {
     
     const { roomSearch } = useSelector((state) => state.search);

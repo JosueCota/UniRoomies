@@ -9,6 +9,7 @@ import { useCreateChatMutation } from '../../features/chatApiSlice';
 import { useFetchRoommate } from '../../utils/useFetchRoommates';
 import ErrorBox from '../Misc/ErrorBox';
 
+//Specific roommate page
 const RoommatePage = () => {
 
   const navigate = useNavigate();

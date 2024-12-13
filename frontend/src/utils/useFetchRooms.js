@@ -15,6 +15,7 @@ export const useFetchRooms = ({page, location, price}) => {
     return {data, error, refetch};
 }
 
+//returns all rooms public info
 export const useFetchRoom = ({id}) => {
     const { data, refetch, isFetching, error } = useGetRoomQuery({id});
     const [roomData, setRoomData] = useState({});
@@ -29,6 +30,7 @@ export const useFetchRoom = ({id}) => {
     return {roomData, isFetching, refetch, error};
 }
 
+//Returns it in a nicer format
 const processRoomData = (room, images) => {
 
     return {

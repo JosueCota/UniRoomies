@@ -1,6 +1,7 @@
 import {createApi} from "@reduxjs/toolkit/query/react"
 import api from "../utils/axiosApiInterceptor"
 
+//Declares Api Slice for rtk api calls
 const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: '' }) =>
   async ({ url, method, data, params, headers }) => {

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ProfilePic from "../ProfilePic";
 import styles from "./roommate.module.css"
 
+//UI component for a roommate in the list of roommates
 export default function Roommate({id, firstName, lastName, userDetails, cities, pfp, updated}) {
     
     return (

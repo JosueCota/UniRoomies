@@ -2,8 +2,8 @@ import React from 'react'
 import styles from "./chat.module.css"
 import Loader from '../Misc/Loader'
 
+//If no chats are selected, this is displayed as filler content
 const ChatTemp = () => {
-    
   return (
     <div className={styles.chatbox} style={{width:"80%", overflow:"hidden", margin:"auto"}}>
       <p style={{margin:"auto", fontSize:"1.5rem", fontWeight:"800"}}>No Chat Selected</p>

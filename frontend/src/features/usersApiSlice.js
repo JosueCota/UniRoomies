@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { USERS_URL } from "../utils/constants";
 
+//Responsible for roommates api calls on users route
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         updateUserInfo: builder.mutation({

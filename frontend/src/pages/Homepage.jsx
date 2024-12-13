@@ -3,6 +3,7 @@ import styles from "./homepage.module.css"
 import BrandHeader from '../components/NavsHeaders/BrandHeader';
 import Accordion from 'react-bootstrap/Accordion';
 
+//UI Hero component 
 const Homepage = () => {
 
   return (

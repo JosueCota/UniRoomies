@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import GeneralButton from '../Forms/GeneralButton';
 import { useSelector } from 'react-redux';
 
+//Basic brand header
 const BrandHeader = () => {
   const {user} = useSelector(state => state.auth);
   return (

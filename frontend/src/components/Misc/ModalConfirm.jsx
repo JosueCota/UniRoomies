@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import GeneralButton2 from '../Forms/GeneralButton2';
 
+//Used to confirm users decision
 const ModalConfirm = ({handleConfirm, title, name}) => {
 
     const [show, setShow] = useState(false);

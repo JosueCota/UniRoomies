@@ -4,6 +4,7 @@ import AutoComplete from './AutoComplete'
 import { FiRefreshCw  } from 'react-icons/fi'
 import Loader from "../Misc/Loader"
 
+//Search Header for rooms and roommates pages
 const SearchHeader = ({placeholder, onClick, address, budget, setBudget, setAddress, loading, children}) => {
 
   const handleAddressChange = (address) => {

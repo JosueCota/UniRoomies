@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import PlacesAutocomplete from "react-places-autocomplete";
 
+//Auto complete class for location searching
 export class AutoComplete extends Component {
     constructor(props) {
         super(props);

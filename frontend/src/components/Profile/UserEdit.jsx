@@ -8,6 +8,7 @@ import { useUpdateUserDetailsMutation } from '../../features/usersApiSlice'
 import BasicInfo from "./BasicInfo"
 import Optionals from "./Optionals"
 
+//Edit form for user
 const UserEdit = ({userDetails, refetch, setEditting, children}) => {
 
   const [updateDetails] = useUpdateUserDetailsMutation()
