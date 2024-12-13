@@ -16,7 +16,7 @@ export default function Roommate({id, firstName, lastName, userDetails, cities, 
                 </div>
                 <div className={styles.citiesContainer}>{cities.map((city, index) => {
                     if (index <= 2) {
-                        return <strong><span>{city}{index===2 && "..."}</span></strong>
+                        return <strong key={`${city}wo`} ><span key={`${city}po`} >{city}{index===2 && "..."}</span></strong>
                     }
                 })}</div>
                 <div className={styles.details}>

@@ -23,7 +23,7 @@ const User = ({userDetails, user, children}) => {
                 <span>Open to Room Sharing: {userDetails.roomSharing? "Yes": "No"}</span>
                 <span>Move In Date: {userDetails.moveInDate}</span>
               </div>
-                <div className={styles.cities}>Cities Of Interest: {userDetails.cities && userDetails.cities.map(city => <p className={styles.city}>{city}</p>)}</div>
+                <div className={styles.cities}>Cities Of Interest: {userDetails.cities && userDetails.cities.map(city => <p  key={city + "cityUser"} className={styles.city}>{city}</p>)}</div>
               </>
                 : <ErrorBox error={"Please Edit Your Profile"}/>
               }
@@ -37,8 +37,8 @@ const User = ({userDetails, user, children}) => {
           >
             <Tab eventKey="about-me" title="About Me">
               {userDetails.description && <p style={{whiteSpace:"pre-line"}}>Description: {userDetails.description}</p>}
-              {userDetails.hobbies && <li>Hobbies: {userDetails.hobbies ? userDetails.hobbies.map(hobby => <p className={styles.item}>{hobby}</p>): null}</li>}
-              {userDetails.contacts && <li>Contacts: {userDetails.contacts ? userDetails.contacts.map(link => <p className={styles.item}>{link}</p>):null}</li>}
+              {userDetails.hobbies && <li>Hobbies: {userDetails.hobbies ? userDetails.hobbies.map(hobby => <p className={styles.item}  key={hobby + "userhobby"}>{hobby}</p>): null}</li>}
+              {userDetails.contacts && <li>Contacts: {userDetails.contacts ? userDetails.contacts.map(link => <p className={styles.item} key={link + "userlink"}>{link}</p>):null}</li>}
             </Tab>
             <Tab eventKey="living-preferences" title="Living Preferences">
               {userDetails.parkingNeeded!=null && <li>Do I need parking? {userDetails.parkingNeeded? "Yes": "No"}</li>}
@@ -48,8 +48,8 @@ const User = ({userDetails, user, children}) => {
               {userDetails.sleepSchedule && <li>I usually sleep: {userDetails.sleepSchedule}</li>}
               {userDetails.stayLength && <li>Looking to stay: {userDetails.stayLength} Months</li>}
               {userDetails.university && <li>I am attending {userDetails.university}</li>}
-              {userDetails.accomodations && <li>Accomodations: {userDetails.accomodations.map(accomodation=> <p className={styles.item}>{accomodation}</p>)}</li>}
-              {userDetails.livingPreferences && <li>Lifestyle Preferences: {userDetails.livingPreferences.map(pref=> <p className={styles.item}>{pref}</p>)}</li>}
+              {userDetails.accomodations && <li>Accomodations: {userDetails.accomodations.map(accomodation=> <p className={styles.item} key={accomodation + "useraccomo"}>{accomodation}</p>)}</li>}
+              {userDetails.livingPreferences && <li>Lifestyle Preferences: {userDetails.livingPreferences.map(pref=> <p className={styles.item} key={pref + "userpreff"}>{pref}</p>)}</li>}
             </Tab>
           </Tabs>
         </div>

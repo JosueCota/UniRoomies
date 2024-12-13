@@ -8,9 +8,9 @@ import { useSelector } from 'react-redux';
 const UserRoom = ({room, user, images, children}) => {
 
     const {user:self} = useSelector((state) => state.auth)
-    const carouselImages = images.map(image => (
-        <Carousel.Item>
-            <img src={image} width={600}/>
+    const carouselImages = images.map((image, index) => (
+        <Carousel.Item key={`${image}${index}`} >
+            <img src={image} width={600} key={`${image}${index}img`} />
         </Carousel.Item>
     ))
 
@@ -35,9 +35,9 @@ const UserRoom = ({room, user, images, children}) => {
         {room.pets && <li>Pets: {room.pets}</li>}
         {room.furnished && <li>Furnished: {room.furnished}</li>}
         {room.description && <li>Description: {room.description}</li>}
-        {room.amenities && <p>Amenities:{room.amenities.map(amenity => <li>{amenity}</li>)}</p>}
-        {room.placesNear && <p>Places Near:{room.placesNear.map(place => <li>{place}</li>)}</p>}
-        {room.utilitiesIncluded && <p>Places Near:{room.utilitiesIncluded.map(util => <li>{util}</li>)}</p>}
+        {room.amenities && <p>Amenities:{room.amenities.map(amenity => <li key={amenity + "amen"}>{amenity}</li>)}</p>}
+        {room.placesNear && <p>Places Near:{room.placesNear.map(place => <li  key={place + "place"}>{place}</li>)}</p>}
+        {room.utilitiesIncluded && <p>Places Near:{room.utilitiesIncluded.map(util => <li  key={util + "util"}>{util}</li>)}</p>}
         <div style={{display:"flex", alignItems:"center"}}>
          {children}
 

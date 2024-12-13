@@ -44,8 +44,8 @@ const BasicInfo = ({cities, userDetails, setCities}) => {
               <p>Cities Selected: </p> 
               <ul className={styles.citiesList}>
               {cities.map(citys => (
-                <InputGroup className={styles.citiesSelected} id={`${citys}group`} style={{zIndex:"0"}} onClick={() => removeCity(citys)}>
-                  <li className={styles.citiesListItems} id={`${citys}list`}>{citys}</li>
+                <InputGroup key={`${citys}group`} className={styles.citiesSelected} id={`${citys}group`} style={{zIndex:"0"}} onClick={() => removeCity(citys)}>
+                  <li className={styles.citiesListItems} id={`${citys}list`} key={`${citys}cityName`} >{citys}</li>
                 </InputGroup>
               ))}
               </ul>

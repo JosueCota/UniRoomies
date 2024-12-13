@@ -23,17 +23,16 @@ const ChatsItem = ({user, message, setSelectedChat, selectedChat, chatId, seen})
   cutText();
 
   return (
-      <Link to={`chat/${chatId}/${user.id}`} onClick={() => setSelectedChat(chatId)} style={{backgroundColor: selectedChat && selectedChat===chatId && "whitesmoke", }} className={`${styles.chats} ${selectedChat && selectedChat===chatId && styles.chatsActive}`}>
-          {seen !== true && <FaDotCircle color='red' style={{position:"absolute"}} size={15}/>}
-          <ProfilePic num={user.pfp} style={styles.pfp}/>
-          <div style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
-            
-        <div>
-          <p className={styles.name}>{user.firstName} {user.lastName}</p>
-          <p className={styles.lastMessage}><span className={styles.hide}>Last Message: </span>{message}</p>
-        </div>
-        <MdClose style={{justifySelf:"end",position:"relative", zIndex:200, border: "1px solid", borderRadius:"1rem"}} onClick={handleClick}/>
+      <Link to={`chat/${chatId}/${user.id}`} onClick={() => setSelectedChat(chatId)} style={{backgroundColor: selectedChat && selectedChat===chatId && "whitesmoke", }} className={`${styles.chats} ${selectedChat && selectedChat===chatId && styles.chatsActive}`} key={`${chatId}link`}>
+        {seen !== true && <FaDotCircle color='red' style={{position:"absolute"}} size={15} key={`${chatId}unread`}/>}
+        <ProfilePic num={user.pfp} style={styles.pfp} key={`${chatId}pfp`}/>
+        <div key={`${chatId}div1`} style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
+          <div key={`${chatId}div2`}>
+            <p className={styles.name} key={`${chatId}name`}>{user.firstName} {user.lastName}</p>
+            <p className={styles.lastMessage} key={`${chatId}lastMsg`}><span className={styles.hide} key={`${chatId}span`}>Last Message: </span>{message}</p>
           </div>
+          <MdClose style={{justifySelf:"end",position:"relative", zIndex:200, border: "1px solid", borderRadius:"1rem"}} onClick={handleClick} key={`${chatId}X`} />
+        </div>
       </Link> 
   )
 }

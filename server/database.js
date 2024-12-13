@@ -3,7 +3,6 @@ const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 const dbHost = process.env.DB_HOST || "localhost";
 
-
 const sequelize = new Sequelize(
     dbName, 
     "root", 
