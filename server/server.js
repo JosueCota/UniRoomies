@@ -24,6 +24,10 @@ const startApp = async () => {
         await sequelize.sync();
         console.log("Created Database and Tables");
         
+        api.get("/" , (req, res) => {
+            res.send("UniRoomies API Route")
+        });
+        
         app.use('/api/users', userRouter);
         app.use('/api/auth', authRouter);
         app.use('/api/roommates', roommateRouter);
