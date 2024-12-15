@@ -14,9 +14,12 @@ const app = express();
  
 //Middleware
 app.use(express.json());                                //Allows json objects in req.body 
+
 app.use(cors({
     origin: process.env.NODE_ENV === "production" ? "https://www.myuniroomies.com": ""
-}));                                        //Authorization
+}));                                        
+
+//Authorization
 app.use(express.urlencoded({ extended: true }));        //Allows Form data recieving
 app.use(cookieParser());                                //Cookie parsing ease
 
@@ -26,7 +29,7 @@ const startApp = async () => {
         await sequelize.sync();
         console.log("Created Database and Tables");
         
-        api.get("/" , (req, res) => {
+        app.get("/" , (req, res) => {
             res.send("UniRoomies API")
         });
         
