@@ -9,7 +9,7 @@ const roommateRouter = require("./routes/roommateRouter");
 const roomRouter = require("./routes/roomRouter");
 const chatRouter = require("./routes/chatRouter");
 const { errorHandler, notFound } = require("./middleware/error.middleware");
-const port = `0.0.0.0:${process.env.PORT}` || "8081";
+const port = process.env.NODE_ENV === "production" ? process.env.PORT : "8081";
 const app = express();
  
 //Middleware
@@ -42,7 +42,7 @@ const startApp = async () => {
         app.use(errorHandler);                                  //Error handling for custom errors
         app.use(notFound);                                      //Error handling for incorrect api route
         
-        const expressServer = app.listen(port , ()=> {
+        const expressServer = app.listen(port, "0.0.0.0", ()=> {
             console.log(`Listening on port ${port}...`)
         });
         
