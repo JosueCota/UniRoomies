@@ -16,7 +16,9 @@ const app = express();
 app.use(express.json());                                //Allows json objects in req.body 
 
 app.use(cors({
-    origin: process.env.NODE_ENV === "production" ? ["https://www.myuniroomies.com", "https://myuniroomies.com"]: ""
+    origin: process.env.NODE_ENV === "production" ? ["https://www.myuniroomies.com", "https://myuniroomies.com"]: "",
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],  
 }));                                        
 
 //Authorization
