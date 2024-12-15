@@ -27,7 +27,7 @@ const axiosBaseQuery =
 
 //Proxy takes care of baseUrl
 const baseQuery = axiosBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BACKEND_URL}`,
+    baseUrl: ``,
 })
 
 export const apiSlice = createApi({

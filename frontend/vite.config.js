@@ -10,6 +10,13 @@ export default ({ mode }) => {
     plugins: [react()],
     server: {
       port:3000,
+      proxy: {
+        "/api": {
+          target: mode === "production" ? "https://api.myuniroomies.com": "http://localhost:8081",
+          changedOrigin: true,
+          secure: mode === "production",
+        }
+      }
     },
   })
 }
