@@ -14,7 +14,9 @@ const app = express();
  
 //Middleware
 app.use(express.json());                                //Allows json objects in req.body 
-app.use(cors());                                        //Authorization
+app.use(cors({
+    origin: process.env.NODE_ENV === "production" ? "https://www.myuniroomies.com": ""
+}));                                        //Authorization
 app.use(express.urlencoded({ extended: true }));        //Allows Form data recieving
 app.use(cookieParser());                                //Cookie parsing ease
 

@@ -12,8 +12,10 @@ export default ({ mode }) => {
       port:3000,
       proxy: {
         "/api": {
-          target: env.VITE_BACKEND_URL,
-          changedOrigin: true
+          target: mode === "production" ? "https://api.myuniroomies.com": "http://localhost:8081",
+          changedOrigin: true,
+          secure: mode === "production",
+          rewrite: (path) => path.replace(/^\/api/, ''), //Removes api prefix from url
         }
       }
     },
