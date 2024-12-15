@@ -10,7 +10,6 @@ const { Op } = require("sequelize");
 const makeChat = asyncHandler( async(req, res) => {
 
     const to_id = req.body.to_id;
-    console.log(to_id)
     const receiever = await User.findByPk(to_id);
 
     if (to_id == req.user.id) {
@@ -26,18 +25,14 @@ const makeChat = asyncHandler( async(req, res) => {
 
     //Check if they have a chat
     const result = await getRecipientOfChat(chat_id=null, recipient_id=to_id, user_id=req.user.id);
-    console.log(result)
 
     if (result) {
-        console.log("here")
         const chat = await Chat_Participant.findOne({
             where: {
                 chat_id: result.chat_id,
                 user_id: req.user.id
             }
         });
-
-        console.log(chat.hidden);
 
         if (chat.hidden) {
             chat.hidden = false;
@@ -85,7 +80,6 @@ const getChats = asyncHandler(async (req, res) => {
     })
 
     let recipients = [];
-    console.log(chats)
     for (const chat of chats){
         var temp = await getRecipientOfChat(chat.chat_id, req.user.id)
         recipients.push(temp)
@@ -99,7 +93,6 @@ const getChats = asyncHandler(async (req, res) => {
 const getPreviousMessages = asyncHandler(async (req, res) => {
 
     const { chatId } = req.params
-    console.log(chatId)
 
     const chat = await Chat_Participant.findOne({
         where: {
@@ -133,7 +126,6 @@ const getPreviousMessages = asyncHandler(async (req, res) => {
 const changeChatHidden = asyncHandler(async (req, res) => {
 
     const { chatId } = req.params
-    console.log(chatId)
 
     const chat = await Chat_Participant.findOne({
         where: {
@@ -205,7 +197,6 @@ const changeSeenMessage = async (user_id, to_id) => {
 }
 
 const getRecipientOfChat = async(chat_id, user_id, recipient_id) => {
-    console.log(chat_id, user_id, recipient_id)
     if (recipient_id){
         var recipient = await Chat_Participant.findOne({
             where: {

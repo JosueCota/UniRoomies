@@ -16,11 +16,7 @@ const BasicInfo = ({cities, userDetails, setCities}) => {
       }
       
       const addCity = () => {
-        console.log("click")
-        console.log(cities.length)
-        console.log(userDetails)
         if (cities.length !== 10){
-          
           setCities((prev) => {
             if (!prev.includes(city)){
               return [...prev, city]

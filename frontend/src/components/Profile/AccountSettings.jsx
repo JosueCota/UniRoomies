@@ -21,7 +21,6 @@ const AccountSettings = () => {
     try {
       const res = await activateUser().unwrap();
       dispatch(setCredentials({...res}));
-      console.log(res);
       showToastSuccess(`Successfully ${res.isActive? "Activated": "Deactivated"} Account`)
     } catch(err) {
       showToastError(err, "activateUserErr")

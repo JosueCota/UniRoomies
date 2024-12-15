@@ -10,7 +10,6 @@ const RoomImage = db.models.Room_Image;
 //Creates or Update Room 
 const createRoom = asyncHandler(async (req, res, next) => {
     
-    console.log(req.body)
     const newRoomParam = {
         UserId: req.user.id,
         location: req.body.location,

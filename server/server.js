@@ -41,7 +41,7 @@ const startApp = async () => {
         app.use(errorHandler);                                  //Error handling for custom errors
         app.use(notFound);                                      //Error handling for incorrect api route
         
-        const expressServer = app.listen(port, ()=> {
+        const expressServer = app.listen(port, "0.0.0.0", ()=> {
             console.log(`Listening on port ${port}...`)
         });
         

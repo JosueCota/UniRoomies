@@ -98,7 +98,7 @@ const login = asyncHandler(async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     if(!valid) {
         res.status(400);
-        throw new Error("Invalid Login Password")
+        throw new Error("Invalid Login")
     }
 
     generateToken(res, user.id);

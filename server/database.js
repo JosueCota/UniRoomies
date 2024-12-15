@@ -37,7 +37,6 @@ const dbSetup = async () => {
         addAssociations()
 
     } catch (error) {
-        console.log(error)
         throw new Error(error)
     }
 }

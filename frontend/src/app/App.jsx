@@ -9,7 +9,7 @@ import { showToastError } from "../utils/helperFunctions.js";
 function App() {
 
   const {user} = useSelector((state) => state.auth);
-  console.log(import.meta.env.VITE_BACKEND_URL);
+
   try {
     if (user) {
       useCheckAuthQuery()

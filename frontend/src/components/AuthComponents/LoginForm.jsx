@@ -36,7 +36,6 @@ const LoginForm = () => {
     try {
       const res = await login({email, password}).unwrap();
       dispatch(setCredentials({...res}));
-      console.log(res)
 
       if (res.isActive !== false) {
         // navigate("/roommates")

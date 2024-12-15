@@ -4,7 +4,6 @@ const uuid = require("uuid").v4;
 
 exports.s3Upload = async (files, path) => {
 
-    console.log(files)
     const s3client = new S3Client();
     const params = await Promise.all(files.map(async (file) => { 
         try {
