@@ -9,7 +9,7 @@ const roommateRouter = require("./routes/roommateRouter");
 const roomRouter = require("./routes/roomRouter");
 const chatRouter = require("./routes/chatRouter");
 const { errorHandler, notFound } = require("./middleware/error.middleware");
-const port = process.env.PORT || "8081";
+const port = `0.0.0.0:${process.env.PORT}` || "8081";
 const app = express();
  
 //Middleware
@@ -25,7 +25,7 @@ const startApp = async () => {
         console.log("Created Database and Tables");
         
         api.get("/" , (req, res) => {
-            res.send("UniRoomies API Route")
+            res.send("UniRoomies API")
         });
         
         app.use('/api/users', userRouter);
