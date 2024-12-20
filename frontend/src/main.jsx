@@ -15,7 +15,7 @@ import Homepage from "./pages/Homepage.jsx";
 import Roommates from "./pages/Roommates.jsx"
 import Rooms from "./pages/Rooms.jsx"
 import Profile from "./pages/Profile.jsx"
-import ActivationPage from './pages/ActivationPage.jsx';
+import RegisterPage from './pages/Registration.jsx';
 import UserTab from './components/Profile/UserTab.jsx';
 import AccountTab from "./components/Profile/AccountTab.jsx"
 import RoommatePage from './components/Roommates/RoommatePage.jsx';
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Homepage/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
-      <Route path="/activation/:token" element={<ActivationPage/>} />
+      <Route path="/register/:token" element={<RegisterPage/>} />
       
       {/* Private Routes */}
       <Route path="" element={<PrivateRoute/>}>

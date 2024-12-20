@@ -6,27 +6,28 @@ import Loader from '../components/Misc/Loader'
 import { toast } from 'react-toastify'
 
 //Activation page that reroutes to login if successful
-const ActivationPage = () => {
+const RegistrationPage = () => {
 
     const {token} = useParams("token");
     const [verifyEmail, {isLoading}] = useVerifyEmailMutation();
     const navigate = useNavigate();
     
     useEffect(() => {
-        handleActivation();
+        handleRegistration();
     }, [])
 
-    const handleActivation = async () => {
+    const handleRegistration = async () => {
         try  {
             if (token) {          
                 await verifyEmail({token})
                 navigate("/login")
-                toast.success("Account Activated!",{toastId:"activationSuccess"})
+                toast.success("Account Activated!",{toastId:"registrationSuccess"})
             } else {
                 toast.error("No Token Provided")
             }
         } catch (err) {
             toast.error(err?.data?.message || err.error);
+            navigate("/register")
         }
     }
   return (
@@ -36,4 +37,4 @@ const ActivationPage = () => {
   )
 }
 
-export default ActivationPage
+export default RegistrationPage

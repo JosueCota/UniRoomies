@@ -26,7 +26,7 @@ const ResendEmailModal = () => {
               showToastError(err)
             }
         } else {
-          showToastError("Please input the email associated with the account you registered!", "resendErr")
+          showToastError("Please input the email associated with the account you created!", "resendErr")
         }
     }
   return (
@@ -36,7 +36,7 @@ const ResendEmailModal = () => {
           <p className={styles.link} onClick={() => setShow(true)}>Didn't Receieve Email?</p>
           <Modal show={show} onHide={() => setShow(false)} backdrop="static">
             <Modal.Header closeButton>
-              <Modal.Title>Resend Activation Email</Modal.Title>
+              <Modal.Title>Resend Registration Email</Modal.Title>
             </Modal.Header>
           
             <Modal.Body>Input Email Associated with Account Made:

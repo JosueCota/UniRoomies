@@ -76,7 +76,7 @@ const RegisterForm = () => {
   return (
 
     <div className={styles.container}>
-      <h2 style={{marginBottom: "2rem"}}>Register</h2>
+      <h2 style={{marginBottom: "2rem"}}>Sign Up</h2>
       
     <Form className={styles.formCont} onSubmit={handleSubmit} id='registerForm'>
         <div className={styles.sameLine}>
