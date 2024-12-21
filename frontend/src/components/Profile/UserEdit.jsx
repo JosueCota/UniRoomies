@@ -99,7 +99,7 @@ const UserEdit = ({userDetails, refetch, setEditting, children}) => {
 
         //Wait for update in database, then refetch data (tags reset when updated)
         refetch()
-        showToastSuccess("Updated User Details" + res.message)
+        showToastSuccess("Updated User Details")
         setEditting(false)
 
       } catch (err) {
