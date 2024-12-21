@@ -104,7 +104,7 @@ const RoomEdit = () => {
 
         //Wait for update in database, then refetch data (tags reset when updated)
         refetch();
-        showToastSuccess("Updated Room Successfully!" + res.message);
+        showToastSuccess(res.message);
         
       } catch (err) {
         setWaiting(false);
