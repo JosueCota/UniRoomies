@@ -14,7 +14,7 @@ const app = express();
 //Constants
 const port = process.env.NODE_ENV === "production" ? process.env.PORT : "8081";
 const corsOptions = {
-    origin: process.env.NODE_ENV === "production" ? ["https://www.myuniroomies.com", "https://myuniroomies.com"]: ["http://localhost:3000"],
+    origin: process.env.NODE_ENV === "production" ? [process.env.FRONTEND_DOMAIN, process.env.FRONTEND_DOMAIN2]: ["http://localhost:3000"],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true  
