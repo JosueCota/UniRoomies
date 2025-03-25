@@ -24,8 +24,14 @@ Prerequesites For Installation:
 To get started, you will need to download the files within this repository and unzip them. Open two terminals, navigate into the frontend folder in one and the server folder in the other. You will then type ``npm i`` to install dependencies into both terminals. You will also need to create an AWS account, set up an S3 Bucket, and make a user with appropriate permissions to allow for uploading and deletion of S3 Bucket objects.
 
 Now create a file named ``.env`` in both the server and frontend folders. Include all environment variables listed and their values:
-  | Server Variarbles | Frontend Variables | 
-  :------------------:|:-------------------------:
-![image](https://github.com/user-attachments/assets/ea4348d0-02d3-485d-aac5-fcb40998ae6c) | VITE_BACKEND_URL
+| Server Variarbles | --- | --- | Frontend Variables | 
+:------------------:|:---:|:---:|:-------------------:
+DB_PASSWORD  | DB_NAME | DB_HOST  | VITE_BACKEND_URL
+DB_PORT | DB_USER  | PORT 
+FRONTEND_DOMAIN | FRONTEND_DOMAIN2 | EMAIL_SECRET
+GMAIL_USER | GMAIL_PASS | frontendURL 
+JWT_SECRET | frontendLogoutURL | REFRESH_SECRET 
+NODE_ENV | AWS_SECRET_ACCESS_KEY | AWS_ACCESS_KEY_ID 
+AWS_REGION | AWS_BUCKET_NAME | ENCRYPTION_KEY 
 
 Finally, after all previous steps have been completed, run the command ``npm start`` for the server and ``npm run dev`` for the frontend!
