@@ -1,7 +1,7 @@
 # UniRoomies
 UniRoomies is a full-stack app made to help university and college students find roommates and housing. UniRoomies strives to provide students with a safe, comfortable, and efficient roommate selection process to increase student wellness. By strictly catering to students, it garners a closer-knit community of individuals in similar circumstances, yielding better compatibility between roommates.
 
-Accessible anywhere through [myuniroomies.com](https://myuniroomies.com)!
+**Website has been archived.**
 
 **Note:** Only someone with an email domain of `.edu` can create an account! 
 
